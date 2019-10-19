@@ -83,7 +83,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_Main.jsp">
+					<a href="/info/info_main.ch4">
 					<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
 				</h4>
 			</div>
@@ -91,7 +91,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
+					<a href="/info/logVisitor.ch4">
 					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a>
 				</h4>
 			</div>
@@ -99,7 +99,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageGLog.jsp">
+					<a href="/info/logGoods.ch4">
 					<i class="fa fa-truck" aria-hidden="true"></i>반입현황관리</a>
 				</h4>
 			</div>
@@ -107,7 +107,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageCompany.jsp">
+					<a href="/info/totalManage.ch4">
 					<i class="fa fa-search-plus" aria-hidden="true"></i>종합 관리</a>
 				</h4>
 			</div>

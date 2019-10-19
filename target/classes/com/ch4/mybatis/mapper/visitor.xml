@@ -30,6 +30,7 @@
 	<!-- QR코드 조회(visitor) -->
 	<select id="visitorQRcode" parameterType="map" resultType="map">
 		select vc.confm_no, vc.confm_date, cc.confm_qrcode, co.com_name
+				, cc.confm_desti, confm_visit_date
 		  from cmg_confm cc, visit_confm vc, visit_apply va, company co
 		 where vc.confm_no = cc. confm_no
 		   and va.visit_no = vc.visit_no

@@ -52,5 +52,30 @@ public class InfoController {
 		}
 		return "Fail";
 	}
+	
+	/////////////// SideMenuBar ///////////////////
+	@RequestMapping(value = "info_main.ch4")
+	public String mng_main() {
+	
+		return "company/info/Info_Main";
+	}
+
+	@RequestMapping(value = "logVisitor.ch4")
+	public String logVisitor() {
+	
+		return "company/info/Info_ManageVLog";
+	}
+	
+	@RequestMapping(value = "logGoods.ch4")
+	public String logGoods() {
+	
+		return "company/info/Info_ManageGLog";
+	}
+	
+	@RequestMapping(value = "totalManage.ch4")
+	public String totalManage() {
+		
+		return "company/info/Info_ManageCompany";
+	}
 
 }

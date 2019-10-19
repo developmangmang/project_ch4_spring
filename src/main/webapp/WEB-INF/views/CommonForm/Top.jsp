@@ -10,7 +10,7 @@
 			<div class="container">
 				<!-- 대표 회사 아이콘 및 링크 -->	
 				<a id="Main_log" href="/View/index/Index_Choose.jsp">
-					<img src="http://localhost:8000/resources/Style/images/logo/logo_navi3.png" alt="">
+					<img src="http://localhost:8080/resources/Style/images/logo/logo_navi3.png" alt="">
 				</a>
 			</div>
 		</nav>
