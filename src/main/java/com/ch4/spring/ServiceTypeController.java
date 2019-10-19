@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ServiceTypeController {
 	Logger logger = Logger.getLogger(ServiceTypeController.class);
 	
+	@RequestMapping(value="index.ch4")
+	public String index() {
+		return "index/Index_Choose";
+	}
 	@RequestMapping(value="visitor.ch4")
 	public String visitor() {
 		return "visitor/Visit_Main";
