@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch4.mybatis.mapper.AdminMapper">
+	<!-- 우리 홈페이지 질문 등록 -->
+	<insert id="sendQuestion" parameterType="map">
+		insert into question(q_no, q_name, q_content, q_date, q_email, q_writer)
+			values(#{q_no}, #{q_name}, #{q_content}, #{q_date}, #{q_email}, #{q_writer})
+	</insert>
+	<!-- 우리 홈페이지 답변 등록 -->
+	<insert id="sendAnswer" parameterType="map">
+		insert into answer(a_no, a_content, a_date, q_no)
+			values(#{a_no},#{a_content},#{a_date},#{q_no})
+	</insert>
+</mapper>  

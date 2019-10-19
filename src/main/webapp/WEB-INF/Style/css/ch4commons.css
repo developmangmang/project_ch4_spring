@@ -1,0 +1,33 @@
+@charset "UTF-8";
+/* 아이콘 위치 설정 */
+i {
+	margin-right: 5px;
+}
+/* 화면 전체 내부여백(Top,Bottom 부분 겹침방지) */
+body {
+	padding-top : 70px;
+	padding-bottom : 0px;
+	padding-right : 0px;
+	padding-left : 0px;
+}
+/* datebox의 calendar 토요일 색상 */
+.calendar-saturday {
+		color: #CC2222;
+	}
+/* datebox의 calendar 금일 굵기,색상 */
+.calendar-today {
+	font-weight: bold;
+	color: #0000ff;
+}
+/* datebox의 calendar 선택불가일 불투명도 */
+.calendar-disabled {
+	opacity: 0.3;
+	filter: alpha(opacity=60);
+	cursor: default;
+}
+/* input 타입=number 일때 우측 spinner 제거 */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}

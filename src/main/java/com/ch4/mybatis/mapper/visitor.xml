@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch4.mybatis.mapper.VisitorMapper">
+	<!-- 신청자 방문이력 조회 -->
+	<update id="preVisitorSearch" parameterType="map" statementType="CALLABLE">
+		{call proc_preVisitApply(
+			#{visit_apply_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_apply_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_apply_date1, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_apply_date2, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=rMap},
+			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
+	
+	<!-- 신청자 반입이력 조회 -->
+	<update id="preGoodsSearch" parameterType="map" statementType="CALLABLE">
+		{call proc_preGoodsApply(
+			#{aplg_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{aplg_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{aplg_date1, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{aplg_date2, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=rMap},
+			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
+	
+	<!-- QR코드 조회(visitor) -->
+	<select id="visitorQRcode" parameterType="map" resultType="map">
+		select vc.confm_no, vc.confm_date, cc.confm_qrcode, co.com_name
+		  from cmg_confm cc, visit_confm vc, visit_apply va, company co
+		 where vc.confm_no = cc. confm_no
+		   and va.visit_no = vc.visit_no
+		   and co.com_no = va.com_no 
+		   and confm_name = #{confm_name}
+		   and confm_hp = #{confm_hp}
+	</select>
+	<!-- 신청 내용 작성  (기본정보)-->
+	<update id="visitorApplyAdd" parameterType="map" statementType="CALLABLE">
+		{call proc_vApplyAdd(
+			#{visit_apply_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_apply_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_purps, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_type, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_term, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_day, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_tkin_encc, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_vhcle_encc, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_no, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
+	 <!-- 신청 내용 작성 (방문자) -->
+	<insert id="visitorAdd" parameterType="map">
+		<foreach collection="vtAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+			into visitor_mng(visitor_name, visitor_hp, visit_no)
+				values(#{it.visitor_name}, #{it.visitor_hp}, #{visit_no})
+		</foreach>
+	</insert>
+	
+	<!-- 신청 내용 작성 (반입기기) -->
+	<insert id="deviceAdd" parameterType="map">
+		<foreach collection="tkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+			into tkin_mng(tkin_model, tkin_kind, tkin_brand, visit_no)
+				values(#{it.tkin_model}, #{it.tkin_kind}, #{it.tkin_brand}, #{visit_no})
+		</foreach>
+	</insert>
+	
+	<!-- 신청 내용 작성 (주차) -->
+	<insert id="parkingAdd" parameterType="map">
+		<foreach collection="pkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+			into parking_mng(parking_kind, parking_num, parking_model, visit_no)
+				values(#{it.parking_kind}, #{it.parking_num}, #{it.parking_model}, #{visit_no})
+		</foreach>
+	</insert>
+	<!-- 방문 신청 취소 (결제상태 변경)-->
+	<update id="visitorApplyCancle" parameterType="map" statementType="CALLABLE">
+		{call proc_visitorCancle(
+			#{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
+	<!-- 방문 신청 변경(기본내용 수정) -->
+	<update id="visitorApplyUpdate" parameterType="map" statementType="CALLABLE">
+		{call proc_vApplyUpd(
+			#{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_purps, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_type, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_term, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_day, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_tkin_encc, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_vhcle_encc, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
+</mapper>

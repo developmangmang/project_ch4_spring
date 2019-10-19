@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch4.mybatis.mapper.ManagerMapper">
+   <!-- visitorQR코드 DB에 저장 -->
+   <insert id="vApplyConfirm" parameterType="map">
+      <foreach collection="confirmList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+      into cmg_confm(confm_qrcode, confm_visit_date, confm_name, confm_hp, confm_desti, confm_no)
+      values(#{item.CONFM_QRCODE},#{item.CONFM_VISIT_DATE},#{item.CONFM_NAME},#{item.CONFM_HP},#{item.CONFM_DESTI},#{item.CONFM_NO})
+      </foreach>
+   </insert>
+   <!-- goodsQR코드 DB에 저장 -->
+   <insert id="gApplyConfirm" parameterType="map">
+      <foreach collection="confirmList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+      into goods_confm(confm_no,confm_qrcode, confm_type, confm_name, confm_quan, confm_desti, aplg_no)
+      values(#{item.CONFM_NO},#{item.CONFM_QRCODE},#{item.CONFM_TYPE},#{item.CONFM_NAME},#{item.CONFM_QUAN},#{item.CONFM_DESTI},#{item.APLG_NO})
+      </foreach>
+   </insert>
+   
+   
+   
+   <!-- 회사승인자 방문신청 결제 완료 -->
+   <update id="vApplyPermitUpd" parameterType="map">
+      update visit_apply
+         set visit_permit_st = #{visit_permit_st}
+              ,visit_permit_id = #{cmng_id}
+              <if test='visit_notes not in {null,""}'>
+                 ,visit_notes = #{visit_notes}
+              </if>
+       where visit_no = #{visit_no}
+   </update>
+   
+   <!-- 회사승인자 방문결재 -->
+   <update id="vApplyPermit" parameterType="map" statementType="CALLABLE">
+      {call proc_visitorConfirm(
+         #{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_permit_id, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_permit_st, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_permit_notes, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{confm_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{confirmList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=rMap},
+         #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+      )}   
+   </update>
+
+   <!-- 회사승인자 반입결재-->
+   <update id="gApplyPermit" parameterType="map" statementType="CALLABLE">
+      {call proc_goodsConfirm(
+         #{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_permit_id, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_permit_st, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_permit_notes, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{confm_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{confirmList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=rMap},
+         #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+      )}
+   </update>
+   <!-- 방문 출입 QR코드 조회 -->
+   <select id="visitorQR" parameterType="map" resultType="map">
+      select confm_qrcode
+        from cmg_confm
+       where confm_name = #{confm_name}
+         and confm_hp = #{confm_hp}
+         and confm_no = #{confm_no}
+   </select>
+   <!-- 방문 출입 QR코드 등록 -->
+   <insert id = "visitorQRAdd" parameterType="map">
+      insert into cmg_confm (confm_qrcode, confm_name, confm_hp, confm_no)
+      values (#{confm_qrcode}, #{confm_name}, #{confm_hp}, #{confm_no}) 
+   </insert>
+   
+   <!-- 승인된 반입 QR코드 조회 -->
+   <select id="goodsQR" parameterType="map" resultType="map">
+      select confm_qrcode
+        from goods_confm
+       where confm_no = #{confm_no}
+         and confm_name = #{confm_name}
+         and aplg_no = {aplg_no}
+   </select>
+   <!-- 승인된 반입 QR코드 등록 -->
+   <insert id="goodsQRAdd" parameterType="map">
+      <foreach collection="confirmList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+      into goods_confm (confm_qrcode, confm_no
+                        , confm_name, confm_type, confm_quan, aplg_no)
+      values (#{item.CONFM_QRCODE}, #{item.CONFM_NO}
+         , #{item.CONFM_NAME}, #{item.CONFM_TYPE}, #{item.CONFM_QUAN}, #{item.APLG_NO})
+      </foreach>
+   </insert>
+   
+</mapper>  
