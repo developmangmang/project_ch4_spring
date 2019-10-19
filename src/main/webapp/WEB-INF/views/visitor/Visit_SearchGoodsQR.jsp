@@ -100,7 +100,7 @@
 	function searchApply(confm_no){
 		$("#confm_no").attr('value',confm_no);
 		$("#form_search_info").attr('action','/goods/searchGoods.ch4');
-//		$("#form_search_info").submit();
+		$("#form_search_info").submit();
 //		alert('반입번호로 신청 상세조회');
 	}
 	function operateFormatterNo(value, row, index) {
@@ -109,23 +109,20 @@
 	    ].join('')
 	}
 	function operateFormatterQR(value, row, index) {
-		/////////// QR이미지 경로 변수 처리 ///////////
-		
-		/////////// QR이미지 경로 변수 처리 ///////////
+		var qrPath = row.qrPath;
+		var confm_no = row.CONFM_NO;
 	    return [
 	      "<button class='btn QR' type='button' style='margin-right:10px;' data-toggle='tooltip' data-replace='right' title='QR보기'>"
-	      +"<img src='http://localhost:8000/resources/Style/images/crud/QR_icon.png'></button>"
+	      +"<img src='http://localhost:8080/resources/Style/images/crud/QR_icon.png'></button>"
 	      +"<button class='btn download' type='button' data-toggle='tooltip' data-replace='right' title='다운로드'>"
-	      +"<a href='http://localhost:8000/resources/Style/images/crud/QR.png' download='myQR.png'>"
-	      +"<img src='http://localhost:8000/resources/Style/images/crud/download_icon.png'></a></button>"
+	      +"<a href='"+qrPath+"' download='"+confm_no+".png'>"
+	      +"<img src='http://localhost:8080/resources/Style/images/crud/download_icon.png'></a></button>"
 	    ].join('')
 	}
 	window.operateEvents = {
 		'click .btn.QR': function (e, value, row, index) {
-			/////////// QR이미지 경로 변수 처리 ///////////
-			
-			/////////// QR이미지 경로 변수 처리 ///////////
-			var QR = "<img class='img_thumbnail' src='http://localhost:8000/resources/Style/images/crud/QR.png'>";
+			var qrPath = row.qrPath;
+			var QR = "<img class='img_thumbnail' src='"+qrPath+"'>";
 			$("#md_qr_body").empty();
 			$("#md_qr_body").append(QR);
 			$("#md_QR").modal('show');

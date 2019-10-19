@@ -3,8 +3,8 @@
 <mapper namespace="com.ch4.mybatis.mapper.GoodsMapper">
    <!-- QR코드 조회(goods) -->
 	<select id="goodsQRcode" parameterType="map" resultType="map">
-		select confm_no, confm_name, confm_type, confm_quan
-				,confm_qrcode, aplg_trans_date, com_name
+		select gc.confm_no, confm_name, confm_type, confm_quan
+				,confm_qrcode, confm_trans_date, co.com_name
 		  from goods_confm gc, goods_apply ga, company co
 		 where ga.aplg_no = gc.aplg_no
 		   and co.com_no = ga.com_no

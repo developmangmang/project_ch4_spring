@@ -16,43 +16,6 @@ public class InfoController {
 	@Autowired
 	InfoLogic iLogic = null;
 	
-	@RequestMapping(value="kioskLogin.ch4")
-	public String kioskLogin(@RequestParam Map<String,Object> pMap) {
-		return "kiosk/Fail";
-	}
-	@RequestMapping(value="QRconfirm.ch4",produces="text/plain;charset=UTF-8")
-	public String QRconfirm(@RequestParam Map<String,Object> pMap, Model mod) {
-		if(((String)pMap.get("type")).equals("visitor")) {
-			Map<String, Object> resultMap = null;
-			resultMap = iLogic.confirmQR(pMap);
-			if("in".equals(resultMap.get("inout"))
-					||"denied".equals(resultMap.get("inout"))
-					||"none".equals(resultMap.get("inout"))
-			  ) 
-			{
-				mod.addAttribute("pMap", pMap);
-				return "??";
-			}
-			else if("out".equals(resultMap.get("inout"))) {
-				mod.addAttribute("pMap", pMap);
-				return "??";
-			}
-		}
-		else if(((String)pMap.get("type")).equals("goods")) {
-			//여기다가 이 qr을 입력하면 안된다는 소리 출력하는법?
-		}
-		return "Fail";
-	}
-	@RequestMapping(value="selectExit.ch4")
-	public String selectExit(@RequestParam Map<String,Object> pMap) {
-		Map<String, Object> resultMap = null;
-		resultMap = iLogic.selectExit(pMap);
-		if((int)resultMap.get("result")==1) {
-			return "??";
-		}
-		return "Fail";
-	}
-	
 	/////////////// SideMenuBar ///////////////////
 	@RequestMapping(value = "info_main.ch4")
 	public String mng_main() {

@@ -14,22 +14,26 @@ public class InfoDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate = null;
 	
-	public Map<String, Object> confirmVQR(Map<String, Object> pMap) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		sqlSessionTemplate.selectOne("confirmVQR",pMap); // confirmVQR vs confirmGQR
-		resultMap.put("result", pMap.get("result"));
-		resultMap.put("inout", pMap.get("inout"));
-		resultMap.put("msg", pMap.get("msg"));
-		return resultMap;
+	public int confirmVQR(Map<String,Object> pMap){
+		logger.info("DAO : confirmVQR호출");
+		int result = 0;
+		result = sqlSessionTemplate.update("confirmVQR",pMap);
+		logger.info("DAO : "+result);
+		return result;
 	}
-
-	public Map<String, Object> selectExit(Map<String, Object> pMap) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		sqlSessionTemplate.update("selectExit", pMap);
-		resultMap.put("result", pMap.get("result"));
-		resultMap.put("inout", pMap.get("inout"));
-		resultMap.put("msg", pMap.get("msg"));
-		return resultMap;
+	public int kioskLogin(Map<String,Object> pMap) {
+		logger.info("DAO : kioskLogin호출");
+		int result = 0;
+		result = sqlSessionTemplate.update("kioskLogin",pMap);
+		logger.info("DAO : "+result);
+		return result;
+	}
+	public int selectExit(Map<String,Object> pMap) {
+		logger.info("DAO : selectExit호출");
+		int result = 0;
+		result = sqlSessionTemplate.update("selectExit",pMap);
+		logger.info("DAO : "+result);
+		return result;
 	}
 
 }

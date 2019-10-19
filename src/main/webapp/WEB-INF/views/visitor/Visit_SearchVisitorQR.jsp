@@ -93,7 +93,6 @@
 			    {field:'CONFM_DATE',title:'승인일자'},
 			    {field:'show_qr',title:'QR코드',events: window.operateEvents,
 			          formatter: operateFormatterQR,width:150},
-			    {field:'CONFM_QRCODE',title:'QRcode',visible:false},
 			    {field:'qrPath',title:'QRpath',visible:false}
 			]
 		});
@@ -114,10 +113,10 @@
 		var confm_visit_date = row.CONFM_VISIT_DATE;
 	    return [
 	      "<button class='btn QR' type='button' style='margin-right:10px;' data-toggle='tooltip' data-replace='right' title='QR보기'>"
-	      +"<img src='http://localhost:8000/resources/Style/images/crud/QR_icon.png'></button>"
+	      +"<img src='http://localhost:8080/resources/Style/images/crud/QR_icon.png'></button>"
 	      +"<button class='btn download' type='button' data-toggle='tooltip' data-replace='right' title='다운로드'>"
 	      +"<a href='"+qrPath+"' download='myQR_"+confm_visit_date+".png'>"
-	      +"<img src='http://localhost:8000/resources/Style/images/crud/download_icon.png'></a></button>"
+	      +"<img src='http://localhost:8080/resources/Style/images/crud/download_icon.png'></a></button>"
 	    ].join('')
 	}
 	window.operateEvents = {
