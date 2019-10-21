@@ -162,7 +162,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-offset-1 col-lg-2">
-							<img class="img-circle" src="http://localhost:8000/resources/Style/images/crud/QR.png">
+							<img class="img-circle" src="http://localhost:8080/resources/Style/images/crud/QR.png">
 						</div>
 						<div class="col-lg-6" style="padding-top:50px;text-align:center;">
 							<!------------------ 이 구간은 이름 & 연락처로 조회시 값이 전송되는 구간 -------------------->

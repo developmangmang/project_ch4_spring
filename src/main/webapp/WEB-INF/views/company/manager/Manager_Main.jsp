@@ -151,7 +151,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 				<div class="col-lg-offset-1 col-lg-10">
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="http://localhost:8000/resources/Style/images/postIt/yellow.png" alt="sq-sample27" />
+							<img src="http://localhost:8080/resources/Style/images/postIt/yellow.png" alt="sq-sample27" />
 							<figcaption>
 								<p>귀사에 방문 신청한 자료들을 조회합니다.이 페이지에서 신청에 대한 승인/반려를 처리합니다.</p>
 								<div class="heading">
@@ -167,7 +167,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 2 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="http://localhost:8000/resources/Style/images/postIt/red.png" alt="sq-sample27" />
+							<img src="http://localhost:8080/resources/Style/images/postIt/red.png" alt="sq-sample27" />
 							<figcaption>
 								<p>귀사에 대한 방문 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 방문자들의 위치를 파악 할 수
 									있습니다.</p>
@@ -184,7 +184,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 3 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="http://localhost:8000/resources/Style/images/postIt/greenblue.png" alt="sq-sample27" />
+							<img src="http://localhost:8080/resources/Style/images/postIt/greenblue.png" alt="sq-sample27" />
 							<figcaption>
 								<p>귀사에 반입할 물품에 대해서 반입 신청한 자료를 조회합니다. 이 페이지에서 신청에 대하 승인/반려를
 									처리합니다.</p>
@@ -201,7 +201,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 4 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="http://localhost:8000/resources/Style/images/postIt/blue.png" alt="sq-sample27" />
+							<img src="http://localhost:8080/resources/Style/images/postIt/blue.png" alt="sq-sample27" />
 							<figcaption>
 								<p>귀사에 대한 반입 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 반입 물품들의 처리상태를 파악
 									할 수 있습니다.</p>
