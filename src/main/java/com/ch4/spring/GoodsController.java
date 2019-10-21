@@ -65,4 +65,9 @@ public class GoodsController {
 		
 		return "visitor/Visit_SearchGoods";
 	}
+	
+	@RequestMapping(value = "searchGQRcode.ch4")
+	public String searchVQRcode() {
+		return "visitor/Visit_SearchGoodsQR";
+	}
 }

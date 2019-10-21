@@ -307,7 +307,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-offset-1 col-lg-2">
-							<img class="img-circle" src="http://localhost:8080/resources/Style/images/crud/searchbox.png" style="background-color:#6EAFA8">
+							<img class="img-circle" src="http://192.168.0.189:8080/resources/Style/images/crud/searchbox.png" style="background-color:#6EAFA8">
 						</div>
 						<div class="col-lg-6" style="padding-left:0px;padding-right:30px;">
 							<ul class="nav nav-tabs">

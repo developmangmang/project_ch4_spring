@@ -102,10 +102,10 @@
 		var confm_no = row.CONFM_NO;
 	    return [
 	      "<button class='btn QR' type='button' style='margin-right:10px;' data-toggle='tooltip' data-replace='right' title='QR보기'>"
-	      +"<img src='http://localhost:8080/resources/Style/images/crud/QR_icon.png'></button>"
+	      +"<img src='http://192.168.0.189:8080/resources/Style/images/crud/QR_icon.png'></button>"
 	      +"<button class='btn download' type='button' data-toggle='tooltip' data-replace='right' title='다운로드'>"
 	      +"<a href='"+qrPath+"' download='"+confm_no+".png'>"
-	      +"<img src='http://localhost:8080/resources/Style/images/crud/download_icon.png'></a></button>"
+	      +"<img src='http://192.168.0.189:8080/resources/Style/images/crud/download_icon.png'></a></button>"
 	    ].join('')
 	}
 	window.operateEvents = {
@@ -151,7 +151,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-offset-1 col-lg-2">
-							<img class="img-circle" src="http://localhost:8080/resources/Style/images/crud/QR.png">
+							<img class="img-circle" src="http://192.168.0.189:8080/resources/Style/images/crud/QR.png">
 						</div>
 						<div class="col-lg-6" style="padding-top:50px;text-align:center;">
 							<!------------------ 이 구간은 이름 & 연락처로 조회시 값이 전송되는 구간 -------------------->

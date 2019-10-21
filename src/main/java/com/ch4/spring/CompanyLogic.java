@@ -66,10 +66,10 @@ public class CompanyLogic {
 
 			if (pMap.get("visit_no") != null) {
 				path = savedFilePath + "visitor/";
-				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
+				url = "http://192.168.0.189:8080/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
 			} else if (pMap.get("aplg_no") != null) {
 				path = savedFilePath + "goods/";
-				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=goods";
+				url = "http://192.168.0.189:8080/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=goods";
 			}
 
 			File file = new File(path);

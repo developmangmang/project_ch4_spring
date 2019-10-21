@@ -153,7 +153,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 1 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="http://localhost:8080/resources/Style/images/postIt/yellow.png" alt="sq-sample27" />
+							<img src="http://192.168.0.189:8080/resources/Style/images/postIt/yellow.png" alt="sq-sample27" />
 							<figcaption>
 								<p>귀사에 대한 방문 기록을 조회합니다. 방문자의 출입로그를 일별,시간별로 확인할 수 있습니다.</p>
 								<div class="heading">
@@ -169,7 +169,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 2 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="http://localhost:8080/resources/Style/images/postIt/red.png" alt="sq-sample27" />
+							<img src="http://192.168.0.189:8080/resources/Style/images/postIt/red.png" alt="sq-sample27" />
 							<figcaption>
 								<p>귀사에 대한 반입 기록을 조회합니다. 반입물품의 출입로그를 일별,시간별로 확인할 수 있습니다.</p>
 								<div class="heading">
@@ -185,7 +185,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 3 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="http://localhost:8080/resources/Style/images/postIt/green.png" alt="sq-sample27" />
+							<img src="http://192.168.0.189:8080/resources/Style/images/postIt/green.png" alt="sq-sample27" />
 							<figcaption>
 								<p>귀사의 모든 시설물에 대한 관리페이지입니다. 실방문지,키오스크 단말,휴무일을 종합 관리합니다.</p>
 								<div class="heading">

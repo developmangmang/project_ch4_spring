@@ -21,6 +21,13 @@ public class InfoDao {
 		logger.info("DAO : "+result);
 		return result;
 	}
+	public int confirmGQR(Map<String,Object> pMap){
+		logger.info("DAO : confirmGQR호출");
+		int result = 0;
+		result = sqlSessionTemplate.update("confirmGQR",pMap);
+		logger.info("DAO : "+result);
+		return result;
+	}
 	public int kioskLogin(Map<String,Object> pMap) {
 		logger.info("DAO : kioskLogin호출");
 		int result = 0;
