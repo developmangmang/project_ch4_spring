@@ -134,7 +134,7 @@ public class VisitorLogic {
 	      List<Map<String,Object>> qrCodeList = vDao.qrCodeList(pMap);
 	      for(int i=0; i<qrCodeList.size();i++) {
 	    	  Map<String, Object> indexMap = qrCodeList.get(i);
-	    	  indexMap.put("qrPath", "http://localhost:8000/resources/QR/visitor/" + indexMap.get("CONFM_QRCODE") + ".png");
+	    	  indexMap.put("qrPath", "http://192.168.0.17:8080/resources/QR/visitor/" + indexMap.get("CONFM_QRCODE") + ".png");
 	    	  logger.info(indexMap);
 	      }
 	      return qrCodeList;

@@ -160,25 +160,6 @@
 				$("#md_detail").modal('show');
 			},
 		});
-		<%if(null!=confm_no){%>
-			$("#input_num").textbox('setValue','<%=confm_no %>');
-			$.ajax({
-				type: "POST",
-				url: "/goods/search.ch4",
-				data: $("#form_search_num").serialize(),
-				dataType: "json",
-				success: function(result){
-					if(!result){
-						alert("조회결과가 없습니다.");
-						return;
-					}
-					$("#tb_search").bootstrapTable('load',result);
-				},
-				error: function(){
-					alert("error");
-				}
-			});
-		<% } %>
 		//신청조회 검색조건이 신청번호일때
 		$('.nav-tabs a[href="#nav_search1"]').on('shown.bs.tab', function(){
 			//form전송 할때 조건문 조건값
@@ -291,7 +272,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-offset-1 col-lg-2">
-							<img class="img-circle" src="http://localhost:8000/resources/Style/images/crud/searchbox.png">
+							<img class="img-circle" src="http://localhost:8080/resources/Style/images/crud/searchbox.png">
 						</div>
 						<div class="col-lg-6" style="padding-left:0px;padding-right:30px;">
 							<ul class="nav nav-tabs">
