@@ -155,7 +155,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 1 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="/Style/images/postIt/yellow.png" alt="sq-sample27" />
+							<img src="http://localhost:8000/resources/Style/images/postIt/yellow.png" alt="sq-sample27" />
 							<figcaption>
 								<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 								<div class="heading">
@@ -171,7 +171,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 2 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="/Style/images/postIt/red.png" alt="sq-sample27" />
+							<img src="http://localhost:8000/resources/Style/images/postIt/red.png" alt="sq-sample27" />
 							<figcaption>
 								<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 								<div class="heading">
@@ -187,7 +187,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 3 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="/Style/images/postIt/green.png" alt="sq-sample27" />
+							<img src="http://localhost:8000/resources/Style/images/postIt/green.png" alt="sq-sample27" />
 							<figcaption>
 								<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 								<div class="heading">
@@ -203,7 +203,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 					<!-- Portfolio Item 4 -->
 					<div class="col-md-6 col-lg-3">
 						<figure class="snip1200">
-							<img src="/Style/images/postIt/puple.png" alt="sq-sample27" />
+							<img src="http://localhost:8000/resources/Style/images/postIt/puple.png" alt="sq-sample27" />
 							<figcaption>
 								<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 								<div class="heading">

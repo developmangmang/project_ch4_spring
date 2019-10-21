@@ -33,5 +33,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mybatis-3.4.6.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/p6spy-2.3.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javax.mail-api-1.4.7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
