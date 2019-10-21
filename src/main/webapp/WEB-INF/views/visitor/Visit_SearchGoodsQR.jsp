@@ -83,7 +83,7 @@
 	$(document).ready(function(){
 		$("#tb_search").bootstrapTable({
 			columns:[
-			    {field:'CONFM_NO',title:'물품번호',formatter: operateFormatterNo},
+			    {field:'CONFM_NO',title:'물품번호'},
 			    {field:'COM_NAME',title:'반입지'},
 			    {field:'CONFM_DESTI',title:'반입장소'},
 			    {field:'CONFM_TRANS_DATE',title:'반입일자'},
@@ -97,17 +97,6 @@
 			]
 		});
 	});
-	function searchApply(confm_no){
-		$("#confm_no").attr('value',confm_no);
-		$("#form_search_info").attr('action','/goods/searchGoods.ch4');
-		$("#form_search_info").submit();
-//		alert('반입번호로 신청 상세조회');
-	}
-	function operateFormatterNo(value, row, index) {
-	    return [
-	      "<a href='#' onClick='searchApply("+value+")' data-toggle='tooltip' data-replace='rigth' title='신청내역조회'>"+value+"</a>"
-	    ].join('')
-	}
 	function operateFormatterQR(value, row, index) {
 		var qrPath = row.qrPath;
 		var confm_no = row.CONFM_NO;

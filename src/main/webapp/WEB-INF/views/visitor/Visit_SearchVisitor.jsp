@@ -194,25 +194,7 @@
 				$("#md_detail").modal('show');
 			},
 		});
-		<%if(null!=confm_no){%>
-			$("#input_num").textbox('setValue','<%=confm_no %>');
-			$.ajax({
-				type: "POST",
-				url: "/visitor/search.ch4",
-				data: $("#form_search_num").serialize(),
-				dataType: "json",
-				success: function(result){
-					if(!result){
-						alert("조회결과가 없습니다.");
-						return;
-					}
-					$("#tb_search").bootstrapTable('load',result);
-				},
-				error: function(){
-					alert("error");
-				}
-			});
-		<% } %>
+		
 		//신청조회 검색조건이 신청번호일때
 		$('.nav-tabs a[href="#nav_search1"]').on('shown.bs.tab', function(){
 			//form전송 할때 조건문 조건값
