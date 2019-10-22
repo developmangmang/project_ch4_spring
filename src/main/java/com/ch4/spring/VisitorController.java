@@ -29,8 +29,9 @@ public class VisitorController {
 	VisitorLogic vLogic = null;
 
 	@RequestMapping(value = "applyRequest.ch4",produces="text/plain;charset=UTF-8")
-	public String applyRequest(@RequestParam Map<String, Object> pMap, HttpServletRequest req) {
+	public String applyRequest(@RequestParam Map<String, Object> pMap, HttpServletRequest req,Model mod) {
 		HttpSession session = req.getSession();
+		mod.addAttribute("host",hostAddress);
 		session.setAttribute("pMap", pMap);
 		return "visitor/Visit_Agreement";
 	}

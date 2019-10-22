@@ -23,6 +23,8 @@ public class CompanyController {
 	
 	@Value("${file.path}")
 	String QRImagePath = null;
+	@Value("${host.address}")
+	String hostAddress;
 	@Autowired
 	CompanyLogic cLogic = null;
 	@Autowired
@@ -31,10 +33,11 @@ public class CompanyController {
 	GoodsLogic gLogic = null;
 
 	@RequestMapping(value = "mngPermit.ch4")
-	public String mngPermit(@RequestParam Map<String, Object> pMap) {
+	public String mngPermit(@RequestParam Map<String, Object> pMap, Model mod) {
 		int result = 0;
 		logger.info("pMap : " + pMap);
 		result = cLogic.mngPermit(pMap);
+		mod.addAttribute("host",hostAddress);
 		if (result == 1) {
 			if (pMap.get("visit_no") != null) {
 				return "company/manager/Manager_SearchVisitor";
@@ -50,6 +53,7 @@ public class CompanyController {
 			HttpServletResponse res) {
 		logger.info(QRImagePath);
 		cLogic.companyLogin(pMap);
+		mod.addAttribute("host",hostAddress);
 		String msg = pMap.get("msg").toString();
 		if (msg.equals("error")) {
 			return "Fail";
@@ -91,15 +95,16 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "register.ch4")
-	public String register(@RequestParam Map<String, Object> pMap) {
-
+	public String register(@RequestParam Map<String, Object> pMap, Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "company/Company_Join";
 	}
 
 	@RequestMapping(value = "join.ch4")
-	public String join(@RequestParam Map<String, Object> pMap) {
+	public String join(@RequestParam Map<String, Object> pMap, Model mod) {
 		int result = 0;
 		result = cLogic.companyJoin(pMap);
+		mod.addAttribute("host",hostAddress);
 		if (result == 1) {
 			return "company/Company_Login";
 		}
@@ -107,15 +112,17 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "isExistID.ch4")
-	public String isExistID(@RequestParam Map<String, Object> pMap) {
+	public String isExistID(@RequestParam Map<String, Object> pMap, Model mod) {
 		int result = 0;
 		result = cLogic.isExistID(pMap);
+		mod.addAttribute("host",hostAddress);
 		return "";
 	}
 
 	@RequestMapping(value = "logout.ch4")
-	public String logout(@RequestParam Map<String, Object> pMap, HttpServletRequest req) {
+	public String logout(@RequestParam Map<String, Object> pMap, HttpServletRequest req, Model mod) {
 		HttpSession session = req.getSession();
+		mod.addAttribute("host",hostAddress);
 		session.invalidate();
 		return "company/Company_Login";
 	}
@@ -123,6 +130,7 @@ public class CompanyController {
 	@RequestMapping(value = "applyVisitDetail.ch4",produces="text/plain;charset=UTF-8")
 	public String applyVisitDetail(@RequestParam Map<String, Object> pMap, Model mod) {
 		Map<String, Object> rMap = vLogic.applyDetail(pMap);
+		mod.addAttribute("host",hostAddress);
 		mod.addAttribute("rMap", rMap);
 		return "company/manager/Manager_DetailVisitor";
 	}
@@ -130,38 +138,39 @@ public class CompanyController {
 	@RequestMapping(value = "applyGoodsDetail.ch4",produces="text/plain;charset=UTF-8")
 	public String applyGoodsDetail(@RequestParam Map<String, Object> pMap, Model mod) {
 		Map<String, Object> rMap = gLogic.goodsDetail(pMap);
+		mod.addAttribute("host",hostAddress);
 		mod.addAttribute("rMap", rMap);
 		return "company/manager/Manager_DetailGoods";
 	}
 
 	/////////////// SideMenuBar ///////////////////
 	@RequestMapping(value = "mng_main.ch4")
-	public String mng_main() {
-
+	public String mng_main(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "company/manager/Manager_Main";
 	}
 
 	@RequestMapping(value = "searchVisitor.ch4")
-	public String searchVisitor() {
-
+	public String searchVisitor(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "company/manager/Manager_SearchVisitor";
 	}
 
 	@RequestMapping(value = "logVisitor.ch4")
-	public String logVisitor() {
-
+	public String logVisitor(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "company/manager/Manager_LogVisitor";
 	}
 
 	@RequestMapping(value = "searchGoods.ch4")
-	public String searchGoods() {
-
+	public String searchGoods(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "company/manager/Manager_SearchGoods";
 	}
 
 	@RequestMapping(value = "logGoods.ch4")
-	public String logGoods() {
-
+	public String logGoods(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "company/manager/Manager_LogGoods";
 	}
 
