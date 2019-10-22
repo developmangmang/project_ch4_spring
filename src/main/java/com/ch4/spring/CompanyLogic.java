@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.zxing.BarcodeFormat;
@@ -21,6 +22,12 @@ import com.google.zxing.qrcode.QRCodeWriter;
 @Service
 public class CompanyLogic {
 	Logger logger = Logger.getLogger(CompanyLogic.class);
+	
+	@Value("${file.path}")
+	String QRImagePath = null;
+	@Value("${host.address}")
+	String host = null;
+	
 	@Autowired
 	CompanyDao cDao = null;
 
@@ -60,16 +67,16 @@ public class CompanyLogic {
 		for (int i = 0; i < confirmList.size(); i++) {
 			Map<String, Object> cMap = confirmList.get(i);
 			String qrCode = (String) cMap.get("CONFM_QRCODE");
-			String savedFilePath = CompanyController.QRImagePath;
+			String savedFilePath = QRImagePath;
 			String path = null;
 			String url = null;
 
 			if (pMap.get("visit_no") != null) {
 				path = savedFilePath + "visitor/";
-				url = "http://192.168.0.189:8080/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
+				url = host + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
 			} else if (pMap.get("aplg_no") != null) {
 				path = savedFilePath + "goods/";
-				url = "http://192.168.0.189:8080/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=goods";
+				url = host + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=goods";
 			}
 
 			File file = new File(path);

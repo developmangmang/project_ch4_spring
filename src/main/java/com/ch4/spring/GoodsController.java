@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,9 @@ import com.ch4.getData.GoodsData;
 @RequestMapping(value = "/goods")
 public class GoodsController {
 	Logger logger = Logger.getLogger(GoodsController.class);
+	
+	@Value("${host.address}")
+	String hostAddress;
 	@Autowired
 	GoodsLogic gLogic = null;
 
@@ -23,6 +27,7 @@ public class GoodsController {
 	public String add(@RequestParam Map<String, Object> pMap,@ModelAttribute GoodsData gData, Model mod) {
 		int result = 0;
 		result = gLogic.goodsApplyAdd(pMap,gData);
+		mod.addAttribute("host",hostAddress);
 		if (result == 1) {
 			mod.addAttribute("aplg_no", pMap.get("aplg_no"));
 			mod.addAttribute("gmAddList", pMap.get("gmAddList"));
@@ -32,9 +37,10 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "cancle.ch4")
-	public String cancle(@RequestParam Map<String, Object> pMap) {
+	public String cancle(@RequestParam Map<String, Object> pMap, Model mod) {
 		int result = 0;
 		result = gLogic.goodsCancle(pMap);
+		mod.addAttribute("host",hostAddress);
 		if (result == 1) {
 			return "visitor/Visit_Main";
 		}
@@ -52,6 +58,7 @@ public class GoodsController {
 	public String update(@RequestParam Map<String, Object> pMap,@ModelAttribute GoodsData gData, Model mod) {
 		int result = 0;
 		result = gLogic.goodsUpdate(pMap,gData);
+		mod.addAttribute("host",hostAddress);
 		if (result == 1) {
 			mod.addAttribute("aplg_no", pMap.get("aplg_no"));
 			mod.addAttribute("gmAddList", pMap.get("gmAddList"));
@@ -61,13 +68,14 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value="searchGoods.ch4")
-	public String searchGoods() {
-		
+	public String searchGoods(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "visitor/Visit_SearchGoods";
 	}
 	
 	@RequestMapping(value = "searchGQRcode.ch4")
-	public String searchVQRcode() {
+	public String searchVQRcode(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "visitor/Visit_SearchGoodsQR";
 	}
 }

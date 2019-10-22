@@ -31,7 +31,7 @@
    margin-top: 0px;
    padding-top: 10px;
    height: 600px;
-   background-image: url('http://192.168.0.189:8080/resources/Style/images/banner/speedGate (2).jpg');
+   background-image: url('${host}/resources/Style/images/banner/speedGate (2).jpg');
 }
 /* 배경 투명도 및 크기  */
 #login_background {

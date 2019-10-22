@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.ch4.getData.VisitorData;
@@ -13,10 +14,14 @@ import com.ch4.getData.VisitorData;
 @Service
 public class VisitorLogic {
 	Logger logger = Logger.getLogger(VisitorLogic.class);
+	
+	@Value("${file.path}")
+	String filePath;
+	@Value("${host.address}")
+	String hostAddress;
 	@Autowired
 	VisitorDao vDao = null;
 	
-
 	public Map<String, Object> applyDetail(Map<String, Object> pMap) {
 		Map<String, Object> rMap = vDao.applyDetail(pMap);
 		return rMap;
@@ -134,7 +139,7 @@ public class VisitorLogic {
 	      List<Map<String,Object>> qrCodeList = vDao.qrCodeList(pMap);
 	      for(int i=0; i<qrCodeList.size();i++) {
 	    	  Map<String, Object> indexMap = qrCodeList.get(i);
-	    	  indexMap.put("qrPath", "http://192.168.0.189:8080/resources/QR/visitor/" + indexMap.get("CONFM_QRCODE") + ".png");
+	    	  indexMap.put("qrPath", hostAddress+"/resources/QR/visitor/" + indexMap.get("CONFM_QRCODE") + ".png");
 	    	  logger.info(indexMap);
 	      }
 	      return qrCodeList;

@@ -1,0 +1,22 @@
+[
+	{"model":"차량모델명","value":""},
+	{"model":"그레이스","value":"그레이스"},
+	{"model":"다마스","value":"다마스"},
+	{"model":"대형버스","value":"대형버스"},
+	{"model":"로디우스","value":"로디우스"},
+	{"model":"베스타","value":"베스타"},
+	{"model":"봉고 III(코치)","value":"봉고 III(코치)"},
+	{"model":"스타렉스","value":"스타렉스"},
+	{"model":"시보레익스프레스","value":"시보레익스프레스"},
+	{"model":"이스타나","value":"이스타나"},
+	{"model":"중형버스","value":"중형버스"},
+	{"model":"카니발","value":"카니발"},
+	{"model":"코러스","value":"코러스"},
+	{"model":"코스모스","value":"코스모스"},
+	{"model":"콤비","value":"콤비"},
+	{"model":"타우너","value":"타우너"},
+	{"model":"토픽","value":"토픽"},
+	{"model":"투리스모","value":"투리스모"},
+	{"model":"트라제","value":"트라제"},
+	{"model":"프레지오","value":"프레지오"}
+]
