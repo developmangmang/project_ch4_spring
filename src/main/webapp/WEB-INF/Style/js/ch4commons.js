@@ -1,6 +1,7 @@
 /**
  * Project CH4
  * COMMOMS JAVASCRIPT
+ * 한글화
  */
 //combobox 직접입력 방지
 $.fn.combobox.defaults.editable = false

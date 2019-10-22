@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "/company")
 public class CompanyController {
-	static String QRImagePath = "D:/Workspace_ch4_spring/project_ch4_spring/src/main/webapp/resources/QR/";
+	static String QRImagePath = "C:/Users/kosmo_11/git/project_ch4_spring/src/main/webapp/resources/QR/";
 	Logger logger = Logger.getLogger(CompanyController.class);
 	@Autowired
 	CompanyLogic cLogic = null;

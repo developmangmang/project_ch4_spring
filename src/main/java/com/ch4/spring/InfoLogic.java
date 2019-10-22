@@ -24,6 +24,16 @@ public class InfoLogic {
 		return jsonObject;
 	}
 	
+	public JSONObject confirmGQR(Map<String,Object> pMap) {
+		logger.info("Logic : confirmGQR호출");
+		iDao.confirmGQR(pMap);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("msg",pMap.get("msg"));
+		jsonObject.put("inout",pMap.get("inout"));
+		JSONArray jsonArray = new JSONArray();
+		return jsonObject;
+	}
+	
 	public JSONObject kioskLogin(Map<String,Object> pMap) {
 		logger.info("Logic : kioskLogin호출");
 		iDao.kioskLogin(pMap);

@@ -135,7 +135,7 @@ figure.snip1200.hover p {
 		margin:20px 20px 10px 17%;
 	}
 	#Main_head{
-		background-image: url('/project_ch4_pojo/Style/images/crud/index_images.png');
+		background-image: url('http://192.168.0.189:8080/resources/Style/images/crud/index_images.png');
 		margin-left:7%;
 		margin-top:35px;
 		text-align: center;

@@ -102,7 +102,7 @@ public class GoodsLogic {
 		List<Map<String, Object>> qrCodeList = gDao.qrCodeList(pMap);
 		for(int i=0; i<qrCodeList.size();i++) {
 	    	  Map<String, Object> indexMap = qrCodeList.get(i);
-	    	  indexMap.put("qrPath", "http://localhost:8000/resources/QR/goods/" + indexMap.get("confm_qrcode") + ".png");
+	    	  indexMap.put("qrPath", "http://192.168.0.17:8080/resources/QR/goods/" + indexMap.get("confm_qrcode") + ".png");
 	      }
 		return qrCodeList;
 	}
