@@ -1,23 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-   String com_addr = (String)request.getAttribute("com_addr");
-   String com_name = (String)request.getAttribute("com_name");
-%>
+  String com_name = (String)request.getAttribute("com_name");
+  String com_addr = (String)request.getAttribute("com_addr");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-  <!-- Web icon 설정 --> 
+<meta charset="UTF-8">
+<!-- Web icon 설정 --> 
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
+<title>Insert title here</title>
+<style>
+   #div_title{
+        border-bottom:1px solid #d8d8d8;
+   }
+   #title{
+        font-size:30px;
+        font-weight: bold;       
+        padding-top:30px;
+        padding-bottom:15px;
+   }
+   #description{
+       padding-top:20px;
+   }
+</style>   
 </head>
 <body>
 <%@ include file="../CommonForm/Top.jsp"%>
-<p style="margin-top:-12px">
-</p>
-<div id="map" style="width:900px;height:600px;"></div>
+<div class="container" style="width:100%;height:80%">
+   
+    <div class="row" id="div_title">        
+        <div class="col-sm-6 col-sm-offset-3" id="title">오시는길</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3" id="map" style="width:1100px;height:500px;"></div>
+    </div>  
+    <div class="row" id="description">
+        <div class="col-sm-3 col-sm-offset-3">여기다 설명할거</div>
+        <div class="col-sm-3">
+            <button class="btn btn-primary" style="width:120px;margin-right:20px;">길찾기</button>
+        </div>
+    </div>
+</div>
+
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e2e985efa1fac09e950547473e48705&libraries=services"></script>
 <script>
@@ -58,7 +86,5 @@ geocoder.addressSearch('<%=com_addr%>', function(result, status) {
     } 
 });    
 </script>
-
-<button id="btn_update" class="btn btn-primary" type="button" onclick="applyUpdate()" style="width:120px;margin-right:20px;">신청변경</button>
 </body>
 </html>
