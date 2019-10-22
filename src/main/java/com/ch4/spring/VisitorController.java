@@ -107,6 +107,7 @@ public class VisitorController {
       Map<String, Object> rMap = vLogic.navigation(pMap);
       mod.addAttribute("com_addr", rMap.get("COM_ADDR"));
       mod.addAttribute("com_name", rMap.get("COM_NAME"));
+      mod.addAttribute("com_hp", rMap.get("COM_HP"));
       logger.info("맵 : " + rMap.get("COM_ADDR"));
       return "visitor/Visit_Navigation";
    }

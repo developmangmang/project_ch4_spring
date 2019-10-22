@@ -3,6 +3,7 @@
 <%
   String com_name = (String)request.getAttribute("com_name");
   String com_addr = (String)request.getAttribute("com_addr");
+  String com_hp = (String)request.getAttribute("com_hp");
 %>    
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,8 @@
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
 <title>Insert title here</title>
+<script type="text/javascript">
+</script>
 <style>
    #div_title{
         border-bottom:1px solid #d8d8d8;
@@ -24,7 +27,12 @@
         padding-bottom:15px;
    }
    #description{
-       padding-top:20px;
+        padding-top:20px;
+   }
+   #div_hp{
+        font-size:20px;
+        font-family:"Sans-Serif";
+        font-weight: bold;
    }
 </style>   
 </head>
@@ -39,9 +47,9 @@
         <div class="col-sm-6 col-sm-offset-3" id="map" style="width:1100px;height:500px;"></div>
     </div>  
     <div class="row" id="description">
-        <div class="col-sm-3 col-sm-offset-3">여기다 설명할거</div>
+        <div id="div_hp" class="col-sm-3 col-sm-offset-3">대표번호 : <%=com_hp %></div>
         <div class="col-sm-3">
-            <button class="btn btn-primary" style="width:120px;margin-right:20px;">길찾기</button>
+            <button id="directions" class="btn btn-primary" onclick="location.href='https://map.kakao.com/?sName=&eName=<%=com_addr%>'" style="width:120px;margin-right:20px;">길찾기</button>
         </div>
     </div>
 </div>
