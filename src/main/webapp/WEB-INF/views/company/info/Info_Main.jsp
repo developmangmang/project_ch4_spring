@@ -9,11 +9,8 @@
 <title>안내관리자 메인 - CH4 방문자 관리 시스템</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
-<<<<<<< HEAD
 <link rel="stylesheet" type="text/css"
    href="/project_ch4_pojo/Style/css/maxCss.css">
-=======
->>>>>>> branch 'master' of https://github.com/developmangmang/project_ch4_spring.git
 </head>
 <link rel="stylesheet"
    href="https://fonts.googleapis.com/css?family=Raleway:400,500,800">
@@ -142,7 +139,6 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 <body>
    <%@ include file="../../CommonForm/Top.jsp"%>
 
-<<<<<<< HEAD
    <!-- Content -->
    <div class="mainContent">
       <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
@@ -172,54 +168,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
                      <a href="/info/logVisitor.ch4"></a>
                   </figure>
                </div>
-=======
-	<!-- Content -->
-	<div class="mainContent">
-		<!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
-		<%@ include file="../../CommonForm/InfoSideBar.jsp"%>
-		<div style="padding-left: 200px">
-			<div class="col-lg-12">
-				<div class="col-lg-offset-1 col-lg-10"
-					style="margin-top: 20px; margin-bottom: 20px;">
-					<div style="font-size: 35px; width: 78%; float: left;">
-						<h1><%=com_name%></h1>
-					</div>
-				</div>
-				<div class="col-lg-offset-1 col-lg-10">
-					<!-- Portfolio Item 1 -->
-					<div class="col-md-6 col-lg-3">
-						<figure class="snip1200">
-							<img src="http://192.168.0.189:8080/resources/Style/images/postIt/yellow.png" alt="sq-sample27" />
-							<figcaption>
-								<p>귀사에 대한 방문 기록을 조회합니다. 방문자의 출입로그를 일별,시간별로 확인할 수 있습니다.</p>
-								<div class="heading">
-									<h2>
-										방문자 <span>현황</span>
-									</h2>
-								</div>
-							</figcaption>
-							<a href="/info/logVisitor.ch4"></a>
-						</figure>
-					</div>
 
-					<!-- Portfolio Item 2 -->
-					<div class="col-md-6 col-lg-3">
-						<figure class="snip1200">
-							<img src="http://192.168.0.189:8080/resources/Style/images/postIt/red.png" alt="sq-sample27" />
-							<figcaption>
-								<p>귀사에 대한 반입 기록을 조회합니다. 반입물품의 출입로그를 일별,시간별로 확인할 수 있습니다.</p>
-								<div class="heading">
-									<h2>
-										반입 <span>현황</span>
-									</h2>
-								</div>
-							</figcaption>
-							<a href="/info/logGoods.ch4"></a>
-						</figure>
-					</div>
->>>>>>> branch 'master' of https://github.com/developmangmang/project_ch4_spring.git
-
-<<<<<<< HEAD
                <!-- Portfolio Item 3 -->
                <div class="col-md-6 col-lg-3">
                   <figure class="snip1200">
@@ -255,27 +204,5 @@ figure.snip1200:hover p, figure.snip1200.hover p {
          </div>
       </div>
    </div>
-=======
-					<!-- Portfolio Item 3 -->
-					<div class="col-md-6 col-lg-3">
-						<figure class="snip1200">
-							<img src="http://192.168.0.189:8080/resources/Style/images/postIt/green.png" alt="sq-sample27" />
-							<figcaption>
-								<p>귀사의 모든 시설물에 대한 관리페이지입니다. 실방문지,키오스크 단말,휴무일을 종합 관리합니다.</p>
-								<div class="heading">
-									<h2>
-										<span>종합 관리</span>
-									</h2>
-								</div>
-							</figcaption>
-							<a href="/info/totalManage.ch4"></a>
-						</figure>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</div>
->>>>>>> branch 'master' of https://github.com/developmangmang/project_ch4_spring.git
 </body>
 </html>
