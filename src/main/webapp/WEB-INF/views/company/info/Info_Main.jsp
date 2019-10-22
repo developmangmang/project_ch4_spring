@@ -9,8 +9,6 @@
 <title>안내관리자 메인 - CH4 방문자 관리 시스템</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
-<link rel="stylesheet" type="text/css"
-   href="/project_ch4_pojo/Style/css/maxCss.css">
 </head>
 <link rel="stylesheet"
    href="https://fonts.googleapis.com/css?family=Raleway:400,500,800">

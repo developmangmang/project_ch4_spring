@@ -90,11 +90,10 @@
             $("#searchText").attr('textboxname',newVal);
             var inputHidden = $("#searchText").textbox('textbox').parent().find('input:last');
             inputHidden.attr('name',newVal);
-   //          $("span.textbox > .textbox-value").attr('name',newVal);
          }
       });
       
-   /* 부트스트랩 테이블 */
+   	  /* 부트스트랩 테이블 */
       $("#tb_sv").bootstrapTable({
              columns:[
                   {field:'VISIT_NO',title:'신청번호'}
@@ -111,7 +110,7 @@
                location.href = '/company/applyVisitDetail.ch4?visit_no='+visit_no;
          }
       });
-   //승인상태 변경 검색 이벤트
+      //승인상태 변경 검색 이벤트
       $("#state").combobox({
          onChange: function(newVal){
             //alert("work");
@@ -127,7 +126,7 @@
          }
       });
       
-   //신청일 변경 검색 이벤트
+      //신청일 변경 검색 이벤트
       $("#startdate").datebox({
          onSelect: function(date){
             $(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());

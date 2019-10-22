@@ -1,7 +1,11 @@
 package com.ch4.spring;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
@@ -129,6 +133,81 @@ public class AndroidController {
 		jsonObject.put("vtList", pMap.get("vtList"));
 		jsonObject.put("tkList", pMap.get("tkList"));
 		jsonObject.put("pkList", pMap.get("pkList"));
+		return jsonObject;
+	}
+	
+	@RequestMapping(value="/searchVisitor.ch4")
+	public @ResponseBody JSONObject searchVisitor(@RequestParam Map<String,Object> pMap,Model mod) {
+		logger.info("searchVisit호출");
+		List<Map<String, Object>> applySearch = new ArrayList<Map<String,Object>>();
+		if(pMap.get("searchType").equals("num")) {
+			applySearch = vLogic.applySearch(pMap);
+		} else if(pMap.get("searchType").equals("info")) {
+			applySearch = vLogic.applyList(pMap);
+		}
+		JSONObject jsonObject = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		for(Map<String, Object> map : applySearch) {
+			jsonArray.add(map);
+		}
+		jsonObject.put("sendData",jsonArray);
+		return jsonObject;
+	}
+	
+	@RequestMapping(value="/detailVisitor.ch4")
+	public @ResponseBody JSONObject detailVisitor(@RequestParam Map<String,Object> pMap) {
+		logger.info("detailVisitor호출");
+		Map<String, Object> rMap = vLogic.applyDetail(pMap);
+		JSONObject jsonObject = new JSONObject();
+		Iterator<String> keys = rMap.keySet().iterator();
+		while(keys.hasNext()) {
+			String key = keys.next();
+			jsonObject.put(key,rMap.get(key));
+		}
+		return jsonObject;
+	}
+	
+	@RequestMapping(value="/searchGoods.ch4")
+	public @ResponseBody JSONObject searchGoods(@RequestParam Map<String,Object> pMap,Model mod) {
+		logger.info("searchGoods호출");
+		List<Map<String, Object>> applySearch = new ArrayList<Map<String,Object>>();
+		if(pMap.get("searchType").equals("num")) {
+			applySearch = gLogic.goodsSearch(pMap);
+		} else if(pMap.get("searchType").equals("info")) {
+			applySearch = gLogic.goodsList(pMap);
+		}
+		JSONObject jsonObject = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		for(Map<String, Object> map : applySearch) {
+			jsonArray.add(map);
+		}
+		jsonObject.put("sendData",jsonArray);
+		return jsonObject;
+	}
+	
+	@RequestMapping(value="/detailGoods.ch4")
+	public @ResponseBody JSONObject detailGoods(@RequestParam Map<String,Object> pMap) {
+		logger.info("detailGoods호출");
+		Map<String, Object> rMap = gLogic.goodsDetail(pMap);
+		JSONObject jsonObject = new JSONObject();
+		Iterator<String> keys = rMap.keySet().iterator();
+		while(keys.hasNext()) {
+			String key = keys.next();
+			jsonObject.put(key,rMap.get(key));
+		}
+		return jsonObject;
+	}
+	
+	@RequestMapping(value = "QRListVisitor.ch4")
+	public @ResponseBody JSONObject qrListVisitor(@RequestParam Map<String, Object> pMap) {
+		logger.info("qrListVisitor호출");
+		List<Map<String, Object>> qrCodeList = vLogic.qrCodeList(pMap);
+		JSONObject jsonObject = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		for(Map<String, Object> map : qrCodeList) {
+			jsonArray.add(map);
+		}
+		jsonObject.put("sendData",jsonArray);
 		return jsonObject;
 	}
 	//////////////////////////////////// 방문자  //////////////////////////////////////////////
