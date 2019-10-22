@@ -29,10 +29,15 @@
    #description{
         padding-top:20px;
    }
-   #div_hp{
+   #div_info,#div_hp{
         font-size:20px;
         font-family:"Sans-Serif";
         font-weight: bold;
+        border:3px solid #d8d8d8;
+        background-color: #F2F2F2;
+   }
+   #div_btn{
+        padding-top:20px;
    }
 </style>   
 </head>
@@ -44,13 +49,22 @@
         <div class="col-sm-6 col-sm-offset-3" id="title">오시는길</div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-3" id="map" style="width:1100px;height:500px;"></div>
+        <div class="col-sm-6 col-sm-offset-3" id="map" style="width:960px;height:500px;"></div>
     </div>  
     <div class="row" id="description">
-        <div id="div_hp" class="col-sm-3 col-sm-offset-3">대표번호 : <%=com_hp %></div>
-        <div class="col-sm-3">
-            <button id="directions" class="btn btn-primary" onclick="location.href='https://map.kakao.com/?sName=&eName=<%=com_addr%>'" style="width:120px;margin-right:20px;">길찾기</button>
+        <div id="div_hp" class="col-sm-3 col-sm-offset-3">
+            <img src="http://localhost:8000/resources/Style/images/crud/call.png" class="img-thumbnail" style="width:30px;border:0px;">
+                        <span style="font-size:10px;">대표번호</span><br> <%=com_hp %>
         </div>
+        <div id="div_info" class="col-sm-3 ">
+            <img src="http://localhost:8000/resources/Style/images/crud/company.png" class="img-thumbnail" style="width:30px;border:0px;">
+                     <span style="font-size:10px;">회사주소</span><br> <%=com_addr %>
+        </div>
+    <div class="row">
+        <div id="div_btn" class="col-sm-6 col-sm-offset-6">
+           <button id="directions" class="btn btn-success" onclick="location.href='https://map.kakao.com/?sName=&eName=<%=com_addr%>'" style="width:120px;margin-right:20px;">길찾기</button>    
+        </div>
+    </div>  
     </div>
 </div>
 
