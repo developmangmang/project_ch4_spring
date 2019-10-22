@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +20,11 @@ import com.ch4.getData.VisitorData;
 @RequestMapping(value = "/visitor")
 public class VisitorController {
 	Logger logger = Logger.getLogger(VisitorController.class);
+	
+	@Value("${file.path}")
+	String filePath;
+	@Value("${host.address}")
+	String hostAddress;
 	@Autowired
 	VisitorLogic vLogic = null;
 
@@ -30,23 +36,27 @@ public class VisitorController {
 	}
 
 	@RequestMapping(value = "searchVisitor.ch4")
-	public String searchVisitor() {
+	public String searchVisitor(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "visitor/Visit_SearchVisitor";
 	}
 
 	@RequestMapping(value = "searchVQRcode.ch4")
-	public String searchVQRcode() {
+	public String searchVQRcode(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "visitor/Visit_SearchVisitorQR";
 	}
 
 	@RequestMapping(value = "applyAgreement.ch4")
-	public String applyAgreement() {
+	public String applyAgreement(Model mod) {
+		mod.addAttribute("host",hostAddress);
 		return "visitor/Visit_Select";
 	}
 
 	@RequestMapping(value = "visitPurpose.ch4")
-	public String visitPurpose(@RequestParam Map<String, Object> pMap, HttpServletRequest req) {
+	public String visitPurpose(@RequestParam Map<String, Object> pMap, HttpServletRequest req ,Model mod) {
 		String vPP = req.getParameter("pp");
+		mod.addAttribute("host", hostAddress);
 		if (vPP.equals("visitor")) {
 			return "visitor/Visit_ApplyVisitor";
 		} else if (vPP.equals("goods")) {
@@ -59,7 +69,7 @@ public class VisitorController {
 	public String add(@RequestParam Map<String, Object> pMap, @ModelAttribute VisitorData vData,  Model mod) {
 		int result = 0;
 		result = vLogic.visitApplyAdd(pMap,vData);
-
+		mod.addAttribute("host",hostAddress);
 		if (result == 1) {
 			mod.addAttribute("visit_no", pMap.get("visit_no"));
 			mod.addAttribute("vtAddList", pMap.get("vtAddList"));
@@ -71,8 +81,9 @@ public class VisitorController {
 	}
 
 	@RequestMapping(value = "cancle.ch4")
-	public String cancle(@RequestParam Map<String, Object> pMap) {
+	public String cancle(@RequestParam Map<String, Object> pMap, Model mod) {
 		int result = 0;
+		mod.addAttribute("host",hostAddress);
 		result = vLogic.visitorCancle(pMap);
 		if (result == 1) {
 			return "visitor/Visit_Main";
@@ -84,6 +95,7 @@ public class VisitorController {
 	public String changeVisitor(@RequestParam Map<String, Object> pMap, Model mod) {
 		Map<String, Object> rMap = vLogic.applyDetail(pMap);
 		mod.addAttribute("rMap", rMap);
+		mod.addAttribute("host",hostAddress);
 		return "visitor/Visit_ChangeVisitor";
 	}
 
@@ -91,6 +103,7 @@ public class VisitorController {
 	public String update(@RequestParam Map<String, Object> pMap, @ModelAttribute VisitorData vData, Model mod) {
 		int result = 0;
 		result = vLogic.visitorUpdate(pMap,vData);
+		mod.addAttribute("host",hostAddress);
 		if (result == 1) {
 			mod.addAttribute("visit_no", pMap.get("visit_no"));
 			mod.addAttribute("vtAddList", pMap.get("vtAddList"));

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "/company")
 public class CompanyController {
-	static String QRImagePath = "C:/Users/kosmo_11/git/project_ch4_spring/src/main/webapp/resources/QR/";
 	Logger logger = Logger.getLogger(CompanyController.class);
+	
+	@Value("${file.path}")
+	String QRImagePath = null;
 	@Autowired
 	CompanyLogic cLogic = null;
 	@Autowired
@@ -45,6 +48,7 @@ public class CompanyController {
 	@RequestMapping(value = "login.ch4",produces="text/plain;charset=UTF-8")
 	public String login(@RequestParam Map<String, Object> pMap, Model mod, HttpServletRequest req,
 			HttpServletResponse res) {
+		logger.info(QRImagePath);
 		cLogic.companyLogin(pMap);
 		String msg = pMap.get("msg").toString();
 		if (msg.equals("error")) {

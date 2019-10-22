@@ -490,7 +490,7 @@
             $("#d_brand").combobox({
                valueField: 'value',
                textField: 'brand',
-               url: "http://localhost:8000/resources/json/"+newValue+".json"
+               url: "${host}"+"/resources/json/"+newValue+".json"
             });
             if("etc"==newValue){
                $("#d_brand").combobox({
@@ -575,7 +575,7 @@
             $("#p_model").combobox({
                valueField: 'value',
                textField: 'model',
-               url: "http://localhost:8000/resources/json/"+newValue+".json"
+               url: "${host}"+"/resources/json/"+newValue+".json"
             });
          }
       });
@@ -709,25 +709,25 @@
          $("#visit_vhcle_encc").val('O');
       }
       //url주소 결정되면 활성화
-      alert(
-         "신청자 이름: "+$("#visit_apply_name").val()+"\n"
-         +"신청자 연락처: "+$("#visit_apply_hp").val()+"\n"
-         +"방문목적: "+$("#visit_purps").textbox('getValue')+"\n"
-         +"목적지: "+$("#visit_desti").combobox('getValue')+"\n"
-         +"방문유형: "+$("#visit_type").combobox('getValue')+"\n"
-         +"방문주기: "+$("#visit_term").combobox('getValue')+"\n"
-         +"방문요일: "+$("#visit_day").combobox('getValue')+"\n"
-         +"방문날짜: "+$("#visit_date").val()+"\n"
-         +"반입기기유무: "+$("#visit_tkin_encc").val()+"\n"
-         +"차량유무: "+$("#visit_vhcle_encc").val()+"\n"
-         +"방문자이름: "+$("#visitor_name").val()+"\n"
-         +"기종: "+$("#tkin_kind").val()+"\n"
-         +"기기제조사: "+$("#tkin_brand").val()+"\n"
-         +"모델명: "+$("#tkin_model").val()+"\n"
-         +"차종: "+$("#parking_kind").val()+"\n"
-         +"모델명: "+$("#parking_model").val()+"\n"
-         +"차량번호: "+$("#parking_num").val()+"\n"
-      );
+//       alert(
+//          "신청자 이름: "+$("#visit_apply_name").val()+"\n"
+//          +"신청자 연락처: "+$("#visit_apply_hp").val()+"\n"
+//          +"방문목적: "+$("#visit_purps").textbox('getValue')+"\n"
+//          +"목적지: "+$("#visit_desti").combobox('getValue')+"\n"
+//          +"방문유형: "+$("#visit_type").combobox('getValue')+"\n"
+//          +"방문주기: "+$("#visit_term").combobox('getValue')+"\n"
+//          +"방문요일: "+$("#visit_day").combobox('getValue')+"\n"
+//          +"방문날짜: "+$("#visit_date").val()+"\n"
+//          +"반입기기유무: "+$("#visit_tkin_encc").val()+"\n"
+//          +"차량유무: "+$("#visit_vhcle_encc").val()+"\n"
+//          +"방문자이름: "+$("#visitor_name").val()+"\n"
+//          +"기종: "+$("#tkin_kind").val()+"\n"
+//          +"기기제조사: "+$("#tkin_brand").val()+"\n"
+//          +"모델명: "+$("#tkin_model").val()+"\n"
+//          +"차종: "+$("#parking_kind").val()+"\n"
+//          +"모델명: "+$("#parking_model").val()+"\n"
+//          +"차량번호: "+$("#parking_num").val()+"\n"
+//       );
       $("#form_apply").submit();
    }
 </script>

@@ -18,7 +18,7 @@
 		margin-top : 0px;
 		padding-top : 10px;
 		height : 600px;
-		background-image: url('http://192.168.0.189:8080/resources/Style/images/banner/speedGate (2).jpg');
+		background-image: url('${host}'+'/resources/Style/images/banner/speedGate (2).jpg');
 	}
 	.panel {
 		border-top-left-radius: 20px;
@@ -167,7 +167,7 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-lg-4">
-										<img class="img-circle" src="http://192.168.0.189:8080/resources/Style/images/crud/buildings.png">
+										<img class="img-circle" src="${host}/resources/Style/images/crud/buildings.png">
 									</div>
 									<div class="col-lg-8">
 										<br>
@@ -190,7 +190,7 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-lg-4">
-										<img class="img-circle" src="http://192.168.0.189:8080/resources/Style/images/crud/clipboard.png">
+										<img class="img-circle" src="${host}/resources/Style/images/crud/clipboard.png">
 									</div>
 									<div class="col-lg-5" style="padding-left:0px;padding-right:0px;">
 										<br>
@@ -217,29 +217,29 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-2">
-									<img class="img-circle" src="http://192.168.0.189:8080/resources/Style/images/crud/searchbox.png" style="background-color:#6EAFA8">
+									<img class="img-circle" src="${host}/resources/Style/images/crud/searchbox.png" style="background-color:#6EAFA8">
 								</div>
 								<div id="col_btn" class="col-lg-4" style="padding-left:0px;padding-right:10px;">
 									<div class="row" style="text-align:center;padding-top:15px;">
 										<button class="btn btn-info" type="button" onClick="searchVisitor()">
-											<img src="http://192.168.0.189:8080/resources/Style/images/crud/visit_icon.png"> 방문조회
+											<img src="${host}/resources/Style/images/crud/visit_icon.png"> 방문조회
 										</button>
 										<button class="btn btn-warning" type="button" onClick="searchGoods()">
-											<img src="http://192.168.0.189:8080/resources/Style/images/crud/goods_icon.png"> 반입조회
+											<img src="${host}/resources/Style/images/crud/goods_icon.png"> 반입조회
 										</button>
 									</div>
 									<div class="row" style="text-align:center;padding-top:15px;">
 										<button class="btn btn-basic" type="button" onClick="searchVQR()">
-											<img src="http://192.168.0.189:8080/resources/Style/images/crud/qr_search_icon.png"> 방문QR
+											<img src="${host}/resources/Style/images/crud/qr_search_icon.png"> 방문QR
 										</button>
 										<button class="btn btn-basic" type="button" onClick="searchGQR()">
-											<img src="http://192.168.0.189:8080/resources/Style/images/crud/qr_search_icon.png"> 반입QR
+											<img src="${host}/resources/Style/images/crud/qr_search_icon.png"> 반입QR
 										</button>
 									</div>
 								</div>
 								<div class="col-lg-6" style="padding-left:0px;padding-right:0px;text-align:center;">
 									<label for="img_process">신청 절차안내</label><br>
-									<img id="img_process" src="/resources/Style/images/crud/img_process.png">
+									<img id="img_process" src="${host}/resources/Style/images/crud/img_process.png">
 								</div>
 							</div>
 						</div>
