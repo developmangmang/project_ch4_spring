@@ -86,7 +86,7 @@
 			    {field:'CONFM_NO',title:'물품번호'},
 			    {field:'COM_NAME',title:'반입지'},
 			    {field:'CONFM_DESTI',title:'반입장소'},
-			    {field:'CONFM_TRANS_DATE',title:'반입일자'},
+			    {field:'APLG_TRANS_DATE',title:'반입일자'},
 			    {field:'CONFM_NAME',title:'물품명'},
 			    {field:'CONFM_TYPE',title:'물품종류'},
 			    {field:'CONFM_QUAN',title:'EA'},

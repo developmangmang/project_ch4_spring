@@ -22,7 +22,7 @@ public class CompanyController {
 	Logger logger = Logger.getLogger(CompanyController.class);
 	
 	@Value("${file.path}")
-	String QRImagePath = null;
+	String filePath = null;
 	@Value("${host.address}")
 	String hostAddress;
 	@Autowired
@@ -51,7 +51,6 @@ public class CompanyController {
 	@RequestMapping(value = "login.ch4",produces="text/plain;charset=UTF-8")
 	public String login(@RequestParam Map<String, Object> pMap, Model mod, HttpServletRequest req,
 			HttpServletResponse res) {
-		logger.info(QRImagePath);
 		cLogic.companyLogin(pMap);
 		mod.addAttribute("host",hostAddress);
 		String msg = pMap.get("msg").toString();

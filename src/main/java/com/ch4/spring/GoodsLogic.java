@@ -5,12 +5,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.ch4.getData.GoodsData;
 
 @Service
 public class GoodsLogic {
+	
+	@Value("${file.path}")
+	String filePath;
+	@Value("${host.address}")
+	String hostAddress;
 	@Autowired
 	GoodsDao gDao = null;
 
@@ -102,7 +108,7 @@ public class GoodsLogic {
 		List<Map<String, Object>> qrCodeList = gDao.qrCodeList(pMap);
 		for(int i=0; i<qrCodeList.size();i++) {
 	    	  Map<String, Object> indexMap = qrCodeList.get(i);
-	    	  indexMap.put("qrPath", "http://192.168.0.17:8080/resources/QR/goods/" + indexMap.get("confm_qrcode") + ".png");
+	    	  indexMap.put("qrPath", hostAddress+"/resources/QR/goods/" + indexMap.get("CONFM_QRCODE") + ".png");
 	      }
 		return qrCodeList;
 	}
