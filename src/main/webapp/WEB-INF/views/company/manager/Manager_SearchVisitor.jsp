@@ -97,7 +97,7 @@
       $("#tb_sv").bootstrapTable({
              columns:[
                   {field:'VISIT_NO',title:'신청번호'}
-                  ,{field:'VISIT_DAYE',title:'신청일'}
+                  ,{field:'VISIT_APPLY_DATE',title:'신청일'}
                   ,{field:'VISIT_APPLY_NAME',title:'신청자명'}
                   ,{field:'VISIT_APPLY_HP',title:'연락처'}
                   ,{field:'VISIT_DESTI',title:'목적지'}/* 현재위치 : 내부 외부 사내 .. */

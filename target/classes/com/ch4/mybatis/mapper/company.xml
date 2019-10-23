@@ -32,7 +32,7 @@
 
 	<!-- 출입로그 조회  -->
 	<select id="inOutList" parameterType="map" resultType="map">
-		select cl.cmg_inout, cl.cmg_entrc, cl.cmg_notes, cc.confm_no, cc.confm_name, cc.confm_hp, visit_desti
+		select cl.cmg_inout, cl.cmg_entrc, cl.cmg_notes, cc.confm_no, cc.confm_name, cc.confm_hp, confm_desti
 		  from cmg_log cl, visit_confm vc, cmg_confm cc, visit_apply va
 		 where cl.confm_qrcode = cc.confm_qrcode
 		   and vc.confm_no = cc.confm_no
