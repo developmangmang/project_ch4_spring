@@ -53,11 +53,11 @@
     </div>  
     <div class="row" id="description">
         <div id="div_hp" class="col-sm-3 col-sm-offset-3">
-            <img src="http://localhost:8000/resources/Style/images/crud/call.png" class="img-thumbnail" style="width:30px;border:0px;">
+            <img src="${host}/resources/Style/images/crud/call.png" class="img-thumbnail" style="width:30px;border:0px;">
                         <span style="font-size:10px;">대표번호</span><br> <%=com_hp %>
         </div>
         <div id="div_info" class="col-sm-3 ">
-            <img src="http://localhost:8000/resources/Style/images/crud/company.png" class="img-thumbnail" style="width:30px;border:0px;">
+            <img src="${host}/resources/Style/images/crud/company.png" class="img-thumbnail" style="width:30px;border:0px;">
                      <span style="font-size:10px;">회사주소</span><br> <%=com_addr %>
         </div>
     <div class="row">

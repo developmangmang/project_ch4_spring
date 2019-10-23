@@ -18,6 +18,7 @@ public class InfoDao {
 		logger.info("DAO : confirmVQR호출");
 		int result = 0;
 		result = sqlSessionTemplate.update("confirmVQR",pMap);
+		logger.info(pMap);
 		logger.info("DAO : "+result);
 		return result;
 	}

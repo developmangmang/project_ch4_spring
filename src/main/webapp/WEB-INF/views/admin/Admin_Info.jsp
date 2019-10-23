@@ -24,10 +24,7 @@
 	}
 </style>
 <script type="text/javascript">
-	function moveQnA(){
-		alert("여기");
-		location.href="admin/qnaBoard.ch4";
-	}
+	
 
 </script>
 </head> 
@@ -37,16 +34,15 @@
 		 jQuery.fn.bootstrapTable.columnDefaults.halign="center"
 		$("#admin_info").bootstrapTable({
 			columns:[
-		        {field:'com_name',title:'회사명', width:'30', widthunit:'px'}
-		        ,{field:'com_reg_date',title:'가입일',width:'100', widthunit:'px'}
-		        ,{field:'com_addr',title:'주소',width:'200', widthunit:'px'}
-		        ,{field:'com_hp',title:'전화번호',width:'150', widthunit:'px'}
-		        ,{field:'com_type',title:'업종',width:'100', widthunit:'px'}
-		        ,{field:'com_card_use',title:'출입증<br>사용여부',width:'50', widthunit:'px'}
-		        ,{field:'com_bizno',title:'사업자번호',width:'150', widthunit:'px'}
+		        {field:'COM_NAME',title:'회사명', width:'30', widthunit:'px'}
+		        ,{field:'COM_REG_DATE',title:'가입일',width:'100', widthunit:'px'}
+		        ,{field:'COM_ADDR',title:'주소',width:'200', widthunit:'px'}
+		        ,{field:'COM_HP',title:'전화번호',width:'150', widthunit:'px'}
+		        ,{field:'COM_TYPE',title:'업종',width:'100', widthunit:'px'}
+		        ,{field:'COM_CARD_USE',title:'출입증<br>사용여부',width:'50', widthunit:'px'}
+		        ,{field:'COM_BIZNO',title:'사업자번호',width:'150', widthunit:'px'}
 		   ]
 			,search:'true'
-			//,url:'/project_ch4_pojo/View/Test/jsonAdminInfoList.json'
 			,url:'admin/adminInfo.ch4'
 			,pagination:'true'//페이지 네이션
 			,paginationPreText:"Previous"
@@ -69,7 +65,7 @@
 			            </a>
 					</li>
 					<li class="nav-item">
-			            <a class="nav-link" href="javascript:moveQnA()">
+			            <a class="nav-link" href="admin/qnaBoard.ch4">
 			              <span data-feather="file"></span>
 			              	QnA
 			            </a>

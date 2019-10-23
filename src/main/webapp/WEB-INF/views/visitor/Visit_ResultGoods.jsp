@@ -158,7 +158,7 @@
    <div class="row">
        <div class="col-lg-8 col-lg-offset-2"> 
           <div style="text-align:center;">
-             <img src="http://192.168.0.189:8080/resources/Style/images/crud/transport_logo_default.png" class="img-thumbnail" style="width:30%;border:0px;">
+             <img src="${host}/resources/Style/images/crud/transport_logo_default.png" class="img-thumbnail" style="width:30%;border:0px;">
              <h3 style="margin-top:10px;">"고객님의 반입신청이 <b style="font-size:40px; color:#b22222;">접수</b><b style="font-size:24px; color:#4169e1;">(<%=aplg_no %>)</b>되었습니다."</h3>
           </div><br>
           <div class="row" style="text-align:center;">

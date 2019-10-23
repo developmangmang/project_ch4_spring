@@ -26,15 +26,15 @@ public class AdminContoller {
 	@Autowired
 	AdminLogic adminLogic = null;
 
-	@RequestMapping(value = "adminLogin")
+	@RequestMapping(value = "adminLogin.ch4")
 	public String adminLogin(@RequestParam Map<String, Object> pMap) {
+		logger.info(pMap);
 		if ((pMap.get("adminID").equals(adminID)) && (pMap.get("adminPW").equals(adminPW))) {
-			return "admin/Admin_MangerInfo";
-		} else {
+			return "admin/Admin_Info";
 		}
 		return "Fail";
 	}
-	@RequestMapping(value = "sendAnwser")
+	@RequestMapping(value = "sendAnwser.ch4")
 	public String sendAnwser(@RequestParam Map<String, Object> pMap, Model mod) {
 		int result = 0;
 		mod.addAttribute("host",hostAddress);

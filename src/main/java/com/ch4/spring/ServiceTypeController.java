@@ -35,7 +35,7 @@ public class ServiceTypeController {
 	@RequestMapping(value="admin.ch4")
 	public String admin(@RequestParam Map<String,Object> pMap, Model mod) {
 		mod.addAttribute("host",hostAddress);
-		return "admin/Admin_MangerLogin";
+		return "admin/Admin_Login";
 	}
 
 }

@@ -199,7 +199,7 @@
             where app.com_no = co.com_no
             <!-- 검색 : 회사코드 -->
          <if test='com_no not in {null,""}'>
-            and vi.com_no = #{com_no}
+            and app.com_no = #{com_no}
          </if>
             <!-- 검색 : (승인)반입번호 -->
          <if test='confm_no not in {null,""}'>
@@ -207,51 +207,55 @@
                           from goods_confm
                          where confm_no = #{confm_no})
          </if>
-            <!-- 검색 : 신청번호 -->
-            <if test='aplg_no not in {null,""}'>
-               and aplg_no = #{aplg_no}
-            </if>
-            <!-- 검색 : 신청자 이름 -->
-            <if test='aplg_name not in {null,""}'>
-               and aplg_name = #{aplg_name}
-            </if>
-            <!-- 검색 : 신청자 연락처 -->
-            <if test='aplg_hp not in {null,""}'>
-               and aplg_hp = #{aplg_hp}
-            </if>
-            <!-- 검색 : 물품명 -->
-            <if test='gmng_name not in {null,""}'>
-               and aplg_name = (select aplg_name
-                              from goods_mng
-                             where gmng_name like '%'||#{gmng_name}||'%')
-            </if>
-            <!-- 검색 : 승인상태 -->
-            <if test='aplg_permit_st not in {null,""}'>
-               and aplg_permit_st = #{aplg_permit_st}
-            </if>
-            <!-- 검색 : 신청일자 -->
-            <if test='aplg_date not in {null,""}'>
-               and aplg_date = #{aplg_date}
-            </if>
-            <!-- 검색 : 신청일자(기간) -->
-            <if test='aplg_date1 not in {null,""}'>
-               and aplg_date >= #{aplg_date1}
-            </if>
-            <if test='aplg_date2 not in {null,""}'>
-            <![CDATA[and aplg_date <= #{aplg_date2}]]>
-            </if>
-            <!-- 검색 : 반입일자 -->
-            <if test='aplg_trans_date not in {null,""}'>
-               and aplg_trans_date = #{aplg_trans_date}
-            </if>
-            <!-- 검색 : 반입일자 (기간)-->
-            <if test='aplg_trans_date1 not in {null,""}'>
-               and aplg_trans_date >= #{aplg_trans_date1}
-            </if>
-            <if test='aplg_trans_date2 not in {null,""}'>
-            <![CDATA[and aplg_trans_date <= #{aplg_trans_date2}]]>
-            </if>
-            <!-- 검색 : 신청연별 -->
+         <!-- 검색 : 신청번호 -->
+         <if test='aplg_no not in {null,""}'>
+            and aplg_no = #{aplg_no}
+         </if>
+         <!-- 검색 : 신청자 이름 -->
+         <if test='aplg_name not in {null,""}'>
+            and aplg_name like '%'||#{aplg_name}||'%'
+         </if>
+         <!-- 검색 : 신청자 연락처 -->
+         <if test='aplg_hp not in {null,""}'>
+            and aplg_hp = #{aplg_hp}
+         </if>
+         <!-- 검색 : 물품명 -->
+         <if test='gmng_name not in {null,""}'>
+            and aplg_name = (select aplg_name
+                           from goods_mng
+                          where gmng_name like '%'||#{gmng_name}||'%')
+         </if>
+         <!-- 검색 : 목적지 -->
+         <if test='aplg_desti not in {null,""}'>
+         	and aplg_desti like '%'||#{aplg_desti}||'%'
+         </if>
+         <!-- 검색 : 승인상태 -->
+         <if test='aplg_permit_st not in {null,""}'>
+            and aplg_permit_st = #{aplg_permit_st}
+         </if>
+         <!-- 검색 : 신청일자 -->
+         <if test='aplg_date not in {null,""}'>
+            and aplg_date = #{aplg_date}
+         </if>
+         <!-- 검색 : 신청일자(기간) -->
+         <if test='aplg_date1 not in {null,""}'>
+            and aplg_date >= #{aplg_date1}
+         </if>
+         <if test='aplg_date2 not in {null,""}'>
+         <![CDATA[and aplg_date <= #{aplg_date2}]]>
+         </if>
+         <!-- 검색 : 반입일자 -->
+         <if test='aplg_trans_date not in {null,""}'>
+            and aplg_trans_date = #{aplg_trans_date}
+         </if>
+         <!-- 검색 : 반입일자 (기간)-->
+         <if test='aplg_trans_date1 not in {null,""}'>
+            and aplg_trans_date >= #{aplg_trans_date1}
+         </if>
+         <if test='aplg_trans_date2 not in {null,""}'>
+         <![CDATA[and aplg_trans_date <= #{aplg_trans_date2}]]>
+         </if>
+         <!-- 검색 : 신청연별 -->
          <if test='aplg_year not in {null,""}'>
             and substr(aplg_date,0,4) = #{aplg_year}
          </if>

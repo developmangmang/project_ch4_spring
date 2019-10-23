@@ -11,98 +11,6 @@
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 </head>
 <body>
-	<script type="text/javascript">
-//combobox 직접입력 방지
-$.fn.combobox.defaults.editable = false
-//datebox 직접입력 방지
-$.fn.datebox.defaults.editable = false
-
-/* 검색방법 콤보박스로 textbox name값 변경 */
-$(document).ready(function(){
-	$('#SearchType').combobox({
-		onChange: function(newVal){
-			$("#searchText").textbox('textbox').attr('name',newVal);
-			$("#searchText").attr('textboxname',newVal);
-			var inputHidden = $("#searchText").textbox('textbox').parent().find('input:last');
-			inputHidden.attr('name',newVal);
-		}
-	});
-
-/* 테이블 데이터 */
-	$("#tb_searchGood").bootstrapTable({
-		columns:[
-			{field:"APLG_NO",title:'신청번호'}
-			,{field:"APLG_DATE",title:'신청일'}
-			,{field:"APLG_NAME",title:'신청자명'}
-			,{field:"APLG_HP",title:'연락처'}
-			,{field:"APLG_DESTI",title:'목적지'}
-			,{field:"APLG_PERMIT_ST",title:'결재상태'}
-		]
-		,url:'/company/applyGoodsList.ch4'
-		,onDblClickRow : function(row, $element, field) {
-			//테이블에서 신청번호 칸에 들어간 정보 가져오기
-			var aplg_no = $element.find('td').eq(0).text();
-			location.href = '/company/applyGoodsDetail.ch4?aplg_no='+aplg_no;
-		}
-	});
-
-//방문현황 콤보
-	$("#state").combobox({
-		onChange: function(newVal){
-			//alert("work");
-			$.ajax({
-				type:'post'
-				,url:'/company/applyGoodsList.ch4'
-				,dataType: "json"
-				,data :$("#f_search").serialize()
-				,success: function(data){
-					$("#tb_sv").bootstrapTable('load',data);
-				}
-			});
-		}
-	});
-//날짜 콤보
-	$("#startdate").datebox({
-		onSelect: function(date){
-			$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
-			$.ajax({
-				type:'post'
-				,url:'/company/applyGoodsList.ch4'
-				,dataType: "json"
-				,data :$("#f_search").serialize()
-				,success: function(data){
-					$("#tb_sv").bootstrapTable('load',data);
-				}
-			});
-		}
-	});
-	$("#closedate").datebox({
-		onSelect: function(date){
-			$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
-			$.ajax({
-				type:'post'
-				,url:'/company/applyGoodsList.ch4'
-				,dataType: "json"
-				,data :$("#f_search").serialize()
-				,success: function(data){
-					$("#tb_sv").bootstrapTable('load',data);
-				}
-			});
-		}
-	});
-	$("#btn_search").click(function(){
-		$.ajax({
-			type:'post'
-			,url:'/company/applyGoodsList.ch4'
-			,dataType: "json"
-			,data :$("#f_search").serialize()
-			,success: function(data){
-				$("#tb_searchGood").bootstrapTable('load',data);
-			}
-		});
-	});
-});
-</script>
 	<%@ include file="../../CommonForm/Top.jsp"%>
 	<!-- Content -->
 	<div class="mainContent">
@@ -119,6 +27,7 @@ $(document).ready(function(){
 			<div class="col-lg-offset-1 col-lg-10">
 				<div class="row">
 					<form id="f_search">
+						<input type="hidden" name="com_no" value="<%=com_no %>">
 						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="SearchType" name='SearchType'
 								 style="width: 90%;">
@@ -131,8 +40,9 @@ $(document).ready(function(){
 						<div class='col-lg-2' style="padding: 5px;">
 							<!-- 검색창 : 콤보박스에 의한 분기 -->
 							<input class="easyui-textbox" id="searchText" name="aplg_no"
-								style="width: 80%;"> <a id="btn_search" class="easyui-linkbutton"
-								type="button" data-options="iconCls:'icon-search'"></a>
+								style="width: 80%;"> <a class="easyui-linkbutton"
+                        		type="button" data-options="iconCls:'icon-search'"
+                        		onclick="btn_search()"></a>
 						</div>
 						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="state" name="aplg_permit_st"
@@ -163,5 +73,99 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	//combobox 직접입력 방지
+	$.fn.combobox.defaults.editable = false
+	//datebox 직접입력 방지
+	$.fn.datebox.defaults.editable = false
+	
+	/* 검색방법 콤보박스로 textbox name값 변경 */
+	$(document).ready(function(){
+		$('#SearchType').combobox({
+			onChange: function(newVal){
+				$("#searchText").textbox('textbox').attr('name',newVal);
+				$("#searchText").attr('textboxname',newVal);
+				var inputHidden = $("#searchText").textbox('textbox').parent().find('input:last');
+				inputHidden.attr('name',newVal);
+			}
+		});
+	
+		/* 테이블 데이터 */
+		$("#tb_searchGood").bootstrapTable({
+			columns:[
+				{field:"APLG_NO",title:'신청번호'}
+				,{field:"APLG_DATE",title:'신청일'}
+				,{field:"APLG_NAME",title:'신청자명'}
+				,{field:"APLG_HP",title:'연락처'}
+				,{field:"APLG_DESTI",title:'목적지'}
+				,{field:"APLG_PERMIT_ST",title:'결재상태'}
+			]
+			,url:'/company/applyGoodsList.ch4?com_no='+'<%=com_no %>'
+			,onDblClickRow : function(row, $element, field) {
+				//테이블에서 신청번호 칸에 들어간 정보 가져오기
+				var aplg_no = $element.find('td').eq(0).text();
+				location.href = '/company/applyGoodsDetail.ch4?aplg_no='+aplg_no;
+			}
+		});
+	
+		//방문현황 콤보
+		$("#state").combobox({
+			onChange: function(newVal){
+				//alert("work");
+				$.ajax({
+					type:'post'
+					,url:'/company/applyGoodsList.ch4'
+					,dataType: "json"
+					,data :$("#f_search").serialize()
+					,success: function(data){
+						$("#tb_searchGood").bootstrapTable('load',data);
+					}
+				});
+			}
+		});
+		//날짜 콤보
+		$("#startdate").datebox({
+			onSelect: function(date){
+				$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+				$.ajax({
+					type:'post'
+					,url:'/company/applyGoodsList.ch4'
+					,dataType: "json"
+					,data :$("#f_search").serialize()
+					,success: function(data){
+						$("#tb_searchGood").bootstrapTable('load',data);
+					}
+				});
+			}
+		});
+		$("#closedate").datebox({
+			onSelect: function(date){
+				$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+				$.ajax({
+					type:'post'
+					,url:'/company/applyGoodsList.ch4'
+					,dataType: "json"
+					,data :$("#f_search").serialize()
+					,success: function(data){
+						$("#tb_searchGood").bootstrapTable('load',data);
+					}
+				});
+			}
+		});
+	});
+	/* 검색버튼 기능 */
+	   function btn_search(){
+	      /* 검색 조건을 통해 재출력 */
+	      $.ajax({
+	         type:'post'
+	         ,url:'/company/applyGoodsList.ch4'
+	         ,dataType: "json"
+	         ,data :$("#f_search").serialize()
+	         ,success: function(data){
+	            $("#tb_searchGood").bootstrapTable('load',data);
+	         }
+	      });   
+	   }
+	</script>
 </body>
 </html>
