@@ -37,32 +37,32 @@ public class AndroidController {
 	//////////////////////////////////// 키오스크  //////////////////////////////////////////////
 	@RequestMapping(value="/QRconfirm.ch4",produces="application/json;charset=utf-8")
 	public @ResponseBody JSONObject confirmVQR(@RequestParam Map<String,Object> pMap) {
-	JSONObject jsonObject = new JSONObject();
-	logger.info(pMap.get("kiosk_no"));
-	logger.info(pMap.get("confm_qrcode"));
-	logger.info(pMap.get("type"));
-	if(pMap.get("type").equals("visitor")) {
-		jsonObject = iLogic.confirmVQR(pMap);
-	}
-	else if(pMap.get("type").equals("goods")) {
-		jsonObject = iLogic.confirmGQR(pMap);
-	}
-	return jsonObject;
+		JSONObject jsonObject = new JSONObject();
+		logger.info(pMap.get("kiosk_no"));
+		logger.info(pMap.get("confm_qrcode"));
+		logger.info(pMap.get("type"));
+		if(pMap.get("type").equals("visitor")) {
+			jsonObject = iLogic.confirmVQR(pMap);
+		}
+		else if(pMap.get("type").equals("goods")) {
+			jsonObject = iLogic.confirmGQR(pMap);
+		}
+		return jsonObject;
 	}
 	
 	@RequestMapping(value="/kioskLogin.ch4",produces="application/json;charset=utf-8")
 	public @ResponseBody JSONObject kioskLogin(@RequestParam Map<String,Object> pMap) {
-	JSONObject jsonObject = new JSONObject();
-	jsonObject = iLogic.kioskLogin(pMap);
-	return jsonObject;
+		JSONObject jsonObject = new JSONObject();
+		jsonObject = iLogic.kioskLogin(pMap);
+		return jsonObject;
 	}
 	
 	@RequestMapping(value="/selectExit.ch4",produces="application/json;charset=utf-8")
 	public @ResponseBody JSONObject selectExit(@RequestParam Map<String,Object> pMap) {
-	JSONObject jsonObject = new JSONObject();
-	logger.info(pMap.get("p_notes"));
-	jsonObject = iLogic.selectExit(pMap);
-	return jsonObject;
+		JSONObject jsonObject = new JSONObject();
+		logger.info(pMap.get("p_notes"));
+		jsonObject = iLogic.selectExit(pMap);
+		return jsonObject;
 	}
 	//////////////////////////////////// 키오스크  //////////////////////////////////////////////
 	

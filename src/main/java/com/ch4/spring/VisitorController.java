@@ -20,44 +20,42 @@ import com.ch4.getData.VisitorData;
 @RequestMapping(value = "/visitor")
 public class VisitorController {
 	Logger logger = Logger.getLogger(VisitorController.class);
-	
-	@Value("${file.path}")
-	String filePath;
+
 	@Value("${host.address}")
 	String hostAddress;
 	@Autowired
 	VisitorLogic vLogic = null;
 
-	@RequestMapping(value = "applyRequest.ch4",produces="text/plain;charset=UTF-8")
-	public String applyRequest(@RequestParam Map<String, Object> pMap, HttpServletRequest req,Model mod) {
+	@RequestMapping(value = "applyRequest.ch4", produces = "text/plain;charset=UTF-8")
+	public String applyRequest(@RequestParam Map<String, Object> pMap, HttpServletRequest req, Model mod) {
+		mod.addAttribute("host", hostAddress);
 		HttpSession session = req.getSession();
-		mod.addAttribute("host",hostAddress);
 		session.setAttribute("pMap", pMap);
 		return "visitor/Visit_Agreement";
 	}
 
 	@RequestMapping(value = "searchVisitor.ch4")
 	public String searchVisitor(Model mod) {
-		mod.addAttribute("host",hostAddress);
+		mod.addAttribute("host", hostAddress);
 		return "visitor/Visit_SearchVisitor";
 	}
 
 	@RequestMapping(value = "searchVQRcode.ch4")
 	public String searchVQRcode(Model mod) {
-		mod.addAttribute("host",hostAddress);
+		mod.addAttribute("host", hostAddress);
 		return "visitor/Visit_SearchVisitorQR";
 	}
 
 	@RequestMapping(value = "applyAgreement.ch4")
 	public String applyAgreement(Model mod) {
-		mod.addAttribute("host",hostAddress);
+		mod.addAttribute("host", hostAddress);
 		return "visitor/Visit_Select";
 	}
 
 	@RequestMapping(value = "visitPurpose.ch4")
-	public String visitPurpose(@RequestParam Map<String, Object> pMap, HttpServletRequest req ,Model mod) {
-		String vPP = req.getParameter("pp");
+	public String visitPurpose(@RequestParam Map<String, Object> pMap, HttpServletRequest req, Model mod) {
 		mod.addAttribute("host", hostAddress);
+		String vPP = req.getParameter("pp");
 		if (vPP.equals("visitor")) {
 			return "visitor/Visit_ApplyVisitor";
 		} else if (vPP.equals("goods")) {
@@ -66,11 +64,12 @@ public class VisitorController {
 		return "Fail";
 	}
 
-	@RequestMapping(value = "add.ch4",produces="text/plain;charset=UTF-8")
-	public String add(@RequestParam Map<String, Object> pMap, @ModelAttribute VisitorData vData,  Model mod) {
+	@RequestMapping(value = "add.ch4", produces = "text/plain;charset=UTF-8")
+	public String add(@RequestParam Map<String, Object> pMap, @ModelAttribute VisitorData vData, Model mod) {
+		mod.addAttribute("host", hostAddress);
 		int result = 0;
-		result = vLogic.visitApplyAdd(pMap,vData);
-		mod.addAttribute("host",hostAddress);
+		result = vLogic.visitApplyAdd(pMap, vData);
+
 		if (result == 1) {
 			mod.addAttribute("visit_no", pMap.get("visit_no"));
 			mod.addAttribute("vtAddList", pMap.get("vtAddList"));
@@ -83,8 +82,8 @@ public class VisitorController {
 
 	@RequestMapping(value = "cancle.ch4")
 	public String cancle(@RequestParam Map<String, Object> pMap, Model mod) {
+		mod.addAttribute("host", hostAddress);
 		int result = 0;
-		mod.addAttribute("host",hostAddress);
 		result = vLogic.visitorCancle(pMap);
 		if (result == 1) {
 			return "visitor/Visit_Main";
@@ -92,19 +91,19 @@ public class VisitorController {
 		return "Fail";
 	}
 
-	@RequestMapping(value = "changeVisitor.ch4",produces="text/plain;charset=UTF-8")
+	@RequestMapping(value = "changeVisitor.ch4", produces = "text/plain;charset=UTF-8")
 	public String changeVisitor(@RequestParam Map<String, Object> pMap, Model mod) {
+		mod.addAttribute("host", hostAddress);
 		Map<String, Object> rMap = vLogic.applyDetail(pMap);
 		mod.addAttribute("rMap", rMap);
-		mod.addAttribute("host",hostAddress);
 		return "visitor/Visit_ChangeVisitor";
 	}
 
-	@RequestMapping(value = "update.ch4",produces="text/plain;charset=UTF-8")
+	@RequestMapping(value = "update.ch4", produces = "text/plain;charset=UTF-8")
 	public String update(@RequestParam Map<String, Object> pMap, @ModelAttribute VisitorData vData, Model mod) {
+		mod.addAttribute("host", hostAddress);
 		int result = 0;
-		result = vLogic.visitorUpdate(pMap,vData);
-		mod.addAttribute("host",hostAddress);
+		result = vLogic.visitorUpdate(pMap, vData);
 		if (result == 1) {
 			mod.addAttribute("visit_no", pMap.get("visit_no"));
 			mod.addAttribute("vtAddList", pMap.get("vtAddList"));
@@ -113,6 +112,18 @@ public class VisitorController {
 			return "visitor/Visit_ResultVisitor";
 		}
 		return "Fail";
+	}
+
+	@RequestMapping(value = "navigation.ch4", produces = "text/plain;charset=UTF-8")
+	public String navigation(@RequestParam Map<String, Object> pMap, Model mod) {
+		mod.addAttribute("host", hostAddress);
+		logger.info("네비게이션  ==>" + pMap);
+		Map<String, Object> rMap = vLogic.navigation(pMap);
+		mod.addAttribute("com_addr", rMap.get("COM_ADDR"));
+		mod.addAttribute("com_name", rMap.get("COM_NAME"));
+		mod.addAttribute("com_hp", rMap.get("COM_HP"));
+		logger.info("맵 : " + rMap.get("COM_ADDR"));
+		return "visitor/Visit_Navigation";
 	}
 
 }
