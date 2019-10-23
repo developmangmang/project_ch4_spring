@@ -24,9 +24,9 @@ public class CompanyLogic {
 	Logger logger = Logger.getLogger(CompanyLogic.class);
 	
 	@Value("${file.path}")
-	String QRImagePath = null;
+	String filePath = null;
 	@Value("${host.address}")
-	String host = null;
+	String hostAddress = null;
 	
 	@Autowired
 	CompanyDao cDao = null;
@@ -67,16 +67,16 @@ public class CompanyLogic {
 		for (int i = 0; i < confirmList.size(); i++) {
 			Map<String, Object> cMap = confirmList.get(i);
 			String qrCode = (String) cMap.get("CONFM_QRCODE");
-			String savedFilePath = QRImagePath;
+			String savedFilePath = filePath;
 			String path = null;
 			String url = null;
 
 			if (pMap.get("visit_no") != null) {
 				path = savedFilePath + "visitor/";
-				url = host + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
+				url = hostAddress + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
 			} else if (pMap.get("aplg_no") != null) {
 				path = savedFilePath + "goods/";
-				url = host + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=goods";
+				url = hostAddress + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=goods";
 			}
 
 			File file = new File(path);

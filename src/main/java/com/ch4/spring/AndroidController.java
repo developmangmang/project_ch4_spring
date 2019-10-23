@@ -201,7 +201,22 @@ public class AndroidController {
 	@RequestMapping(value = "QRListVisitor.ch4")
 	public @ResponseBody JSONObject qrListVisitor(@RequestParam Map<String, Object> pMap) {
 		logger.info("qrListVisitor호출");
+		logger.info(pMap);
 		List<Map<String, Object>> qrCodeList = vLogic.qrCodeList(pMap);
+		JSONObject jsonObject = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		for(Map<String, Object> map : qrCodeList) {
+			jsonArray.add(map);
+		}
+		jsonObject.put("sendData",jsonArray);
+		return jsonObject;
+	}
+	
+	@RequestMapping(value = "QRListGoods.ch4")
+	public @ResponseBody JSONObject qrListGoods(@RequestParam Map<String, Object> pMap) {
+		logger.info("qrListGoods호출");
+		logger.info(pMap);
+		List<Map<String, Object>> qrCodeList = gLogic.qrCodeList(pMap);
 		JSONObject jsonObject = new JSONObject();
 		JSONArray jsonArray = new JSONArray();
 		for(Map<String, Object> map : qrCodeList) {
