@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ch4.getData.GoodsData;
 import com.ch4.getData.VisitorData;
 
 @RestController
@@ -104,23 +105,39 @@ public class AndroidController {
 		return jsonObject;
 	}
 	
-	@RequestMapping(value="/update.ch4")
+	@RequestMapping(value="/updateVisitor.ch4")
 	public @ResponseBody JSONObject visitorUpdate(@RequestParam Map<String,Object> pMap,@ModelAttribute VisitorData vData,Model mod) {
 		logger.info("visitorUpdate호출");
 		int result = 0;
 		result = vLogic.visitorUpdate(pMap, vData);
 		JSONObject jsonObject = new JSONObject();
-//		jsonObject.put("visit_no", pMap.get("visit_no"));
 		return jsonObject;
 	}
 	
-	@RequestMapping(value="/cancle.ch4")
+	@RequestMapping(value="/updateGoods.ch4")
+	public @ResponseBody JSONObject goodsUpdate(@RequestParam Map<String,Object> pMap,@ModelAttribute GoodsData gData,Model mod) {
+		logger.info("visitorUpdate호출");
+		int result = 0;
+		result = gLogic.goodsUpdate(pMap, gData);
+		JSONObject jsonObject = new JSONObject();
+		return jsonObject;
+	}
+	
+	@RequestMapping(value="/cancleVisitor.ch4")
 	public @ResponseBody JSONObject visitorCancle(@RequestParam Map<String,Object> pMap) {
 		logger.info("visitorCancle호출");
 		int result = 0;
 		result = vLogic.visitorCancle(pMap);
 		JSONObject jsonObject = new JSONObject();
-//		jsonObject.put("visit_no", pMap.get("visit_no"));
+		return jsonObject;
+	}
+	
+	@RequestMapping(value="/cancleGoods.ch4")
+	public @ResponseBody JSONObject goodsCancle(@RequestParam Map<String,Object> pMap) {
+		logger.info("goodsCancle호출");
+		int result = 0;
+		result = gLogic.goodsCancle(pMap);
+		JSONObject jsonObject = new JSONObject();
 		return jsonObject;
 	}
 	
@@ -133,6 +150,16 @@ public class AndroidController {
 		jsonObject.put("vtList", pMap.get("vtList"));
 		jsonObject.put("tkList", pMap.get("tkList"));
 		jsonObject.put("pkList", pMap.get("pkList"));
+		return jsonObject;
+	}
+	
+	@RequestMapping(value="/changeGoods.ch4")
+	public @ResponseBody JSONObject changeGoods(@RequestParam Map<String,Object> pMap,Model mod) {
+		logger.info("changeVisitor호출");
+		Map<String,Object> rMap = gLogic.goodsDetail(pMap);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("infoMap", pMap.get("infoMap"));
+		jsonObject.put("gmList", pMap.get("gmList"));
 		return jsonObject;
 	}
 	
@@ -225,5 +252,6 @@ public class AndroidController {
 		jsonObject.put("sendData",jsonArray);
 		return jsonObject;
 	}
+	
 	//////////////////////////////////// 방문자  //////////////////////////////////////////////
 }
