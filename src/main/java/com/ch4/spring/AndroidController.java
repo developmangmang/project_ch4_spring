@@ -95,13 +95,23 @@ public class AndroidController {
 		return jsonObject;
 	}
 	
-	@RequestMapping(value="/add.ch4")
+	@RequestMapping(value="/addVisitor.ch4")
 	public @ResponseBody JSONObject visitAdd(@RequestParam Map<String,Object> pMap,@ModelAttribute VisitorData vData,Model mod) {
 		logger.info("visitAdd호출");
 		int result = 0;
 		result = vLogic.visitApplyAdd(pMap, vData);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("visit_no", pMap.get("visit_no"));
+		return jsonObject;
+	}
+	
+	@RequestMapping(value="addGoods.ch4")
+	public @ResponseBody JSONObject goodsAdd(@RequestParam Map<String,Object> pMap,@ModelAttribute GoodsData gData,Model mod) {
+		logger.info("goodsAdd호출");
+		int result = 0;
+		result = gLogic.goodsApplyAdd(pMap, gData);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("aplg_no", pMap.get("aplg_no"));
 		return jsonObject;
 	}
 	

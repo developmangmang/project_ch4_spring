@@ -80,7 +80,7 @@ public class VisitorLogic {
          List<Map<String,Object>> vtAddList = (List<Map<String,Object>>) updInfo.get("vtAddList");
          List<Map<String,Object>> tkAddList = (List<Map<String,Object>>) updInfo.get("tkAddList");
          List<Map<String,Object>> pkAddList = (List<Map<String,Object>>) updInfo.get("pkAddList");
-         
+         logger.info(pMap);
          result = vDao.visitorUpdate(pMap);
          if(result==1) {
             visit_no = pMap.get("visit_no").toString();

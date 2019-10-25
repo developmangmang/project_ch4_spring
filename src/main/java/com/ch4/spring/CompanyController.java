@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/company")
@@ -110,12 +111,13 @@ public class CompanyController {
 		return "Fail";
 	}
 
-	@RequestMapping(value = "isExistID.ch4")
-	public String isExistID(@RequestParam Map<String, Object> pMap, Model mod) {
+	@RequestMapping(value = "isExistID.ch4",produces="application/text;charset=UTF-8")
+	public @ResponseBody String isExistID(@RequestParam Map<String, Object> pMap, Model mod, HttpServletRequest req) {
 		int result = 0;
 		result = cLogic.isExistID(pMap);
+		logger.info(pMap);
 		mod.addAttribute("host",hostAddress);
-		return "";
+		return pMap.get("msg").toString();
 	}
 
 	@RequestMapping(value = "logout.ch4")

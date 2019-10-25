@@ -100,7 +100,7 @@ h2 {
       alert("키오스크");
    }
    function moveJoin(){
-      alert("회원가입");
+      location.href='/company/register.ch4';
       
    }
 </script>

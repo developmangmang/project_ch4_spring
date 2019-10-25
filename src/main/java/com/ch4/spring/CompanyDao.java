@@ -44,13 +44,15 @@ public class CompanyDao {
 
 	public int companyJoin(Map<String, Object> pMap) {
 		int result = 0;
+		logger.info(pMap);
 		result = sqlSessionTemplate.insert("companyJoin", pMap);
 		return result;
 	}
 
 	public int isExistID(Map<String, Object> pMap) {
 		int result = 0;
-		result = sqlSessionTemplate.selectOne("isExistID", pMap);
+		logger.info(pMap);
+		result = sqlSessionTemplate.update("isExistID", pMap);
 		return result;
 	}
 

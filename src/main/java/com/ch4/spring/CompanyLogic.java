@@ -42,12 +42,15 @@ public class CompanyLogic {
 		List<Map<String, Object>> confirmList = (List<Map<String, Object>>) pMap.get("confirmList");
 		logger.info("pMap ++ : " + pMap);
 		logger.info("와와아 : " + confirmList);
+		String permit = null;
 		for (int i = 0; i < confirmList.size(); i++) {
 			logger.info(confirmList.get(i));
+			permit = confirmList.get(i).get("CONFM_NO").toString();
+			logger.info(permit);
 		}
 		if (result == 0) {
 			return result;
-		} else if (result == 1) {
+		} else if (result == 1 && !(permit.equals("null"))) {
 			if (pMap.get("visit_permit_st") != null) {// 방문일 경우
 				cDao.mngPermitV(pMap);
 				result = (int) pMap.get("result");
