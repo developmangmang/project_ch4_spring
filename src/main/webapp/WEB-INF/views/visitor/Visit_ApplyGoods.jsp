@@ -122,7 +122,7 @@
 		margin: 0 0 0 0px;
 	}
 </style>
-<title>반입 신청 - CH4 방문자 관리 시스템</title>
+<title>반입 신청 - CH4 방문/반입 자동화 시스템</title>
 <script type="text/javascript">
 	var gIndex = 1;
 	var now = new Date();

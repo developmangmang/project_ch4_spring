@@ -8,7 +8,7 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
-<title>방문/반입 신청 - CH4 방문자 관리 시스템</title>
+<title>방문/반입 신청 - CH4 방문/반입 자동화 시스템</title>
 <style>
 	#title {
 		border-left: 5px solid #195A92;
@@ -18,7 +18,7 @@
 		margin-top : 0px;
 		padding-top : 10px;
 		height : 600px;
-		background-image: url('${host}'+'/resources/Style/images/banner/speedGate (2).jpg');
+		background-image: url('${host}/resources/Style/images/banner/speedGate (2).jpg');
 	}
 	.panel {
 		border-top-left-radius: 20px;

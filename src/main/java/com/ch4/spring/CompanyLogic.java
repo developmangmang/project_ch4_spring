@@ -120,8 +120,13 @@ public class CompanyLogic {
 		return applyVisitList;
 	}
 
-	public List<Map<String, Object>> inOutList(Map<String, Object> pMap) {
-		List<Map<String, Object>> inOutList = cDao.inOutList(pMap);
+	public List<Map<String, Object>> inOutVisitorList(Map<String, Object> pMap) {
+		List<Map<String, Object>> inOutList = cDao.inOutVisitorList(pMap);
+		return inOutList;
+	}
+	
+	public List<Map<String, Object>> inOutGoodsList(Map<String, Object> pMap) {
+		List<Map<String, Object>> inOutList = cDao.inOutGoodsList(pMap);
 		return inOutList;
 	}
 

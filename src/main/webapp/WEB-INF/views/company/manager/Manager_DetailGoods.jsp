@@ -46,7 +46,7 @@
 <meta charset="UTF-8">
 <!-- Web icon 설정 -->
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>반입 신청 상세 - CH4 방문자 관리 시스템</title>
+<title>신청 상세 - CH4 방문/반입 자동화 시스템</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <!-- CSS Style Import -->

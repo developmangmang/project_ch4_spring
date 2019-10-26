@@ -4,47 +4,6 @@
     pageEncoding="UTF-8"%>
     
 <%
-/*  	List<Map<String,Object>> qnaList = new ArrayList<>();
-	Map<String, Object> pMap = new HashMap<>();
-	pMap.put("Q_NO","1");
-	pMap.put("Q_TITLE","q_title1");
-	pMap.put("Q_CONTENT","q_content1");
-	pMap.put("Q_DATE","q_date1");
-	pMap.put("Q_EMAIL","q_email1");
-	pMap.put("Q_WRITER","q_writer1");
-	qnaList.add(pMap);
-	pMap = new HashMap<>();
-	pMap.put("Q_NO","2");
-	pMap.put("Q_TITLE","q_title2");
-	pMap.put("Q_CONTENT","q_content2");
-	pMap.put("Q_DATE","q_date2");
-	pMap.put("Q_EMAIL","q_email2");
-	pMap.put("Q_WRITER","q_writer2");
-	qnaList.add(pMap); 
-	pMap = new HashMap<>();
-	pMap.put("Q_NO","3");
-	pMap.put("Q_TITLE","q_title3");
-	pMap.put("Q_CONTENT","q_content3");
-	pMap.put("Q_DATE","q_date3");
-	pMap.put("Q_EMAIL","q_email3");
-	pMap.put("Q_WRITER","q_writer3");
-	qnaList.add(pMap); 
-	pMap = new HashMap<>();
-	pMap.put("Q_NO","4");
-	pMap.put("Q_TITLE","q_title4");
-	pMap.put("Q_CONTENT","q_content4");
-	pMap.put("Q_DATE","q_date4");
-	pMap.put("Q_EMAIL","q_email4");
-	pMap.put("Q_WRITER","q_writer4");
-	qnaList.add(pMap); 
-	pMap = new HashMap<>();
-	pMap.put("Q_NO","5");
-	pMap.put("Q_TITLE","q_title5");
-	pMap.put("Q_CONTENT","q_content5");
-	pMap.put("Q_DATE","q_date5");
-	pMap.put("Q_EMAIL","q_email5");
-	pMap.put("Q_WRITER","q_writer5");
-	qnaList.add(pMap);  */
 	List<Map<String,Object>> qnaList = null;
 	qnaList = (List<Map<String,Object>>)request.getAttribute("qnaList");
  %>
@@ -56,17 +15,18 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
-<title>Insert title here</title>
+<title>관리자 QnA - CH4 방문/반입 자동화 시스템</title>
 <script type="text/javascript">
 	//답변 보내기 
-	function sendAnswer(){
-		var content = $("#a_content").val();
+	function sendAnswer(index){
+		var content = $("#content"+index).textbox().val();
 		if(content==""){//답변 작성이 없을때
 			alert("답변을 작성해 주세요.");
 		}else{//답변을 작성했을때
-			$('#sendAnswer').attr("method","post");
-			$('#sendAnswer').attr("action","admin/sendAnswer.ch4"); //전송을 하는 곳.
-			$('#sendAnswer').submit(); 
+			$('#a_content'+index).attr('value',content);
+			$('#sendAnswer'+index).attr("method","post");
+			$('#sendAnswer'+index).attr("action","/admin/sendAnswer.ch4"); //전송을 하는 곳.
+			$('#sendAnswer'+index).submit(); 
 		}
 		
 	}
@@ -136,16 +96,19 @@
 				</div>
 				<!-- 댓글내용 -->
 				<div class="collapse" id="writeAnswer<%=i%>">
-				<form id="sendAnswer">
-					<input type="hidden" id="qno" name="qno" value="<%= qnaList.get(i).get("Q_NO") %>">
+				<form id="sendAnswer<%=i %>">
+					<input type="hidden" id="qno" name="q_no" value="<%= qnaList.get(i).get("Q_NO") %>">
+					<input type="hidden" name="q_email" value="<%=qnaList.get(i).get("Q_EMAIL") %>">
+					<input type="hidden" name="q_title" value="<%=qnaList.get(i).get("Q_TITLE") %>">
+					<input type="hidden" id="a_content<%=i %>" name="a_content">
 					<div class="panel-body">
 						<h5>댓글 내용</h5>
 						<textarea class="easyui-textbox" placeholder="답변을 입력해주세요." 
-							 		  id="a_content" name="a_content"
+							 		  id="content<%=i %>"
 							 		  style="height:100px; width: 900px;"></textarea>
 					</div>
 					<div class="panel-footer">
-						<button class="btn btn-danger" type="button" onClick="sendAnswer()">답변 보내기</button>
+						<button class="btn btn-danger" type="button" onClick="sendAnswer(<%=i %>)">답변 보내기</button>
 					</div>
 				</form>
 				</div>
@@ -164,6 +127,5 @@
     	</div>
 	</div>
 </div>
-<%@ include file="../CommonForm/Footer.jsp"%>
 </body>
 </html>

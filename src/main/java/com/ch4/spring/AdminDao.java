@@ -1,5 +1,6 @@
 package com.ch4.spring;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -15,8 +16,17 @@ public class AdminDao {
 
 	public int sendAnwser(Map<String, Object> pMap) {
 		int result = 0;
-		result = sqlSessionTemplate.insert("sendAnwser", pMap);
+		result = sqlSessionTemplate.insert("sendAnswer", pMap);
 		return result;
 	}
+	
+	public List<Map<String, Object>> qnaList() {
+		List<Map<String, Object>> qnaList = sqlSessionTemplate.selectList("qnaList");
+		return qnaList;
+	}
 
+	public List<Map<String, Object>> companyList() {
+		List<Map<String, Object>> companyList = sqlSessionTemplate.selectList("companyList");
+		return companyList;
+	}
 }

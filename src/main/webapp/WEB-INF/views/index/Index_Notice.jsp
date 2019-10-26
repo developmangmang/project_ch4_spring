@@ -10,10 +10,9 @@
 <meta charset="utf-8"> 
 <!-- Web icon 설정 --> 
 <%@ include file="../CommonForm/TapLogo.jsp"%>
-<title>고객지원 페이지</title>
+<title>공지사항 - CH4 방문/반입 자동화 시스템</title>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
-<title>고객지원 페이지</title>
 <style type="text/css">
 	h2 {
 		text-align: left;
@@ -25,7 +24,7 @@
 		margin-top: 0px;
 		padding-top: 10px;
 		height: 300px;
-		background-image: url('../../Style/images/banner/banner_top.jpg');
+		background-image: url('${host}/resources/Style/images/banner/banner_top.jpg');
 	}
 	
 	.jumbotron_Content a{
@@ -50,15 +49,16 @@ var grade;
 	$(document).ready(function(){
 		$("#tb_notice").bootstrapTable({
 			columns:[
-		        {field:'n_no',title:'no'}
-		        ,{field:'n_title',title:'title'}
-		        ,{field:'n_date',title:'date'}
-		        ,{field:'n_file',title:'file'}
-		        ,{field:'n_writer',title:'writer'}
-		        ,{field:'n_hit',title:'hit'}
+		        {field:'N_NO',title:'글번호'}
+		        ,{field:'N_TITLE',title:'제목'}
+		        ,{field:'N_DATE',title:'작성일'}
+		        ,{field:'N_FILE',title:'첨부파일'}
+		        ,{field:'N_WRITER',title:'작성자'}
+		        ,{field:'N_HIT',title:'조회수'}
+		        ,{field:'N_CONTENT',visible:false}
+		        ,{field:'N_GRADE',visible:false}
 		   ]
-			,url:'/project_ch4_pojo/View/Test/jsonNoticeList.json'
-			//,url:'/index/notice.ch4'
+			,url:'/index/noticeList.ch4'
 			,pagination:'true'//페이지 네이션
 			,paginationPreText:"Previous"
 			,paginationNextText:"Next"
@@ -67,27 +67,18 @@ var grade;
 			,onClickRow:function(row,$element,field){
 				//$element.attr('data-index',10)
 				$element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
-				var n_no = $element.find("td:first").html();
-				$.ajax({
- 					type: 'get',
- 					dataType: 'json',
- 					url: '/project_ch4_pojo/View/Test/jsonNoticeDetail.json',
- 					success: function(data){
- 						 $.each(data,function(index,item){
-	 						$("#n_title").text(item.n_title);
-	 						$("#n_date").text(item.n_date);
-	 						$("#n_writer").text(item.n_writer);
-	 						$("#n_content").textbox('setValue',item.n_content);
-	 						$("#n_file").textbox('setValue',item.n_file);
-	 						$("#n_hit").text(item.n_hit); 
-	 						grade = item.n_grade;
-	 						if(grade!=null){
-	 							var img = "<img src='../../Style/images/write-board.png' style='margin-right: 20px;' >";
-	 							$("#td_grade").html(img);
-	 						}
- 						});
- 					}
- 				});
+	 			$("#n_title").text(row.N_TITLE);
+	 			$("#n_date").text(row.N_DATE);
+	 			$("#n_writer").text(row.N_WRITER);
+	 			$("#n_content").textbox('setValue',row.N_CONTENT);
+	 			$("#n_file").textbox('setValue',row.N_FILE);
+	 			$("#n_hit").text(row.N_HIT); 
+	 			grade = row.N_GRADE;
+	 			if(grade!=null){
+	 				var img = "<img src='${host}/resources/Style/images/write-board.png' style='margin-right: 20px;' >";
+	 				$("#td_grade").html(img);
+	 			}
+ 				
 				$("#DetailNotice").modal('show');
 			 }
 		});////////////////end of bootstrapTable
@@ -97,13 +88,10 @@ var grade;
 <script type="text/javascript">
 	//검색하기
 	function NoticeList(){
-		alert("검색");
 		var cb_search = $("#cb_search").val();
 		var tb_search = $("#tb_search").val();
-		alert("tb_search : "+tb_search);
 		 $("#tb_notice").bootstrapTable({
-			//alert("여기");
-			url:"/index/notice.ch4?cb_search="+cb_search+"&tb_search="+tb_search
+			url:"/index/noticeList.ch4?cb_search="+cb_search+"&tb_search="+tb_search
 		}); 
 	}////////////////////////end of NoticeList
 	
@@ -194,7 +182,7 @@ var grade;
 								   	style="width:auto; font-size: 13px;"></span></p>
 							</td>
 							<td>
-								<img src='../../Style/images/open-eye.png' style='margin-right: 5px;' >
+								<img src='${host}/resources/Style/images/open-eye.png' style='margin-right: 5px;' >
 								<span class="badge" value="n_hit" id="n_hit" name="n_hit" ></span>
 							</td>
 						</tr>

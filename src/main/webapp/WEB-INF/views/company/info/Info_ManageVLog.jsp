@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <!-- Web icon 설정 -->
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>방문현황 관리</title>
+<title>방문현황 관리 - CH4 방문/반입 자동화 시스템</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 </head>

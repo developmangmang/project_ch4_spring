@@ -8,7 +8,7 @@
 <%@ include file="CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../Style/common/HeadUI.jsp"%> 
-<title>에러페이지 - CH4 방문자 관리 시스템</title>
+<title>ERROR - CH4 방문자 관리 시스템</title>
 </head>
 <body>
 <!-- 에러메세지 띄우고 10초 카운트 뒤에 돌아가기 버튼 생성 -->
