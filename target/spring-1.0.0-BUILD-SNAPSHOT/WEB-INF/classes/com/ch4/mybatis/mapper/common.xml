@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch4.mybatis.mapper.CommonMapper">
+   <resultMap type="hashmap" id="rMap"/>
+   <!-- 회사명단 콤보박스 -->
+   <select id="companyCombo" parameterType="map" resultType="map">
+      select com_no, com_name
+        from company   
+   </select>
+   <!-- 부서명단 콤보박스 -->
+   <select id="deptCombo" parameterType="map" resultType="map">
+      select dept_no ,dept_name
+        from dept
+       where com_no = #{com_no}
+   </select>   
+   <!-- 목적지명단 콤보박스 -->
+   <select id="destiCombo" parameterType="map" resultType="map">
+      select desti_no, desti_name
+        from destination
+       where com_no = #{com_no}
+   </select>
+   <!-- 방문신청테이블 + 회사이름 조회  -->
+   <select id="visitorApplySearch" parameterType="map" resultType="map">
+      select visit_no, visit_apply_name, visit_apply_date, visit_apply_hp, visit_purps, visit_desti
+         , visit_type, visit_term, visit_day, visit_date, visit_tkin_encc, visit_vhcle_encc
+         , visit_permit_id, visit_permit_st, visit_notes, vi.com_no, com_name
+        from visit_apply vi, company co
+       where vi.com_no = co.com_no
+      <!-- 검색 : 회사코드 -->
+      <if test='com_no not in {null,""}'>
+         and vi.com_no = #{com_no}
+      </if>
+      <!-- 검색 : (승인)방문번호 -->
+      <if test='confm_no not in {null,""}'>
+         and vi.visit_no = (select visit_no
+                       from visit_confm
+                      where confm_no = #{confm_no})
+      </if>
+      <!-- 검색 : 신청번호 -->
+      <if test='visit_no not in {null,""}'>
+         and vi.visit_no = #{visit_no}
+      </if>
+      <!-- 검색 : 신청자이름  -->
+      <if test='visit_apply_name not in {null,""}'>
+         and visit_apply_name like '%'||#{visit_apply_name}||'%'
+      </if>
+      <!-- 검색 : 신청자 연락처 -->
+      <if test='visit_apply_hp not in {null,""}'>
+         and visit_apply_hp = #{visit_apply_hp}
+      </if>
+      <!-- 검색 : 방문자이름 -->
+      <if test='visitor_name not in {null,""}'>
+         and vi.visit_no = (select visit_no
+                       from visitor_mng
+                      where visitor_name like '%'||#{visitor_name}||'%')
+      </if>
+      <!-- 검색 : 방문자연락처 -->
+      <if test='visitor_hp not in {null,""}'>
+         and vi.visit_no = (select visit_no
+                       from visitor_mng
+                      where visitor_hp = #{visitor_hp})
+      </if>
+      <!-- 검색 : 승인상태 -->
+      <if test='visit_permit_st not in {null,""}'>
+         and visit_permit_st = #{visit_permit_st}
+      </if>
+      <!-- 검색 : 신청일자 -->
+      <if test='visit_apply_date not in {null,""}'>
+         and visit_apply_date = #{visit_date}
+      </if>
+      <!-- 검색 : 신청일자(기간으로) -->
+      <if test='visit_apply_date1 not in {null,""}'>
+         and visit_apply_date >= #{visit_apply_date1}
+      </if>
+      <if test='visit_apply_date2 not in {null,""}'>
+      <![CDATA[and visit_date <= #{visit_apply_date2}]]>
+      </if>
+      <!-- 검색 : 방문일자 -->
+      <if test='visit_date not in {null,""}'>
+         and visit_date = #{visit_date}
+      </if>
+      <!-- 검색 : 방문일자(기간으로) -->
+      <if test='visit_date1 not in {null,""}'>
+         and visit_date >= #{visit_date1}
+      </if>
+      <if test='visit_date2 not in {null,""}'>
+      <![CDATA[and visit_date <= #{visit_date2}]]>
+      </if>
+      <!-- 검색 : 방문유형 -->
+      <if test='visit_type not in {null,""}'>
+         and visit_type = #{visit_type}
+      </if>
+      <!-- 검색 : 목적지 -->
+      <if test='visit_desti not in {null,""}'>
+         and visit_desti like '%'||#{visit_desti}||'%'
+      </if>
+      <!-- 검색 : 신청연별 -->
+      <if test='visit_apply_year not in {null,""}'>
+         and substr(visit_apply_date,0,4) = #{visit_apply_year}
+      </if>
+      <!-- 검색 : 방문연별 -->
+      <if test='visit_year not in {null,""}'>
+         and substr(visit_date,0,4) = #{visit_year}
+      </if>
+      <!-- 검색 : 신청월별 -->
+      <if test='visit_apply_month not in {null,""}'>
+         and substr(visit_apply_date,6,2) = #{visit_apply_month}
+      </if>
+      <!-- 검색 : 방문월별 -->
+      <if test='visit_month not in {null,""}'>
+         and substr(visit_date,6,2) = #{visit_month}
+      </if>
+   </select>
+   <!-- 방문자 조회 -->
+   <select id="visitorSearch" parameterType="map" resultType="map">
+      select visitor_name, visitor_hp from visitor_mng
+      <where>
+         <!-- 검색 : (승인)방문번호 -->
+         <if test='confm_no not in {null,""}'>
+            and visit_no = (select visit_no
+                          from visit_confm
+                         where confm_no = #{confm_no})
+         </if>
+         <!-- 검색 : 신청번호 -->
+         <if test='visit_no not in {null,""}'>
+            and visit_no = #{visit_no}
+         </if>
+         <!-- 검색 : 방문자 이름 -->
+         <if test='visitor_name not in {null,""}'>
+            and visitor_name like '%'||#{visitor_name}||'%'
+         </if>
+         <!-- 검색 : 방문자 연락처 -->
+         <if test='visitor_hp not in {null,""}'>
+            and visitor_hp = #{visitor_hp}
+         </if>
+      </where>
+   </select>
+   <!-- 반입기기 조회 -->
+   <select id="deviceSearch" parameterType="map" resultType="map">
+      select tkin_kind, tkin_brand, tkin_model, tkin_posbl_encc from tkin_mng
+      <where>
+         <!-- 검색 : (승인)방문번호 -->
+         <if test='confm_no not in {null,""}'>
+            and visit_no = (select visit_no
+                          from visit_confm
+                         where confm_no = #{confm_no})
+         </if>
+         <!-- 검색 : 신청번호 -->
+         <if test='visit_no not in {null,""}'>
+            and visit_no = #{visit_no}
+         </if>
+         <!-- 검색 : 기종 -->
+         <if test='tkin_kind not in {null,""}'>
+            and tkin_kind = #{tkin_kind}
+         </if>
+         <!-- 검색 : 제조사 -->
+         <if test='tkin_brand not in {null,""}'>
+            and tkin_brand = #{tkin_brand}
+         </if>
+         <!-- 검색 : 모델명 -->
+         <if test='tkin_model not in {null,""}'>
+            and tkin_model like '%'||#{tkin_model}||'%'
+         </if>
+      </where>
+   </select>
+   <!-- 주차 조회 -->
+   <select id="parkingSearch" parameterType="map" resultType="map">
+      select parking_kind, parking_model, parking_num from parking_mng
+      <where>
+         <!-- 검색 : (승인)방문번호 -->
+         <if test='confm_no not in {null,""}'>
+            and visit_no = (select visit_no
+                          from visit_confm
+                         where confm_no = #{confm_no})
+         </if>
+         <!-- 검색 : 신청번호 -->
+         <if test='visit_no not in {null,""}'>
+            and visit_no = #{visit_no}
+         </if>
+         <!-- 검색 : 차량번호 -->
+         <if test='parking_num not in {null,""}'>
+            and parking_num = #{parking_num}
+         </if>
+         <!-- 검색 : 차종 -->
+         <if test='parking_kind not in {null,""}'>
+            and parking_kind = #{parking_kind}
+         </if>
+         <!-- 검색 : 모델명 -->
+         <if test='parking_model not in {null,""}'>
+            and parking_model = #{parking_model}
+         </if>
+      </where>
+   </select>
+   <!-- 반입신청테이블 + 회사이름 조회 -->
+   <select id="goodsApplySearch" parameterType="map" resultType="map">
+      select aplg_no, aplg_name, aplg_date, aplg_reason, aplg_desti, aplg_trans_date, aplg_hp
+         , aplg_permit_st, aplg_notes, aplg_permit_id, app.com_no, com_name
+            from goods_apply app, company co
+            where app.com_no = co.com_no
+            <!-- 검색 : 회사코드 -->
+         <if test='com_no not in {null,""}'>
+            and app.com_no = #{com_no}
+         </if>
+            <!-- 검색 : (승인)반입번호 -->
+         <if test='confm_no not in {null,""}'>
+            and aplg_no = (select aplg_no
+                          from goods_confm
+                         where confm_no = #{confm_no})
+         </if>
+         <!-- 검색 : 신청번호 -->
+         <if test='aplg_no not in {null,""}'>
+            and aplg_no = #{aplg_no}
+         </if>
+         <!-- 검색 : 신청자 이름 -->
+         <if test='aplg_name not in {null,""}'>
+            and aplg_name like '%'||#{aplg_name}||'%'
+         </if>
+         <!-- 검색 : 신청자 연락처 -->
+         <if test='aplg_hp not in {null,""}'>
+            and aplg_hp = #{aplg_hp}
+         </if>
+         <!-- 검색 : 물품명 -->
+         <if test='gmng_name not in {null,""}'>
+            and aplg_name = (select aplg_name
+                           from goods_mng
+                          where gmng_name like '%'||#{gmng_name}||'%')
+         </if>
+         <!-- 검색 : 목적지 -->
+         <if test='aplg_desti not in {null,""}'>
+         	and aplg_desti like '%'||#{aplg_desti}||'%'
+         </if>
+         <!-- 검색 : 승인상태 -->
+         <if test='aplg_permit_st not in {null,""}'>
+            and aplg_permit_st = #{aplg_permit_st}
+         </if>
+         <!-- 검색 : 신청일자 -->
+         <if test='aplg_date not in {null,""}'>
+            and aplg_date = #{aplg_date}
+         </if>
+         <!-- 검색 : 신청일자(기간) -->
+         <if test='aplg_date1 not in {null,""}'>
+            and aplg_date >= #{aplg_date1}
+         </if>
+         <if test='aplg_date2 not in {null,""}'>
+         <![CDATA[and aplg_date <= #{aplg_date2}]]>
+         </if>
+         <!-- 검색 : 반입일자 -->
+         <if test='aplg_trans_date not in {null,""}'>
+            and aplg_trans_date = #{aplg_trans_date}
+         </if>
+         <!-- 검색 : 반입일자 (기간)-->
+         <if test='aplg_trans_date1 not in {null,""}'>
+            and aplg_trans_date >= #{aplg_trans_date1}
+         </if>
+         <if test='aplg_trans_date2 not in {null,""}'>
+         <![CDATA[and aplg_trans_date <= #{aplg_trans_date2}]]>
+         </if>
+         <!-- 검색 : 신청연별 -->
+         <if test='aplg_year not in {null,""}'>
+            and substr(aplg_date,0,4) = #{aplg_year}
+         </if>
+         <!-- 검색 : 반입연별 -->
+         <if test='aplg_trans_year not in {null,""}'>
+            and substr(aplg_trans_date,0,4) = #{aplg_trans_year}
+         </if>
+         <!-- 검색 : 신청월별 -->
+         <if test='aplg_month not in {null,""}'>
+            and substr(aplg_date,6,2) = #{aplg_month}
+         </if>
+         <!-- 검색 : 반입월별 -->
+         <if test='aplg_trans_month not in {null,""}'>
+            and substr(aplg_trans_date,6,2) = #{aplg_trans_month}
+         </if>
+   </select>
+   <!-- 물품관리 테이블 조회 -->
+   <select id="goodsSearch" parameterType="map" resultType="map">
+      select aplg_no, gmng_name, gmng_type, gmng_quan, gmng_confm, gmng_notes from goods_mng
+      <where>
+         <!-- 검색 : (승인)반입번호 -->
+         <if test='confm_no not in {null,""}'>
+            and aplg_no = (select aplg_no
+                          from goods_confm
+                         where confm_no = #{confm_no})
+         </if>
+         <!-- 검색 : 신청번호 -->
+         <if test='aplg_no not in {null,""}'>
+            and aplg_no = #{aplg_no}
+         </if>
+         <!-- 검색 : 물품명 -->
+         <if test='gmng_name not in {null,""}'>
+            and gmng_name like '%'||#{gmng_name}||'%'
+         </if>
+         <!-- 검색 : 물품종류 -->
+         <if test='gmng_type not in {null,""}'>
+            and gmng_type like '%'||#{gmng_type}||'%'
+         </if>
+         <!-- 검색 : 승인여부 -->
+         <if test='gmng_confm not in {null,""}'>
+            and gmng_confm = #{gmng_confm}
+         </if>
+      </where>
+   </select>
+</mapper>

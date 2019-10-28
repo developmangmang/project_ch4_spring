@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch4.mybatis.mapper.CompanyMapper">
+	<!-- 로그인 프로시저-->
+	<update id="companyLogin" parameterType="map" statementType="CALLABLE">
+		{call proc_companyLogin(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{cmng_pw,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{cmng_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{com_no,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{com_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{cmng_grade,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{dept_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+								)}
+	</update>
+	
+	<!-- 회원가입 아이디 중복검사 프로시저  -->
+	<update id="isExistID" parameterType="map" statementType="CALLABLE">
+		{call proc_isExistID(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+							)}	
+	</update>
+	
+	<!-- 회원가입  -->
+	<insert id="companyJoin" parameterType="map">
+		insert into company_manage(cmng_no, cmng_id, cmng_pw, cmng_name, cmng_grade, cmng_hp, dept_no)
+		values ('CM'||to_char(systimestamp + (INTERVAL '9' HOUR),'YYMMDDFF3')||dbms_random.string('x',3)
+		,#{cmng_id},#{cmng_pw},#{cmng_name},#{cmng_grade},#{cmng_hp},#{dept_no})
+	</insert>
+
+	<!-- 출입로그 조회  -->
+	<select id="inOutList" parameterType="map" resultType="map">
+		select cl.cmg_inout, cl.cmg_entrc, cl.cmg_notes, cc.confm_no, cc.confm_name, cc.confm_hp, confm_desti
+		  from cmg_log cl, visit_confm vc, cmg_confm cc, visit_apply va
+		 where cl.confm_qrcode = cc.confm_qrcode
+		   and vc.confm_no = cc.confm_no
+		   and vc.visit_no = va.visit_no
+		<!-- 검색조건 : 방문일자 -->
+		<if test='confm_visit_date not in {null,""}'>
+			and confm_visit_date = #{confm_visit_date}
+		</if>
+		<!-- 검색조건 : 방문일자(기간) -->
+		<if test='confm_visit_date1 not in {null,""}'>
+			and confm_visit_date >= #{confm_visit_date1}
+		</if>
+		<if test='confm_visit_date2 not in {null,""}'>
+		<![CDATA[and confm_visit_date <= #{confm_visit_date2}]]>
+		</if>
+		<!-- 검색조건 : 신청자명 -->
+		<if test='visit_apply_name not in {null,""}'>
+			and visit_apply_name = #{visit_apply_name}
+		</if>
+		<!-- 검색조건 : 신청자연락처 -->
+		<if test='visit_apply_hp not in {null,""}'>
+			and visit_apply_hp = #{visit_apply_hp}
+		</if>
+		<!-- 검색조건 : 방문자명 -->
+		<if test='confm_name not in {null,""}'>
+			and confm_name like '%'||#{confm_name}||'%'
+		</if>
+		<!-- 검색조건 : 방문자연락처 -->
+		<if test='confm_hp not in {null,""}'>
+			and confm_hp = #{confm_hp}
+		</if>
+		<!-- 검색조건 : 처리상태-->
+		<if test='cmg_notes not in {null,""}'>
+			and cmg_notes = #{cmg_notes}
+		</if>
+	</select>
+	<!-- 방문현황조회 -->
+	<select id="vLogSearch">
+		select confm_no,confm_name,confm_hp,confm_desti,cmg_inout,cmg_entrc,cmg_notes
+		  from cmg_log cl, cmg_confm cc
+		 where cl.confm_qrcode = cc.confm_qrcode
+		<!-- 검색조건  : 방문일자-->
+		<if test='confm_visit_date not in {null,""}'>
+			and confm_visit_date = #{confm_visit_date}
+		</if>
+		<!-- 검색조건 : 방문번호 -->
+		<if test='confm_no not in {null,""}'>
+			and confm_no = #{confm_no}
+		</if>
+		<!-- 검색조건 : 방문자명 -->
+		<if test='confm_name not in {null,""}'>
+			and confm_name like '%'||#{confm_name}||'%'
+		</if>
+		<!-- 검색조건 : 방문장소 -->
+		<if test='confm_desti not in {null,""}'>
+			and confm_desti like '%'||#{confm_desti}||'%'
+		</if>
+		<!-- 검색조건 : 방문상태 -->
+		<if test='cmg_notes not in {null,""}'>
+			and cmg_notes = #{cmg_notes}
+		</if>
+		<!-- 검색조건 : 출입시간 -->
+		<if test='cmg_inout not in {null,""}'>
+			and substr(cmg_inout,4,2) = #{cmg_inout}
+		</if>
+	</select>
+	<!-- 반입현황조회 -->
+	<select id="gLogSearch">
+		select confm_no,confm_desti,confm_state,confm_name,confm_type,confm_quan
+				,confm_trans_quan,confm_trans_time
+		  from goods_confm gc, goods_apply ga
+		   and gc.aplg_no = ga.aplg_no
+		<!-- 검색조건 : 반입일자 -->
+		<if test='aplg_date not in {null,""}'>
+			and gc.aplg_date = #{aplg_date}
+		</if>
+		<!-- 검색조건 : 실반입일자 -->
+		<if test='confm_trans_date not in {null,""}'>
+			and aplg_date = #{aplg_date}
+		</if>
+		<!-- 검색조건 : 물품번호 -->
+		<if test='confm_no not in {null,""}'>
+			and confm_no = #{confm_no}
+		</if>
+		<!-- 검색조건 : 신청번호 -->
+		<if test='aplg_no not in {null,""}'>
+			and gc.aplg_no = #{aplg_no}
+		</if>
+		<!-- 검색조건 : 물품명 -->
+		<if test='confm_name not in {null,""}'>
+			and confm_name = #{confm_name}
+		</if>
+		<!-- 검색조건 : 반입장소 -->
+		<if test='confm_desti not in {null,""}'>
+			and confm_desti = #{confm_desti}
+		</if>
+		<!-- 검색조건 : 반입상태 -->
+		<if test='confm_state not in {null,""}'>
+			confm_state = #{confm_state}
+		</if>
+		<!-- 검색조건 : 반입시간 -->
+		<if test='confm_trans_time not in {null,""}'>
+			and substr(confm_trans_time,4,2) = #{confm_trans_time}
+		</if>
+	</select>
+</mapper>

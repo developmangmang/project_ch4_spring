@@ -210,5 +210,15 @@ public class AndroidController {
 		jsonObject.put("sendData",jsonArray);
 		return jsonObject;
 	}
+	@RequestMapping(value = "naviVisitNo.ch4")
+	public @ResponseBody JSONObject companyNum(@RequestParam Map<String, Object> pMap) {
+		JSONObject jsonObject = new JSONObject();
+		Map<String,Object> rMap = vLogic.naviVisitNo(pMap);
+		jsonObject.put("com_addr", rMap.get("com_addr"));
+		jsonObject.put("com_name", rMap.get("com_name"));
+		jsonObject.put("com_hp", rMap.get("com_hp"));
+		return jsonObject;
+	}
+	
 	//////////////////////////////////// 방문자  //////////////////////////////////////////////
 }

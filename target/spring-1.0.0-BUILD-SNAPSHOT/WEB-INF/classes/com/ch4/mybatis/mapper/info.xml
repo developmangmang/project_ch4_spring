@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch4.mybatis.mapper.InfoMapper">
+	<!-- visitorQR전송 프로시저 -->
+	<update id="confirmVQR" parameterType="map" statementType="CALLABLE">
+		{call proc_confirmVQR(#{confm_qrcode,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{kiosk_no,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{inout,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+							)}
+	</update>
+	<!-- goodsQR전송 프로시저 -->
+	<update id="confirmGQR" parameterType="map" statementType="CALLABLE">
+		{call proc_confirmGQR(#{confm_qrcode,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{kiosk_no,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{inout,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+							)}
+	</update>
+	<!-- 키오스크 로그인 프로시저 -->
+	<update id="kioskLogin" parameterType="map" statementType="CALLABLE">
+		{call proc_kioskLogin(
+			#{kiosk_no,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{com_no,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{kiosk_gate,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
+	<!-- 나갈유형 선택 프로시저 -->
+	<update id="selectExit" parameterType="map" statementType="CALLABLE">
+		{call proc_selectExit(
+			#{confm_qrcode,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{kiosk_no,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{p_notes,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{inout,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
+</mapper>  

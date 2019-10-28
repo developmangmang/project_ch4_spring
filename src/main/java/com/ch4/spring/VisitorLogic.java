@@ -148,5 +148,10 @@ public class VisitorLogic {
       return rMap;
    }
 
+public Map<String,Object> naviVisitNo(Map<String, Object> pMap) {
+	Map<String,Object> rMap = vDao.naviVisitNo(pMap);
+	return rMap;
+}
+
 
 }
