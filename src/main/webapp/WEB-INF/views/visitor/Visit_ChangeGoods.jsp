@@ -145,7 +145,7 @@
 		margin: 0 0 0 0px;
 	}
 </style>
-<title>신청변경 - CH4 방문자 관리 시스템</title>
+<title>신청변경 - CH4 방문/반입 자동화 시스템</title>
 <script type="text/javascript">
 	//등록한 방문자 수,반입기기 수,차량 수
 	var gIndex = 1;
@@ -347,9 +347,9 @@
 				    		<table class="table">
 				    			<tr>
 					    			<th>성명</th>
-					    			<td><%=aplg_name %></td>
+					    			<td><input id="visit_apply_name" type="hidden" name="visit_apply_name" value="<%=aplg_name %>"><%=aplg_name %></td>
 					    			<th>전화번호</th>
-					    			<td><%=aplg_hp %></td>
+					    			<td><input id="visit_apply_hp" type="hidden" name="visit_apply_hp" value="<%=aplg_hp %>"><%=aplg_hp %></td>
 				    			</tr>
 				    		</table>
 				    	</div>
@@ -377,7 +377,7 @@
 				    			<tbody>
 				    				<tr>
 				    					<td>
-				    						<select id="aplg_desti" class="easyui-combobox" style="width:80%;">
+				    						<select id="aplg_desti" name="aplg_desti" class="easyui-combobox" style="width:80%;">
 				    							<option value="">목적지</option>
 				    						</select>
 				    					</td>

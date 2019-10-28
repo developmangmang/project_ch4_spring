@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
-<title>안내관리인 메인 페이지</title>
+<title>CH4서비스 - CH4 방문/반입 자동화 시스템</title>
 <!-- 공통코드 -->
 <%@ include file="../../Style/common/HeadUI.jsp"%>
 <style>
@@ -118,188 +118,214 @@ figure.snip1200.hover p {
   -webkit-transition-delay: 0.35s;
   transition-delay: 0.35s;
 }
-	/* 사이드바 설정 */
-	aside {
-	    width: 15%;
-	    height: 100%;
-	    position: fixed;
-	    background-color: rgb(14,30,43);
-	    overflow: auto;
-	}
-	/* 사이드바 overflow 시 스크롤바 안보이게 하기 */
-	aside::-webkit-scrollbar { 
-	    display: none; 
-	}
-	/* 메인 페이지 프레임 구간 설정 */
-	.mainContent {
-		margin:20px 20px 10px 17%;
-	}
-	#Main_head{
-		background-image: url('http://192.168.0.189:8080/resources/Style/images/crud/index_images.png');
-		margin-left:7%;
-		margin-top:35px;
-		text-align: center;
-		height: 300px;
-		
-	}
-	#Main_title{
-		background-color:rgba(223,223,223,0.7);
-		margin: 70px 30px 50px 30px;
-		padding: 30px;
-		vertical-align: middle;
-	}
+   /* 사이드바 설정 */
+   aside {
+       width: 15%;
+       height: 100%;
+       position: fixed;
+       background-color: rgb(14,30,43);
+       overflow: auto;
+   }
+   /* 사이드바 overflow 시 스크롤바 안보이게 하기 */
+   aside::-webkit-scrollbar { 
+       display: none; 
+   }
+   /* 메인 페이지 프레임 구간 설정 */
+   .mainContent {
+      margin:20px 20px 10px 17%;
+   }
+   #Main_head{
+      background-image: url('${host}/resources/Style/images/crud/index_images.png');
+      margin-left:7%;
+      margin-top:35px;
+      text-align: center;
+      height: 300px;
+      
+   }
+   #Main_title{
+      background-color:rgba(223,223,223,0.7);
+      margin: 70px 30px 50px 30px;
+      padding: 30px;
+      vertical-align: middle;
+   }
 </style>
 <script type="text/javascript">
-	function moveMain(){
-		alert("여기");
-		location.href="index/indexMain.ch4";
-	}
-	function MoveCustomerSupport(){
-		alert("여기");
-		location.href="index/customerSupport.ch4";
-	}
-	function MoveQuestion(){
-		alert("여기");
-		location.href="index/question.ch4";
-	}
-	function MoveAskJoin(){
-		alert("여기");
-		location.href="index/askJoin.ch4";
-	}
-	function MoveStory(){
-		alert("여기");
-		location.href="index/story.ch4";
-	}
-	$(".hover").mouseleave(
-		function () {
-			$(this).removeClass("hover");
-		}
-	);
-
+   function moveMain(){
+      location.href="/index/indexMain.ch4";
+   }
+   function moveCustomerSupport(){
+      location.href="/index/customerSupport.ch4";
+   }
+   function moveQuestion(){
+      location.href="/index/moveQnA.ch4";
+   }
+   function moveNotice(){
+      location.href="/index/notice.ch4";
+   }
+   function moveAskJoin(){
+      location.href="/index/askJoin.ch4";
+   }
+   function moveStory(){
+      location.href="/index/story.ch4";
+   }
+   $(".hover").mouseleave(
+      function () {
+         $(this).removeClass("hover");
+      }
+   );
 </script>
 </head>
 <body>
 <%@ include file="../CommonForm/Top.jsp"%>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-2">
-		<!-- Side Bar -->
-		<aside>
-			<div class="panel-group" style="margin-top:90px">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a href="#" onClick="moveMain()">
-							<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
-						</h4>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" href="#collapse1">
-							<i class="fa fa-users" aria-hidden="true"></i>고객지원</a>
-						</h4>
-					</div>
-					<div id="collapse1" class="panel-collapse collapse in">
-						<div class="panel-body">
-							<a  href="#" onClick="MoveCustomerSupport()">
-							<i class="fa fa-search-plus" aria-hidden="true"></i>고객지원</a><br> 
-							<a  href="#" onClick="MoveQuestion()">
-							<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a><br> 
-							<a  href="#" onClick="MoveAskJoin()">
-							<i class="fa fa-list-alt" aria-hidden="true"></i>가입문의</a><br> 
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a href="#" onClick="MoveStory()">
-							<i class="fa fa-home" aria-hidden="true"></i>개발스토리</a>
-						</h4>
-					</div>
-				</div>
-			</div>
-		</aside>
-	</div>
-	<div class="col-lg-9">
-		<div class=" row Main_head">
-			<div align="center" style="margin-top: 50px;">
-				<h1 style=" font-weight: bold;" >CH4</h1>
-				<h3><font style="color: #5a5a5a; ">This is the Customer Support page.</font></h3>
-				<p style="width: 500px;">
-					<font style="color: gray;">This is a service page for the customer.-You can use services such as announcements, 
-						  1:1 questions, and more.<br>
-						  You can move using the menu at the bottom.
-					</font>
-				</p>
-			</div>
-			<div class="row" style="margin-left:7%" id="Main_title">
-		    	<div class="container">
-			        <!-- Portfolio Item 1 -->
-			        <div class="col-md-6 col-lg-3">
-						<figure class="snip1200">
-							<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
-							<figcaption>
-								<p>서비스에 대한 공지를 보실 수 있습니다.</p>
-								<div class="heading">
-									<h2> <span> 고객 지원 </span> </h2>
-								</div>
-							</figcaption>
-							<a href="#"></a>
-						</figure>
-					</div>
-			        <!-- Portfolio Item 2 -->
-			       	<div class="col-md-6 col-lg-3">
-						<figure class="snip1200">
-							<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
-							<figcaption>
-								<p>ch4가 제공하는 서비스에 대한 질문을 남기기는 곳입니다.</p>
-								<div class="heading">
-									<h2> <span> Question </span> </h2>
-								</div>
-							</figcaption>
-							<a href="#" onClick="MoveQuestion()"></a>
-						</figure>
-			        </div>
-			        <!-- Portfolio Item 3 -->
-					<div class="col-md-6 col-lg-3">
-						<figure class="snip1200">
-							<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
-							<figcaption>
-								<p>서비스 가입에 대한 질문을 할 수 있는 곳입니다.</p>
-								<div class="heading">
-									<h2> <span>가입문의</span> </h2>
-								</div>
-							</figcaption>
-							<a href="#"></a>
-						</figure>
-					</div>
-			           <!-- Portfolio Item 4 -->
-					<div class="col-md-6 col-lg-3">
-						<figure class="snip1200">
-							<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
-							<figcaption>
-								<p>개발에 대한 내용을 보실 수 있습니다.</p>
-								<div class="heading">
-									<h2> <span>Story</span> </h2>
-								</div>
-							</figcaption>
-							<a href="#"></a>
-						</figure>
-					</div>
-		        </div>
-		  	</div>
-		</div>
-	</div>
-</div>
-
-
-
-  
- 
-<!-- 공통 Footer -->
-<%@ include file="../CommonForm/Footer.jsp"%>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-2">
+            <!-- Side Bar -->
+            <aside>
+               <div class="panel-group" style="margin-top: 90px">
+                  <div class="panel panel-default">
+                     <div class="panel-heading">
+                        <h4 class="panel-title">
+                           <a href="#" onClick="moveMain()"> <i class="fa fa-home"
+                              aria-hidden="true"></i>메인페이지
+                           </a>
+                        </h4>
+                     </div>
+                  </div>
+                  <!-- 추가시작 -->
+                  <div class="panel panel-default">
+                     <div class="panel-heading">
+                        <h4 class="panel-title">
+                           <a href="#" onClick="moveNotice()"> <i class="fa fa-home"
+                              aria-hidden="true"></i>공지사항
+                           </a>
+                        </h4>
+                     </div>
+                  </div>
+                  <!-- 추가끝 -->
+                  <div class="panel panel-default">
+                     <div class="panel-heading">
+                        <h4 class="panel-title">
+                           <a data-toggle="collapse" href="#collapse1"> <i
+                              class="fa fa-users" aria-hidden="true"></i>고객지원
+                           </a>
+                        </h4>
+                     </div>
+                     <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                           <a href="#" onClick="moveCustomerSupport()"> <i
+                              class="fa fa-search-plus" aria-hidden="true"></i>고객지원
+                           </a><br> <a href="#" onClick="moveQuestion()"> <i
+                              class="fa fa-search-plus" aria-hidden="true"></i>1:1문의
+                           </a><br> <a href="#" onClick="moveAskJoin()"> <i
+                              class="fa fa-list-alt" aria-hidden="true"></i>가입문의
+                           </a><br>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="panel panel-default">
+                     <div class="panel-heading">
+                        <h4 class="panel-title">
+                           <a href="#" onClick="moveStory()"> <i class="fa fa-home"
+                              aria-hidden="true"></i>개발스토리
+                           </a>
+                        </h4>
+                     </div>
+                  </div>
+               </div>
+            </aside>
+         </div>
+         <div class="col-lg-9">
+            <div class=" row Main_head">
+               <div align="center" style="margin-top: 50px;">
+                  <h1 style="font-weight: bold;">CH4</h1>
+                  <h3>
+                     <font style="color: #5a5a5a;">This is the Customer Support
+                        page.</font>
+                  </h3>
+                  <p style="width: 500px;">
+                     <font style="color: gray;">This is a service page for the
+                        customer.-You can use services such as announcements, 1:1
+                        questions, and more.<br> You can move using the menu at the
+                        bottom.
+                     </font>
+                  </p>
+               </div>
+               <div class="row" style="margin-left: 7%" id="Main_title">
+                  <div class="container">
+                     <!-- Portfolio Item 1 -->
+                     <div class="col-md-6 col-lg-3">
+                        <figure class="snip1200">
+                           <img
+                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg"
+                              alt="sq-sample27" />
+                           <figcaption>
+                              <p>서비스에 대한 공지를 보실 수 있습니다.</p>
+                              <div class="heading">
+                                 <h2>
+                                    <span> 고객 지원 </span>
+                                 </h2>
+                              </div>
+                           </figcaption>
+                           <a href="#" onClick="moveCustomerSupport()"></a>
+                        </figure>
+                     </div>
+                     <!-- Portfolio Item 2 -->
+                     <div class="col-md-6 col-lg-3">
+                        <figure class="snip1200">
+                           <img
+                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg"
+                              alt="sq-sample27" />
+                           <figcaption>
+                              <p>ch4가 제공하는 서비스에 대한 질문을 남기기는 곳입니다.</p>
+                              <div class="heading">
+                                 <h2>
+                                    <span> Question </span>
+                                 </h2>
+                              </div>
+                           </figcaption>
+                           <a href="#" onClick="moveQuestion()"></a>
+                        </figure>
+                     </div>
+                     <!-- Portfolio Item 3 -->
+                     <div class="col-md-6 col-lg-3">
+                        <figure class="snip1200">
+                           <img
+                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg"
+                              alt="sq-sample27" />
+                           <figcaption>
+                              <p>서비스 가입에 대한 질문을 할 수 있는 곳입니다.</p>
+                              <div class="heading">
+                                 <h2>
+                                    <span>가입문의</span>
+                                 </h2>
+                              </div>
+                           </figcaption>
+                           <a href="#" onClick="moveAskJoin()"></a>
+                        </figure>
+                     </div>
+                     <!-- Portfolio Item 4 -->
+                     <div class="col-md-6 col-lg-3">
+                        <figure class="snip1200">
+                           <img
+                              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg"
+                              alt="sq-sample27" />
+                           <figcaption>
+                              <p>개발에 대한 내용을 보실 수 있습니다.</p>
+                              <div class="heading">
+                                 <h2>
+                                    <span>Story</span>
+                                 </h2>
+                              </div>
+                           </figcaption>
+                           <a href="#" onClick="moveStory()"></a>
+                        </figure>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </body>
 </html>

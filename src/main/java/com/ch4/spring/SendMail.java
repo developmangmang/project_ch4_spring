@@ -12,7 +12,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.log4j.Logger;
+
 public class SendMail {
+	Logger logger = Logger.getLogger(SendMail.class);
+	
 	String from = "lhn1301@naver.com";// 보내는 사람 메일 주소
 	String username = "lhn1301";// 아이디
 	String password = "kosmo!!11";// 비밀번호
@@ -39,11 +43,12 @@ public class SendMail {
 			Message msg = new MimeMessage(mailSession);
 			// set the from and to address
 			msg.setFrom(new InternetAddress(from));// 보내는 사람 설정
-			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(pMap.get("q_mail").toString(), false));// 받는
+			logger.info(pMap);
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(pMap.get("q_email").toString(), false));// 받는
 																														// 사람설정
 			// Setting the Subject and Content Type
-			msg.setSubject(pMap.get("q_title").toString());// 제목
-			msg.setText(pMap.get("q_content").toString());// 내용
+			msg.setSubject("Re:"+pMap.get("q_title").toString());// 제목
+			msg.setText(pMap.get("a_content").toString());// 내용
 			msg.setSentDate(new Date());// 보내는 날짜 설정
 			Transport.send(msg);// 메일 보내기
 

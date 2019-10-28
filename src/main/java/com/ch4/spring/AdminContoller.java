@@ -1,13 +1,13 @@
 package com.ch4.spring;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
 
 import org.apache.log4j.Logger;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +34,7 @@ public class AdminContoller {
 		}
 		return "Fail";
 	}
-	@RequestMapping(value = "sendAnwser.ch4")
+	@RequestMapping(value = "sendAnswer.ch4")
 	public String sendAnwser(@RequestParam Map<String, Object> pMap, Model mod) {
 		int result = 0;
 		mod.addAttribute("host",hostAddress);
@@ -51,9 +51,18 @@ public class AdminContoller {
 		}
 		result = adminLogic.sendAnwser(pMap);
 		if(result == 1) {//성공
+			List<Map<String,Object>> qnaList = adminLogic.qnaList();
+			mod.addAttribute("qnaList",qnaList);
 			return "admin/Admin_QnA";
 		}
 		return "Fail"; 
+	}
+	@RequestMapping(value = "qnaBoard.ch4")
+	public String qnaBoard(Model mod) {
+		mod.addAttribute("host",hostAddress);
+		List<Map<String,Object>> qnaList = adminLogic.qnaList();
+		mod.addAttribute("qnaList",qnaList);
+		return "admin/Admin_QnA";
 	}
 
 }

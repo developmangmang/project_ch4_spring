@@ -8,7 +8,7 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
-<title>Index_QnA</title>
+<title>QnA - CH4 방문/반입 자동화 시스템</title>
 <style type="text/css">
 	div .textbox {
 		margin-top:7px;
@@ -30,7 +30,7 @@
 		margin-top: 0px;
 		padding-top: 10px;
 		height: 300px;
-		background-image: url('../../Style/images/banner/speedGate (2).jpg');
+		background-image: url('${host}/resources/Style/images/banner/speedGate (2).jpg');
 	}
 	.jumbotron_Content a{
 		font-size: 25px;
@@ -47,7 +47,6 @@
 </style>
 <script type="text/javascript">
 	function q_write(){
-		alert("여기");
 		if($("#q_title").val()==""){
 			alert("제목을 입력해주세요.")
 			$("#q_title").textbox('textbox').focus();
@@ -69,9 +68,9 @@
 			return;
 		}
 		//url보내기
-		$('#f_write').attr("method","post");
-		$('#f_write').attr("action","index/question.ch4"); //전송을 하는 곳.
-		$('#f_write').submit();
+		$('#f_question').attr("method","post");
+		$('#f_question').attr("action","/index/question.ch4"); //전송을 하는 곳.
+		$('#f_question').submit();
 		
 	}
 </script>
@@ -105,8 +104,6 @@
 		    <div class="well" align="center" style="text-align: center; ">
 				<form id="f_question">
 					<input type="hidden" name="q_no" value="0">
-					<input type="hidden" name="q_date" value="0">
-					<input type="hidden" name="msg_date" value="0">
 					<div class="row" style="vertical-align: middle;">
 						<div class="col-lg-2" align="center">
 							<label for="q_title" >제 목</label>
@@ -154,6 +151,5 @@
 	</div>
 </div>
 <!-- 카드 시작 끝 -->
-<%@ include file="../CommonForm/Footer.jsp"%>
 </body>
 </html>

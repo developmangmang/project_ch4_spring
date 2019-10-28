@@ -8,7 +8,7 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
-<title>약관동의 - CH4 방문자 관리 시스템</title>
+<title>약관동의 - CH4 방문/반입 자동화 시스템</title>
 </head>
 <body>
 <%@ include file="../CommonForm/Top.jsp"%>

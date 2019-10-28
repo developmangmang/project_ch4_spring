@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,14 +13,14 @@ import com.ch4.getData.GoodsData;
 
 @Service
 public class GoodsLogic {
-	
+	Logger logger = Logger.getLogger(GoodsLogic.class);
 	@Value("${file.path}")
 	String filePath;
 	@Value("${host.address}")
 	String hostAddress;
 	@Autowired
 	GoodsDao gDao = null;
-
+	
 	public Map<String, Object> goodsDetail(Map<String, Object> pMap) {
 		Map<String, Object> goodsDetail = gDao.goodsDetail(pMap);
 		return goodsDetail;
@@ -37,7 +38,7 @@ public class GoodsLogic {
 			return result;
 		} else if (result == 1) {
 			aplg_no = pMap.get("aplg_no").toString();
-
+			logger.info(aplg_no);
 			Map<String, Object> gmMap = new HashMap<String, Object>();
 			gmMap.put("aplg_no", aplg_no);
 			gmMap.put("gmAddList", gmAddList);

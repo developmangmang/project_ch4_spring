@@ -202,7 +202,7 @@
 		margin: 0 0 0 0px;
 	}
 </style>
-<title>신청변경 - CH4 방문자 관리 시스템</title>
+<title>신청변경 - CH4 방문/반입 자동화 시스템</title>
 <script type="text/javascript">
 	//등록한 방문자 수,반입기기 수,차량 수
 	var vIndex = 1;
@@ -709,6 +709,7 @@
 	    <!------------------------------------- 신청 폼 시작 -------------------------------------->
 	    <form id="form_update" action="/visitor/update.ch4" method="POST">
 	    	<input id="com_no" type="hidden" name="com_no" value="<%=com_no %>">
+	    	<input id="com_name" type="hidden" name="com_name" value="<%=com_name %>">
 	    	<input id="visit_no" type="hidden" name="visit_no" value="<%=visit_no %>">
 	    	<input id="visit_tkin_encc" type="hidden" name="visit_tkin_encc" value="<%=visit_tkin_encc %>">
 	    	<input id="visit_vhcle_encc" type="hidden" name="visit_vhcle_encc" value="<%=visit_vhcle_encc %>">

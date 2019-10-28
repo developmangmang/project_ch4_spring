@@ -20,7 +20,7 @@
 		margin-top: 0px;
 		padding-top: 10px;
 		height: 300px;
-		background-image: url('../../Style/images/banner/speedGate (3).jpg');
+		background-image: url('${host}/resources/Style/images/banner/speedGate (2).jpg');
 	}
 	.jumbotron_Main a{
 		font-size: 25px;
@@ -62,7 +62,5 @@
 	      문의하신 내용의 처리 및 답변은 평일기준 24시간 이내 처리됩니다.</font></p>
 </div>
 <!--안의 내용 들어갈 부분이에욤. -->
-<!-- 공통 Footer -->
-<%@ include file="../CommonForm/Footer.jsp"%>
 </body>
 </html>

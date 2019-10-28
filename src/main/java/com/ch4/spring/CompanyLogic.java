@@ -24,9 +24,9 @@ public class CompanyLogic {
 	Logger logger = Logger.getLogger(CompanyLogic.class);
 	
 	@Value("${file.path}")
-	String QRImagePath = null;
+	String filePath = null;
 	@Value("${host.address}")
-	String host = null;
+	String hostAddress = null;
 	
 	@Autowired
 	CompanyDao cDao = null;
@@ -42,12 +42,15 @@ public class CompanyLogic {
 		List<Map<String, Object>> confirmList = (List<Map<String, Object>>) pMap.get("confirmList");
 		logger.info("pMap ++ : " + pMap);
 		logger.info("와와아 : " + confirmList);
+		String permit = null;
 		for (int i = 0; i < confirmList.size(); i++) {
 			logger.info(confirmList.get(i));
+			permit = confirmList.get(i).get("CONFM_NO").toString();
+			logger.info(permit);
 		}
 		if (result == 0) {
 			return result;
-		} else if (result == 1) {
+		} else if (result == 1 && !(permit.equals("null"))) {
 			if (pMap.get("visit_permit_st") != null) {// 방문일 경우
 				cDao.mngPermitV(pMap);
 				result = (int) pMap.get("result");
@@ -67,16 +70,16 @@ public class CompanyLogic {
 		for (int i = 0; i < confirmList.size(); i++) {
 			Map<String, Object> cMap = confirmList.get(i);
 			String qrCode = (String) cMap.get("CONFM_QRCODE");
-			String savedFilePath = QRImagePath;
+			String savedFilePath = filePath;
 			String path = null;
 			String url = null;
 
 			if (pMap.get("visit_no") != null) {
 				path = savedFilePath + "visitor/";
-				url = host + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
+				url = hostAddress + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
 			} else if (pMap.get("aplg_no") != null) {
 				path = savedFilePath + "goods/";
-				url = host + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=goods";
+				url = hostAddress + "/android/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=goods";
 			}
 
 			File file = new File(path);
@@ -117,8 +120,13 @@ public class CompanyLogic {
 		return applyVisitList;
 	}
 
-	public List<Map<String, Object>> inOutList(Map<String, Object> pMap) {
-		List<Map<String, Object>> inOutList = cDao.inOutList(pMap);
+	public List<Map<String, Object>> inOutVisitorList(Map<String, Object> pMap) {
+		List<Map<String, Object>> inOutList = cDao.inOutVisitorList(pMap);
+		return inOutList;
+	}
+	
+	public List<Map<String, Object>> inOutGoodsList(Map<String, Object> pMap) {
+		List<Map<String, Object>> inOutList = cDao.inOutGoodsList(pMap);
 		return inOutList;
 	}
 

@@ -26,10 +26,16 @@ public class RestCompanyController {
         jsonStr = g.toJson(applyVisitList);
 		return jsonStr;
 	}
-	@RequestMapping(value = "inOutList.ch4",produces="text/plain;charset=UTF-8")
-	public String inOutList(@RequestParam Map<String, Object> pMap) {
-		 List<Map<String, Object>> inOutList = cLogic.inOutList(pMap);
+	@RequestMapping(value = "inOutVisitorList.ch4",produces="text/plain;charset=UTF-8")
+	public String inOutVisitorList(@RequestParam Map<String, Object> pMap) {
+		 List<Map<String, Object>> inOutList = cLogic.inOutVisitorList(pMap);
          jsonStr = g.toJson(inOutList);
+		return jsonStr;
+	}
+	@RequestMapping(value = "inOutGoodsList.ch4",produces="text/plain;charset=UTF-8")
+	public String inOutGoodsList(@RequestParam Map<String, Object> pMap) {
+		List<Map<String, Object>> inOutList = cLogic.inOutGoodsList(pMap);
+		jsonStr = g.toJson(inOutList);
 		return jsonStr;
 	}
 	@RequestMapping(value = "applyGoodsList.ch4",produces="text/plain;charset=UTF-8")

@@ -10,14 +10,14 @@
 <%@ include file="../../Style/common/HeadUI.jsp"%>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<title>Insert title here</title>
+<title>개발스토리 - CH4 방문/반입 자동화 시스템</title>
 <style type="text/css">
 .banner_Main {
 	margin-top: 0px;
 	margin-bottom: 50px;
 	padding-top: 0px;
 	height: 200px;
-	background-image: url('../../Style/images/banner/speedGate (1).jpg');
+	background-image: url('${host}/resources/Style/images/banner/speedGate (1).jpg');
 }
 
 .step {
@@ -156,7 +156,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#" >
-        <img src="../../Style/images/logo/logo_navi5.png">
+        <img src="${host}/resources/Style/images/logo/logo_navi5.png">
       </a>
        <p class="navbar-text">개발 스토리</p>
     </div>
@@ -196,7 +196,7 @@
 				<h2 class="about" id="about_date">개발 일정표</h2>
 			</div>
 			<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 Schedule">
-				<img src="../../Style/images/banner/developdate.png" style="margin-top: 20px;">
+				<img src="${host}/resources/Style/images/banner/developdate.png" style="margin-top: 20px;">
 			</div>
 		</div>
 	</div>
@@ -298,7 +298,6 @@
 									</div>
 								</div>
 							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -306,6 +305,5 @@
 		</div>
 	</div>
 </div>
-<%@ include file="../CommonForm/Footer.jsp"%>
 </body>
 </html>
