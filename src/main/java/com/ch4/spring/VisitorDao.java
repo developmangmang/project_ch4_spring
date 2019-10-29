@@ -144,9 +144,5 @@ public class VisitorDao {
 		return rMap;
 	}
 
-	public Map<String,Object> naviVisitNo(Map<String, Object> pMap) {
-		Map<String,Object> rMap = sqlSessionTemplate.selectOne("naviVisitNo",pMap);
-		return rMap;
-	}
 
 }

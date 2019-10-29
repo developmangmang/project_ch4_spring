@@ -8,7 +8,7 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
-<title>회원가입 - CH4 방문자 관리 시스템</title>
+<title>회원가입 - CH4 방문/반입 자동화 시스템</title>
 <style>
 	div #label{
 		vertical-align: middle;
@@ -58,7 +58,7 @@
 	table th{
 		width: 120px;
 	}
-	#cmng_permit_hp1,#cmng_permit_hp2, #cmng_permit_hp3{
+	#cmng_hp1,#cmng_hp2, #cmng_hp3{
 		width: 153px;
 	}
 </style>
@@ -70,13 +70,14 @@
 			$("#cmng_id").textbox('textbox').focus();
 			return;
 		}
+		if($("#id_check").val()=="unchecked"){
+			alert("중복검사를 해주세요.");
+			return;
+		}
 		if($("#cmng_pw").val()==""){
 			alert("비밀번호를 입력해주세요.");
 			$("#cmng_pw").passwordbox('textbox').focus();
 			return;
-		}
-		if($("#id_dbcheck").val()==""){
-			alert("중복검사를 해주세요.");
 		}
 		if($("#re_cmng_pw").val()==""){
 			alert("비밀번호를 확인 해주세요.");
@@ -88,19 +89,29 @@
 			$("#cmng_name").textbox('textbox').focus();
 			return;
 		}
-		if($("#cmng_permit_hp1").val()==""){
+		if($("#cmng_hp1").val()==""){
 			alert("핸드폰 번호를 입력 해주세요.");
-			$("#cmng_permit_hp").textbox('textbox').focus();
+			$("#cmng_hp1").textbox('textbox').focus();
 			return;
 		}
-		if($("#cmng_permit_hp2").val()==""){
+		if($("#cmng_hp2").val()==""){
 			alert("핸드폰 번호를 입력 해주세요.");
-			$("#cmng_permit_hp").textbox('textbox').focus();
+			$("#cmng_hp2").textbox('textbox').focus();
 			return;
 		}
-		if($("#cmng_permit_hp3").val()==""){
+		if($("#cmng_hp3").val()==""){
 			alert("핸드폰 번호를 입력 해주세요.");
-			$("#cmng_permit_hp").textbox('textbox').focus();
+			$("#cmng_hp3").textbox('textbox').focus();
+			return;
+		}
+		if(!($("#combo_company").combobox('getValue'))){
+			alert("회사를 선택해 주세요.");
+			$("#combo_company").combobox('textbox').focus();
+			return;
+		}
+		if(!($("#combo_dept").combobox('getValue'))){
+			alert("부서를 선택해 주세요.");
+			$("#combo_dept").combobox('textbox').focus();
 			return;
 		}
 		if($("#cmng_grade").val()==""){
@@ -109,46 +120,67 @@
 			return;
 		}
 		else{
-			var cmng_permit_hp = $("#cmng_permit_hp1").val()+'-'
-								+$("#cmng_permit_hp2").val()+'-'
-								+$("#cmng_permit_hp3").val();
-			alert(cmng_permit_hp);
-			$("#cmng_permit_hp").textbox('setValue',cmng_permit_hp);
+			var cmng_hp = $("#cmng_hp1").val()+'-'
+								+$("#cmng_hp2").val()+'-'
+								+$("#cmng_hp3").val();
+			$("#cmng_hp").attr('value',cmng_hp);
 		} 
 		//url 보내기
-		$('#join-submit').attr("method","post");
-		$('#join-submit').attr("action","company/join.ch4?"); //전송을 하는 곳.
-		$('#join-submit').submit(); 
+		$('#form_join').attr("method","post");
+		$('#form_join').attr("action","/company/join.ch4?"); //전송을 하는 곳.
+		$('#form_join').submit(); 
 	}
 	//아이디 중복 체크
-	function checkid(){
-		var id = $("#cmng_id").val();
-		alert(id);
-		$.ajax({
-			method:'get'
-			,url:'company/isExistID.ch4?'+id
-			,success:function(data){
-				alert(data);
-				if(data=="성공"){
-					$('#idcheck').html('※ 사용가능한 아이디 입니다.');
-					$("#cmng_pw").textbox('textbox').focus();
-					return true;
-				}else{
-	               $('#idcheck').html('<span style="color:red;">※사용불가능한 아이디입니다.</span>');
-	               $("#cmng_id").textbox('textbox').focus();
-	               $("#cmng_id").textbox('textbox').val('');
-	               return false;
-				}
-			}
-		});//////////end of ajax
-	}
 	
+	function checkid() {
+		var id = $("#cmng_id").val();
+		if($('#idcheck').text()=='※중복검사.'){
+			$.ajax({
+				method : 'get',
+				url : '/company/isExistID.ch4?cmng_id=' + id,
+				dataType : "text",
+				success : function(data) {
+					alert(data);
+					if (data == "사용 가능한 아이디입니다.") {
+						$('#idcheck').html(data);
+						$('#id_check').attr('value', 'checked');
+						$("#cmng_pw").textbox('textbox').focus();
+						return;
+					} else {
+						$('#idcheck').html(
+								'<span style="color:red;">' + data + '</span>');
+						$('#id_check').attr('value', 'unchecked');
+						$("#cmng_id").textbox('textbox').focus();
+						$("#cmng_id").textbox('textbox').val('');
+						return;
+					}
+				}
+			});//////////end of ajax
+		}
+		else{
+			alert('아이디 형식을 맞춰주세요...');
+		}
+	}
 </script>
 </head>
 <body>
 <%@ include file="../CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$("#combo_company").combobox({
+			valueField: 'COM_NO',
+			textField: 'COM_NAME',
+			url: "/visitor/companyList.ch4",
+			onChange:function(newValue){
+				var com_name = $(this).textbox('getText');
+				$("#com_name").attr("value",com_name);
+				$("#combo_dept").combobox({
+					valueField: 'DEPT_NO',
+					textField: 'DEPT_NAME',
+					url: "/visitor/deptList.ch4?com_no="+newValue
+				});
+			}
+		});
 		$("#cmng_id").textbox('textbox').blur(function(){
 			if($("#cmng_id").val()==''){
 				$("#cmng_id").textbox('textbox').focus();
@@ -166,7 +198,7 @@
 				$('#idcheck').html('<span style="color:red;">※첫글자는 영문으로 입력</span>');
 				return;
 			}
-			var idCheck = /^[a-zA-Z][a-zA-Z0-9]{5,17}$/;
+			var idCheck = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{5,17}$/;
 			if (idCheck.test($("#cmng_id").textbox('textbox').val())) {
 				$("#idcheck").html("<span style='color:red;'>※중복검사.</span>");
 	            return;
@@ -194,88 +226,109 @@
 </script>
 <div class="container-fluid">
 	<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
-		<div class="row page-header" style="padding-top: 10px">
+		<div class="row page-header">
 			<h1 class="text-center col-12 mb-0" style="padding-bottom: 20px;">JOIN</h1>
 		</div>
 		<div class="row">
 			<div class="well col-lg-offset-2 col-lg-8 col-lg-offset-2">
 				<div class="" align="center">
-					<table >
-						<tr>
-							<th> 아이디 </th>
-							<td colspan="2">
-								<input id="cmng_id" name="cmng_id" class="tb_id easyui-textbox"
-										prompt="아이디를 입력하세요.">
-							</td>
-							<td align="center">
-								<button id="id_dbcheck" class="btn btn-danger"
-										onClick="checkid()" >
-											중복검사
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td colspan="3">
-								<div id="idcheck"></div>
-							</td>
-						</tr>
-						<tr>
-							<th>비밀번호 </th>
-							<td colspan="3">
-								<input id="cmng_pw" name="cmng_pw" class="tb easyui-passwordbox"
-									   prompt="비밀번호를 입력하세요.">
-							</td>
-						</tr>
-						<tr>
-							<th>비밀번호 확인 </th>
-							<td colspan="3">
-								<input id="re_cmng_pw" name="re_cmng_pw" class="tb easyui-passwordbox" 
-									   prompt="비밀번호를 다시  입력 해 주세요">
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td colspan="3">
-								<div id="pwcheck"></div>
-							</td>
-						</tr>
-						<tr>
-							<th>성명  </th>
-							<td colspan="3">
-								<input id="cmng_name" name="cmng_name" class="tb easyui-textbox"
-									   prompt="이름을 입력해주세요">
-							</td>
-						</tr>
-						<tr align="left">
-							<th>연락처 </th>
-							<td id="hp1" colspan="3" >
-								<input type="hidden" id="cmng_permit_hp" name="cmng_permit_hp" > 
-								<input id="cmng_permit_hp1" name="cmng_permit_hp" class="easyui-textbox"
-									   prompt="010">
-								<span>-</span>
-								<input id="cmng_permit_hp2" class="easyui-textbox">
-								<span>-</span>
-								<input id="cmng_permit_hp3" class="easyui-textbox">
-							</td>
-						</tr>
-						<tr>
-							<th>등급 </th>
-							<td colspan="3">
-								 <select class="tb_combo easyui-combobox" name="cmng_grade" id="cmng_grade" 
-								 		 data-options="panelHeight:'auto'">
-						                <option value=""></option>
-						                <option value="CMNG_GRADE_COMMIT">결제자</option>
-						                <option value="CMNG_GRADE_INFO">안내데스크</option>
-						             </select>
-							</td>
-						</tr>
-					</table>
+				<form id="form_join">
+						<table>
+							<tr>
+								<th> 아이디 </th>
+								<td colspan="2">
+									<input id="cmng_id" name="cmng_id" class="tb_id easyui-textbox"
+											prompt="아이디를 입력하세요.">
+								</td>
+								<td align="center">
+									<input type="hidden" id="id_check" value="unchecked">
+									<button id="btn_chekck" class="btn btn-danger"
+											onClick="checkid()" type="button">
+												중복검사
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="3">
+									<div id="idcheck"></div>
+								</td>
+							</tr>
+							<tr>
+								<th>비밀번호 </th>
+								<td colspan="3">
+									<input id="cmng_pw" name="cmng_pw" class="tb easyui-passwordbox"
+										   prompt="비밀번호를 입력하세요.">
+								</td>
+							</tr>
+							<tr>
+								<th>비밀번호 확인 </th>
+								<td colspan="3">
+									<input id="re_cmng_pw" class="tb easyui-passwordbox" 
+										   prompt="비밀번호를 다시  입력 해 주세요">
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="3">
+									<div id="pwcheck"></div>
+								</td>
+							</tr>
+							<tr>
+								<th>성명  </th>
+								<td colspan="3">
+									<input id="cmng_name" name="cmng_name" class="tb easyui-textbox"
+										   prompt="이름을 입력해주세요">
+								</td>
+							</tr>
+							<tr align="left">
+								<th>연락처 </th>
+								<td id="hp1" colspan="3" >
+									<input type="hidden" id="cmng_hp" name="cmng_hp" > 
+									<input id="cmng_hp1" class="easyui-textbox"
+										   prompt="010">
+									<span>-</span>
+									<input id="cmng_hp2" class="easyui-textbox">
+									<span>-</span>
+									<input id="cmng_hp3" class="easyui-textbox">
+								</td>
+							</tr>
+							<tr>
+								<th>회사명</th>
+								<td colspan="3">
+									<select class="tb_combo easyui-combobox" id="combo_company" name="com_no"
+									 data-options="panelHeight:'auto'">
+										<option value="">회사명</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th>부서명</th>
+								<td colspan="3">
+									<select class="tb_combo easyui-combobox" id="combo_dept" name="dept_no"
+									 data-options="panelHeight:'auto'">
+										<option value="">부서명</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th>등급 </th>
+								<td colspan="3">
+									 <select class="tb_combo easyui-combobox" name="cmng_grade" id="cmng_grade" 
+									 		 data-options="panelHeight:'auto'">
+							                <option value=""></option>
+							                <option value="승인자">승인자</option>
+							                <option value="안내데스크">안내데스크</option>
+							             </select>
+								</td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
-		<div class="row" align="center" style="padding-top: 50px">
-			<button id="join-submit" class="btn btn-primary" 
+		<div class="row" align="center" >
+			<button id="btn_join" class="btn btn-primary" 
 				    onClick="join()">
 				        회원가입&emsp;<i class="fa fa-check spaceLeft"></i>
 			</button>

@@ -96,7 +96,7 @@ public class AndroidController {
 	}
 	
 	@RequestMapping(value="/addVisitor.ch4")
-	public @ResponseBody JSONObject visitAdd(@RequestParam Map<String,Object> pMap,@ModelAttribute VisitorData vData,Model mod) {
+	public @ResponseBody JSONObject visitAdd(@RequestParam Map<String,Object> pMap, @ModelAttribute VisitorData vData,Model mod) {
 		logger.info("visitAdd호출");
 		int result = 0;
 		result = vLogic.visitApplyAdd(pMap, vData);
@@ -248,13 +248,14 @@ public class AndroidController {
 		jsonObject.put("sendData",jsonArray);
 		return jsonObject;
 	}
-	@RequestMapping(value = "naviVisitNo.ch4")
+	@RequestMapping(value = "navigation.ch4")
 	public @ResponseBody JSONObject companyNum(@RequestParam Map<String, Object> pMap) {
 		JSONObject jsonObject = new JSONObject();
-		Map<String,Object> rMap = vLogic.naviVisitNo(pMap);
-		jsonObject.put("com_addr", rMap.get("com_addr"));
-		jsonObject.put("com_name", rMap.get("com_name"));
-		jsonObject.put("com_hp", rMap.get("com_hp"));
+		Map<String,Object> rMap = vLogic.navigation(pMap);
+		logger.info("rMap : " + rMap);
+		jsonObject.put("com_addr", rMap.get("COM_ADDR"));
+		jsonObject.put("com_name", rMap.get("COM_NAME"));
+		jsonObject.put("com_hp", rMap.get("COM_HP"));
 		return jsonObject;
 	}
 	

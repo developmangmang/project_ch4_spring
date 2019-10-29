@@ -6,7 +6,7 @@
 <meta charset="utf-8"> 
 <!-- Web icon 설정 --> 
 <%@ include file="../CommonForm/TapLogo.jsp"%>
-<title>고객지원 페이지</title>
+<title>고객지원 - CH4 방문/반입 자동화 시스템</title>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%>
 <style type="text/css">
@@ -14,7 +14,7 @@
 	margin-top: 0px;
 	padding-top: 10px;
 	height: 300px;
-	background-image: url('../../Style/images/banner/banner_top.jpg');
+	background-image: url('${host}/resources/Style/images/banner/banner_top.jpg');
 }
 
 .jumbotron_Content a {
@@ -66,7 +66,7 @@
 					<h5 style="color: gray;">CH4 서비스를 이용하시면서 궁금한 점이 있으신가요? 원하시는 상담방법을 이용해 문의해주세요.</h5>
 				</div>
 				<div class="row">
-					<img alt="" src="../../Style/images/logo/line.png">
+					<img alt="" src="${host}/resources/Style/images/logo/line.png">
 				</div>
 				<div class="row">
 					<div class="col-lg-4" style="padding-bottom: 10px; margin-bottom: 30px;">
@@ -77,7 +77,7 @@
 							</p>
 						</div>
 						<div class="col-lg-5">
-							<img alt="" src="../../Style/images/logo/question.png">
+							<img alt="" src="${host}/resources/Style/images/logo/question.png">
 						</div>
 					</div>
 					<div class="col-lg-4" style="padding-bottom: 10px; margin-bottom: 30px;">
@@ -88,7 +88,7 @@
 							</p>
 						</div>
 						<div class="col-lg-5">
-							<img alt="" src="../../Style/images/logo/Inquiry.png">
+							<img alt="" src="${host}/resources/Style/images/logo/Inquiry.png">
 						</div>
 					</div>
 					<div class="col-lg-4" style="padding-bottom: 10px; margin-bottom: 30px;">
@@ -99,7 +99,7 @@
 							</p>
 						</div>
 						<div class="col-lg-5">
-							<img alt="" src="../../Style/images/logo/call.png">
+							<img alt="" src="${host}/resources/Style/images/logo/call.png">
 						</div>
 					</div>
 				</div>
@@ -251,7 +251,7 @@
 						<p><font id="fontG">서비스 이용과 관련한 문의사항을 등록해주세요. 최대한 빨리 답변해드릴 수 있도록 노력하겠습니다.</font></p>
 					</div>
 					<div class="col-lg-5" style="height: 150px; padding-top: 10px;">
-						<img alt="" src="../../Style/images/logo/sendMail.png">
+						<img alt="" src="${host}/resources/Style/images/logo/sendMail.png">
 					</div>
 				</div>
 				<div class="col-lg-6" style=" border:1px;border-color:white; background-color:#fafafa;">
@@ -263,14 +263,12 @@
 						<p><font id="fontG">업무외 시간에는 서비스 문의하기를 이용해주세요.</font></p>
 					</div>
 					<div class="col-lg-5" style="height: 150px; padding-top: 10px;">
-						<img alt="" src="../../Style/images/logo/calling.png">
+						<img alt="" src="${host}/resources/Style/images/logo/calling.png">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- 공통 Footer -->
-<%@ include file="../CommonForm/Footer.jsp"%>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
-<title>Admin_info</title>
+<title>관리자 CH4 방문/반입 자동화 시스템</title>
 <style type="text/css">
 	.table thead{
 		background-color: #337ab7;
@@ -65,7 +65,7 @@
 			            </a>
 					</li>
 					<li class="nav-item">
-			            <a class="nav-link" href="admin/qnaBoard.ch4">
+			            <a class="nav-link" href="/admin/qnaBoard.ch4">
 			              <span data-feather="file"></span>
 			              	QnA
 			            </a>

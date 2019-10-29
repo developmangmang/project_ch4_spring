@@ -6,33 +6,49 @@
 <meta charset="UTF-8">
 <!-- Web icon 설정 -->
 <%@ include file="../CommonForm/TapLogo.jsp"%>
-<title>시스템 관리- CH4 방문자 관리 시스템</title>
+<title>관리자 로그인 - CH4 방문/반입 자동화 시스템</title>
 <%@ include file="../../Style/common/HeadUI.jsp"%>
 <style type="text/css">
 	#jumbo_adminlogin {
-		margin-top : 30px;
+		margin-top : 0px;
 		padding-top : 10px;
-		height : 700px;
+		height : 600px;
 		background-image: url('${host}/resources/Style/images/banner/speedGate (1).jpg');
 	}
-	#login_background{
-		background-color:rgba(223,223,223,0.7);
-		height: 100%;
-		padding-bottom: 50px;
-		padding-top: 30px;
+	/* 배경 투명도 및 크기  */
+	#login_background {
+	   background-color: rgba(223, 223, 223, 0.7);
+	   height: 400px;
+	   padding-bottom: 30px;
+	}
+	#admin_id {
+	   width: 350px;
+	   height: 50px;
+	   margin-bottom: 10px;
+	}
+	#admin_pw {
+	   width: 350px;
+	   height: 50px;
+	   margin-bottom: 10px;
 	}
 	#btn_login {
-		width: 30%;
-		height: 40px;
+	   width: 350px;
+	   height: 50px;
+	}
+	#signtitle {
+	   font-size: 50px;
+	   margin-bottom: 30px;
 	}
 	.checkbox{
 		border: 0px;
 	}
 	h2 {
-		padding-left: 3%;
-		margin-left: 8%;
-		border-left: solid 7px;
-		color: white;
+	   padding-left: 3%;
+	   margin-left: 8%;
+	   border-left: solid 7px;
+	   color: white;
+	   font-weight: 700;
+	   font-family: sans-serif;
 	}
 
 </style>
@@ -61,20 +77,22 @@
 <div class="container-fluid" style="text-align: center;">
 	<div id="jumbo_adminlogin" class="jumbotron">
 		<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
-			<div class="row" align="left" style="margin-top:80px;">
+			<div class="row" align="left" style="margin-top:50px;">
 				<h2>ADMIN</h2>
 			</div>
 			<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 				<div id="login_background" class="row" align="center" >
-					<h1 style="font-size: 50px;">Please sign in</h1>
+					&nbsp;
+					<h1 id="signtitle">Please sign in</h1>
+					&nbsp;
 					<div class="row">
 						<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3">
 							<form  id="f_adminlogin" class="f_adminlogin">
-								<div class="row">
-									<input id="admin_id" class="easyui-textbox" name="adminID"  prompt="id" data-options="iconCls:'icon-man'" style="width:300px; height: 40px;">
+								<div class="row" style="margin-bottom:10px;">
+									<input id="admin_id" class="easyui-textbox" name="adminID"  prompt="id" data-options="iconCls:'icon-man'" style="height: 40px;">
 								</div>
 								<div class="row"> 
-									<input id="admin_pw" class="easyui-passwordbox" name="adminPW" prompt="Password" iconWidth="28" style="width:300px; height: 40px;margin-top: -10px;">
+									<input id="admin_pw" class="easyui-passwordbox" name="adminPW" prompt="Password" iconWidth="28" style="height: 40px;">
 								</div>
 								<div class="row">
 									<button id="btn_login" type="button" class="btn btn-lg btn-primary btn-block" style="margin-top: 50px;" onClick="javascript:login()">Sign in</button>

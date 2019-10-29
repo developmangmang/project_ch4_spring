@@ -8,7 +8,7 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
-<title>QR조회 - CH4 방문자 관리 시스템</title>
+<title>QR조회 - CH4 방문/반입 자동화 시스템</title>
 <style>
 	h2#title {
 		border-left: 5px solid #FF5F41;

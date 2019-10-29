@@ -8,13 +8,9 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
-<title>메인 - CH4 방문자 관리 시스템</title>
+<title>CH4 방문/반입 자동화 시스템</title>
 </head>
 <body>
-<!-- 
-	수정사항
-	화면이동 요청 url
- -->
 <%@ include file="../CommonForm/Top.jsp"%>
 <!-- 방문 유형 선택 옵션 -->	
 		<div class="container" style="text-align: center;">

@@ -145,7 +145,7 @@
       margin: 0 0 0 0px;
    }
 </style>
-<title>방문 신청 - CH4 방문자 관리 시스템</title>
+<title>방문 신청 - CH4 방문/반입 자동화 시스템</title>
 <script type="text/javascript">
    //등록한 방문자 수,반입기기 수,차량 수
    var vIndex = 1;

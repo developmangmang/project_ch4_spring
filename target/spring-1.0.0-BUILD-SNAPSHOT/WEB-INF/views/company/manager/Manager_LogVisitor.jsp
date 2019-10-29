@@ -6,105 +6,11 @@
 <meta charset="UTF-8">
 <!-- Web icon 설정 -->
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>방문 현황 조회 - CH4 방문자 관리 시스템</title>
+<title>방문 현황 - CH4 방문/반입 자동화 시스템</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 </head>
 <body>
-	<script type="text/javascript">
-//combobox 직접입력 방지
-$.fn.combobox.defaults.editable = false
-//datebox 직접입력 방지
-$.fn.datebox.defaults.editable = false
-
-/* 검색방법 콤보박스로 textbox name값 변경 */
-$(document).ready(function(){
-	$('#SearchType').combobox({
-		onChange: function(newVal){
-			$("#searchText").textbox('textbox').attr('name',newVal);
-			$("#searchText").attr('textboxname',newVal);
-			var inputHidden = $("#searchText").textbox('textbox').parent().find('input:last');
-			inputHidden.attr('name',newVal);
-// 			$("span.textbox > .textbox-value").attr('name',newVal);
-		}
-	});
-
-/* 테이블 데이터 */
-	$("#tb_logVisitor").bootstrapTable({
-	    columns:[
-	         {field:'CONFM_NO',title:'방문번호'}
-	         ,{field:'CMG_INOUT',title:'출입시간'}
-	         ,{field:'CONFM_NAME',title:'방문자명'}
-	         ,{field:'CMG_ENTRC',title:'출입위치'}/* 출입위치 : 사용게이트 */
-	         ,{field:'CMG_NOTES',title:'처리상태'}
-	         ,{field:'CONFM_DESTI',title:'목적지'}
-	    ]
-		,url: "/company/inOutList.ch4" 
-	    ,pagination:'true'//페이지 네이션
-	    ,paginationPreText:"Previous"
-	    ,paginationNextText:"Next"
-	    ,pageSize:10//기본 페이지 사이즈
-	    ,pageList:[10, 15, 20, 30] //칸수
-	});
-	
-// 캘린더 검색 기능
-	$('#calender').calendar({
-		onSelect: function(date){
-			$.ajax({
-				type:'post'
-				,url:'project_ch4_pojo/json/logVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/applyVisitList.ch4 */
-				,dataType: "json"
-				,data :$("#f_search").serialize()
-				,success: function(data){
-					$("#tb_logVisitor").bootstrapTable('load',data);
-				}
-			});
-		}
-	});
-//방문현황 콤보 박스
-	$("#state").combobox({
-		onChange: function(newVal){
-			$.ajax({
-				type:'post'
-				,url:'/project_ch4_pojo/json/logVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
-				,dataType: "json"
-				,data :$("#f_search").serialize()
-				,success: function(data){
-					$("#tb_logVisitor").bootstrapTable('load',data);
-				}
-			});
-		}
-	});
-//출입시간 콤보박스
-	$("#time").combobox({
-		onChange: function(newVal){
-			$.ajax({
-				type:'post'
-				,url:'/project_ch4_pojo/json/logVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
-				,dataType: "json"
-				,data :$("#f_search").serialize()
-				,success: function(data){
-					$("#tb_logVisitor").bootstrapTable('load',data);
-				}
-			});
-		}
-	});
-	
-});
-
-/* 버튼 검색 */
-function search(){
-	$.ajax({
-			type:'post'
-			,url:'/company/applyVisitList.ch4'
-			,dataType: "json"
-			,data :$("#f_search").serialize()
-			,success: function(data){
-				$("#tb_logVisitor").bootstrapTable('load',data);
-			}
-	});
-}
-</script>
 	<%@ include file="../../CommonForm/Top.jsp"%>
 	<!-- Content -->
 	<div class="mainContent">
@@ -119,11 +25,13 @@ function search(){
 			</div>
 			<div class="col-lg-offset-1 col-lg-10">
 				<form id="f_search">
+					<input type="hidden" name="com_no" value="<%=com_no %>">
 					<!-- 캘린더 -->
 					<div class="col-lg-offset-1 col-lg-3">
 						<div class="easyui-calendar" id="calender"
 							style="margin-bottom: 10px; width: 250px; height: 200px;"></div>
 					</div>
+					<input type="hidden" id="confm_visit_date" name="confm_visit_date">
 					<!-- 검색 툴바 -->
 					<div class="col-lg-7">
 						<div class="col-lg-12">
@@ -195,5 +103,121 @@ function search(){
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+	//combobox 직접입력 방지
+	$.fn.combobox.defaults.editable = false
+	//datebox 직접입력 방지
+	$.fn.datebox.defaults.editable = false
+	
+	/* 검색방법 콤보박스로 textbox name값 변경 */
+	$(document).ready(function(){
+		$('#SearchType').combobox({
+			onChange: function(newVal){
+				$("#searchText").textbox('textbox').attr('name',newVal);
+				$("#searchText").attr('textboxname',newVal);
+				var inputHidden = $("#searchText").textbox('textbox').parent().find('input:last');
+				inputHidden.attr('name',newVal);
+	// 			$("span.textbox > .textbox-value").attr('name',newVal);
+			}
+		});
+	
+	/* 테이블 데이터 */
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = +now.getMonth()+1;
+		if(month<10){
+			month = '0'+month;
+		}
+		var day = now.getDate();
+		if(day<10){
+			day = '0'+day;
+		}
+		var confm_visit_date = year+'-'+month+'-'+day;
+		$("#tb_logVisitor").bootstrapTable({
+		    columns:[
+		         {field:'CONFM_NO',title:'방문번호'}
+		         ,{field:'CMG_INOUT',title:'출입시간'}
+		         ,{field:'CONFM_NAME',title:'방문자명'}
+		         ,{field:'CMG_ENTRC',title:'출입위치'}/* 출입위치 : 사용게이트 */
+		         ,{field:'CMG_NOTES',title:'처리상태'}
+		         ,{field:'CONFM_DESTI',title:'목적지'}
+		    ]
+			,url: "/company/inOutVisitorList.ch4?confm_visit_date="+confm_visit_date+"&com_no="+'<%=com_no %>'
+		    ,pagination:'true'//페이지 네이션
+		    ,paginationPreText:"Previous"
+		    ,paginationNextText:"Next"
+		    ,pageSize:10//기본 페이지 사이즈
+		    ,pageList:[10, 15, 20, 30] //칸수
+		});
+		
+	// 캘린더 검색 기능
+		$('#calender').calendar({
+			onSelect: function(date){
+				var year = date.getFullYear();
+				var month = +date.getMonth()+1;
+				if(month<10){
+					month = '0'+month;
+				}
+				var day = date.getDate();
+				if(day<10){
+					day = '0'+day;
+				}
+				var confm_visit_date = year+'-'+month+'-'+day;
+				$('#confm_visit_date').attr('value',confm_visit_date);
+				$.ajax({
+					type:'post'
+					,url:"/company/inOutVisitorList.ch4"
+					,dataType: "json"
+					,data :$("#f_search").serialize()
+					,success: function(data){
+						$("#tb_logVisitor").bootstrapTable('load',data);
+					}
+				});
+			}
+		});
+	//방문현황 콤보 박스
+		$("#state").combobox({
+			onChange: function(newVal){
+				$.ajax({
+					type:'post'
+					,url:"/company/inOutVisitorList.ch4" 
+					,dataType: "json"
+					,data :$("#f_search").serialize()
+					,success: function(data){
+						$("#tb_logVisitor").bootstrapTable('load',data);
+					}
+				});
+			}
+		});
+	//출입시간 콤보박스
+		$("#time").combobox({
+			onChange: function(newVal){
+				$.ajax({
+					type:'post'
+					,url:"/company/inOutVisitorList.ch4" 
+					,dataType: "json"
+					,data :$("#f_search").serialize()
+					,success: function(data){
+						$("#tb_logVisitor").bootstrapTable('load',data);
+					}
+				});
+			}
+		});
+		
+	});
+	
+	/* 버튼 검색 */
+	function search(){
+		$.ajax({
+				type:'post'
+				,url:"/company/inOutVisitorList.ch4" 
+				,dataType: "json"
+				,data :$("#f_search").serialize()
+				,success: function(data){
+					$("#tb_logVisitor").bootstrapTable('load',data);
+				}
+		});
+	}
+</script>
 </body>
 </html>
