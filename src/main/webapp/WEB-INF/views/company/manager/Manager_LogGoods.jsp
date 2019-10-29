@@ -9,108 +9,193 @@
 <title>반입 현황 - CH4 방문/반입 자동화 시스템</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
+<style type="text/css">
+	html, body {
+		margin: 0px;;
+		width: 100%;
+		height: 100%;
+	}
+	.container-fluid {
+		margin: 0px 0px 0px 0px;
+		padding: 0px 0px 0px 0px;
+		background-color: #f6f3ee;
+		height: 100%;
+	}
+	#header_area {
+		margin-top : 10px;
+		margin-bottom : 20px;
+		border-bottom-style: solid;
+		border-bottom-width: thick;
+		padding-block-end: 10px;
+		border-bottom-color: #7d1935;
+	}
+	#titleimg {
+		margin-left: 30px;	
+	}
+	#dashboard_area {
+		height: 100%;
+	}
+	#search_area {
+		background-color: rgba(125, 25, 53, 0.5);
+		/* height: 100%; */
+		padding: 20px 10px 30px 10px;
+	}
+	#tb_search {
+		width: 90%;
+	}
+	#tb_search input {
+		height: 40px;
+		width: 90%;
+	}
+	#tb_search .textbox {
+		border-color: #7d1935;
+		margin-bottom: 10px;
+	}
+	#tb_search .combo-arrow {
+    	background-color: #ebe4da;
+	}
+	#tb_search #line {
+		 border-bottom: solid;
+		 border-bottom-style: dotted;
+		 border-bottom-color: #ebe4da;
+	}
+	#tb_search #label {
+		margin-top: 15px;
+		font-size: medium;
+		font-family: "맑은 고딕",monospace;
+	}
+	#tb_logGoods {
+		width: 98%;	
+	}
+	#tb_logGoods thead {
+		background-color: rgba(84, 84, 84, 0.8);
+		color: #f6f3ee;
+		border-style: solid;
+		border-bottom-color: #545454;
+	}
+	#tb_logGoods tbody {
+		background-color: white;
+		margin: 0px 0px 0px 0px;
+	}
+	.bootstrap-table .fixed-table-pagination>.pagination-detail .pagination-info {
+	    margin-left: 20px;
+	}
+</style>
 </head>
 <body>
-   <%@ include file="../../CommonForm/Top.jsp"%>
-   <!-- Content -->
-   <div class="mainContent">
-      <%@ include file="../../CommonForm/ManagerSideBar.jsp"%>
-      <div style="padding-left: 200px">
-         <div class="col-lg-offset-1 col-lg-10"
-            style="margin-top: 20px; margin-bottom: 20px;">
-            <div
-               style="margin: 30px 20px 10px 0px; font-size: 35px; width: 50%; float: left;">
-               <h1>반입 현황 조회</h1>
-            </div>
-         </div>
-         <div class="col-lg-offset-1 col-lg-10">
-            <!-- 검색 조건 설정 -->
-            <form id="f_search">
-               <input type="hidden" name="com_no" value="<%=com_no %>">
-               <!-- 캘린더 -->
-               <div class="col-lg-offset-1 col-lg-3">
-                  <div class="easyui-calendar" id="calender"
-                     style="margin-bottom: 10px; width: 250px; height: 200px;"></div>
-               </div>
-               <input type="hidden" id="confm_trans_date" name="confm_trans_date">
-               <!-- 검색 툴바 -->
-               <div class="col-lg-7">
-                  <div class="col-lg-12">
-                     <br>
-                     <!-- 검색 타입 설정 -->
-                     <select class="easyui-combobox" id="SearchType" name='SearchType'
-                        label="검색방법" labelPosition="left" style="width: 230px;">
-                        <option value="aplg_name">신청자명</option>
-                        <option value="aplg_hp">신청자 연락처</option>
-                        <option value="confm_name">물품명</option>
-                        <option value="confm_desti">반입장소</option>
-                     </select>
-                     <!-- 검색창 : 콤보박스에 의한 분기<br> -->
-                     <!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-                     <input class="easyui-textbox" id="searchText" name="aplg_name"
-                        style="width: 150px;"> <a class="easyui-linkbutton"
-                        type="button" data-options="iconCls:'icon-search'"
-                        onclick="search()"></a>
-                  </div>
-                  <br>
-                  <!-- 콤보 박스 : 처리결과 대해 -->
-                  <div class="col-lg-12" style="margin-top: 10px;">
-                     <select class="easyui-combobox" id="state" name="confm_state"
-                        label="방문현황" labelPosition="left" style="width: 230px;">
-                        <option value="" selected>전체</option>
-                        <option value="미반입">미반입</option>
-                        <option value="반입완료">반입완료</option>
-                        <option value="취소">취소</option>
-                        <option value="오류">오류</option>
-                     </select>
-                  </div>
-                  <br>
-                  <!-- 콤보 박스 : 처리결과 대해 -->
-                  <div class="col-lg-12" style="margin-top: 10px;">
-                     <select class="easyui-combobox" id="time" name="confm_trans_time"
-                        label="출입시간" labelPosition="left" style="width: 230px;">
-                        <option value="" selected>전체</option>
-                        <option value="00">00시</option>
-                        <option value="01">01시</option>
-                        <option value="02">02시</option>
-                        <option value="03">03시</option>
-                        <option value="04">04시</option>
-                        <option value="05">05시</option>
-                        <option value="06">06시</option>
-                        <option value="07">07시</option>
-                        <option value="08">08시</option>
-                        <option value="09">09시</option>
-                        <option value="10">10시</option>
-                        <option value="11">11시</option>
-                        <option value="12">12시</option>
-                        <option value="13">13시</option>
-                        <option value="14">14시</option>
-                        <option value="15">15시</option>
-                        <option value="16">16시</option>
-                        <option value="17">17시</option>
-                        <option value="18">18시</option>
-                        <option value="19">19시</option>
-                        <option value="20">20시</option>
-                        <option value="21">21시</option>
-                        <option value="22">22시</option>
-                        <option value="23">23시</option>
-                     </select>
-                  </div>
-               </div>
-            </form>
-            <div style="width: 84%;">
-               <table class="table table-bordered table-hover" id="tb_lg">
-               </table>
-            </div>
-         </div>
-      </div>
-   </div>
+<%@ include file="../../CommonForm/Top.jsp"%>
+<div class="container-fluid">
+<%@ include file="../../CommonForm/ManagerSideBar.jsp"%>
+	<div style="padding-left: 16%; height: 100%">
+		<div class="row" id="header_area"> 
+			<img src="${host}/resources/Style/images/logo/log_goods.png" id="titleimg">
+		</div>
+		<div class="row" id="dashboard_area">
+			<div class=" well col-lg-2" id="search_area" align="center">
+				<form id="f_search">
+					<input type="hidden" name="com_no" value="<%=com_no %>">
+					<table id="tb_search">
+						<tr>
+	                		<td>
+	                			<label id="label">일자 검색</label>
+	                		</td>
+	                	</tr>
+						<tr id="line">
+							<td>
+								<div class="easyui-calendar" id="calender" style="width:250px;height:250px;"></div>
+								<input type="hidden" id="confm_trans_date" name="confm_trans_date">
+							</td>
+						</tr>
+						<tr>
+	                		<td>
+	                			<label id="label">검색 조건</label>
+	                		</td>
+	                	</tr>
+	                	<tr>
+	                		<td>
+	                			<select class="easyui-combobox" id="SearchType" name='SearchType'
+                        				style="width: 95%;" data-options="panelHeight:'auto'">
+									<option value="aplg_name">신청자명</option>
+									<option value="aplg_hp">신청자 연락처</option>
+									<option value="confm_name">물품명</option>
+									<option value="confm_desti">반입장소</option>
+								</select>
+	                		</td>
+	                	</tr>
+	                	<tr id="line">
+	                		<td>
+	                			<input class="easyui-searchbox" id="searchText" name="aplg_name"
+                        				data-options="searcher:search">
+	                		</td>
+	                	</tr>
+	                	<tr>
+	                		<td>
+	                			<label id="label">방문현황</label>
+	                		</td>
+	                	</tr>
+               			<tr id="line">
+	                		<td>
+	                			<select class="easyui-combobox" id="state" name="confm_state"
+										style="width: 95%;"  data-options="panelHeight:'auto'">
+									<option value="" selected>전체</option>
+									<option value="미반입">미반입</option>
+									<option value="반입완료">반입완료</option>
+									<option value="취소">취소</option>
+									<option value="오류">오류</option>
+								</select>
+	                		</td>
+	                	</tr>
+	                	<tr>
+	                		<td>
+	                			<label id="label">출입시간</label>
+	                		</td>
+	                	</tr>
+               			<tr>
+	                		<td>
+	                			<select class="easyui-combobox" id="time" name="confm_trans_time"
+									style="width: 230px;" data-options="penelHeight:'auto'">
+									<option value="" selected>전체</option>
+									<option value="00">00시</option>
+									<option value="01">01시</option>
+									<option value="02">02시</option>
+									<option value="03">03시</option>
+									<option value="04">04시</option>
+									<option value="05">05시</option>
+									<option value="06">06시</option>
+									<option value="07">07시</option>
+									<option value="08">08시</option>
+									<option value="09">09시</option>
+									<option value="10">10시</option>
+									<option value="11">11시</option>
+									<option value="12">12시</option>
+									<option value="13">13시</option>
+									<option value="14">14시</option>
+									<option value="15">15시</option>
+									<option value="16">16시</option>
+									<option value="17">17시</option>
+									<option value="18">18시</option>
+									<option value="19">19시</option>
+									<option value="20">20시</option>
+									<option value="21">21시</option>
+									<option value="22">22시</option>
+									<option value="23">23시</option>
+								</select>
+	                		</td>
+	                	</tr>
+					</table>
+            	</form>
+			</div>
+			<div class="col-lg-10">
+			   <table class="table table-bordered table-hover" id="tb_logGoods"></table>
+			</div>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
 //combobox 직접입력 방지
    $.fn.combobox.defaults.editable = false
    //datebox 직접입력 방지
    $.fn.datebox.defaults.editable = false
-   
    /* 검색방법 콤보박스로 textbox name값 변경 */
    $(document).ready(function(){
       $('#SearchType').combobox({
@@ -121,7 +206,6 @@
             inputHidden.attr('name',newVal);
          }
       });
-   
    /* 테이블 데이터 */
       var now = new Date();
       var year = now.getFullYear();
@@ -134,7 +218,7 @@
          day = '0'+day;
       }
       var confm_trans_date = year+'-'+month+'-'+day;
-      $("#tb_lg").bootstrapTable({
+      $("#tb_logGoods").bootstrapTable({
          columns:[
             {field:"CONFM_NO",title:'물품번호'}
             ,{field:"CONFM_DESTI",title:'방문장소'}
@@ -173,7 +257,7 @@
                ,dataType: "json"
                ,data :$("#f_search").serialize()
                ,success: function(data){
-                  $("#tb_lg").bootstrapTable('load',data);
+                  $("#tb_logGoods").bootstrapTable('load',data);
                }
             });
          }
@@ -187,7 +271,7 @@
                ,dataType: "json"
                ,data :$("#f_search").serialize()
                ,success: function(data){
-                  $("#tb_lg").bootstrapTable('load',data);
+                  $("#tb_logGoods").bootstrapTable('load',data);
                }
             });
          }
@@ -201,7 +285,7 @@
                ,dataType: "json"
                ,data :$("#f_search").serialize()
                ,success: function(data){
-                  $("#tb_lg").bootstrapTable('load',data);
+                  $("#tb_logGoods").bootstrapTable('load',data);
                }
             });
          }
@@ -217,7 +301,7 @@
          ,dataType: "json"
          ,data :$("#f_search").serialize()
          ,success: function(data){
-            $("#tb_lg").bootstrapTable('load',data);
+            $("#tb_logGoods").bootstrapTable('load',data);
          }
       });   
    }
