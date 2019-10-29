@@ -10,57 +10,101 @@
 <%@ include file="../../Style/common/HeadUI.jsp"%> 
 <title>회원가입 - CH4 방문/반입 자동화 시스템</title>
 <style>
-	div #label{
-		vertical-align: middle;
+	html, body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
 	}
-	span#help_block{
-		display: none;
+	
+	#logo_background {
+		background-color: #f6f3ee;
+		height: 100%;
 	}
-	.textbox-label {
-		width: 100px;
-		height: 50px;
-		line-height: 40px;
-		vertical-align: middle;
+	
+	#logo_ch4 {
+		margin-top: 250px;
+		width: 300px;
+	}
+	
+	.logoinfo {
+		font-size: 50px;
+		font-weight: 900;
+	    font-family: Spoqa Han Sans, Sans-serif;
+	    margin-top: -18px;
+	    color: #545454;
+	    
+	}
+	#join_background {
+		height : 100%;
+		background-color: #4a96ad;
+	}
+	#join_area {
+	padding-right: 50px;
+	padding-left: 50px;
+	padding-top: 20px;
+	padding-bottom: 50px;
+	margin-top: 170px;
+	
+	background-color:#f6f3ee;
+	opacity: inherit;
+	}
+	#headJoin {
+		font-size: 60px;
+		font-weight: 900;
+		font-family: Georgia, monospace;
+		margin-bottom: 10px;
+	
+	}
+	.textbox {
+		line-height: 20px;
 		white-space: nowrap;
-		margin: 10px;
-		padding-right: 5px;
+		border-color: #4a96ad;
 	}
-	.well {
-		padding-right: 30px;
-		padding-left: 30px;
-		padding-top: 30px;
-		padding-bottom: 20px;
+	table #label {
+		font-family: Georgia, "맑은 고딕", serif;
+		vertical-align: middle;
 	}
-	#_easyui_textbox_input1,#_easyui_textbox_input2,#_easyui_textbox_input3,
-	#_easyui_textbox_input4,#_easyui_textbox_input5,#_easyui_textbox_input6,
-	#_easyui_textbox_input7,#_easyui_textbox_input8
-	{
-		height:40px;
+	.textbox 
+	#_easyui_textbox_input1, #_easyui_textbox_input2,
+	#_easyui_textbox_input3, #_easyui_textbox_input4,
+	#_easyui_textbox_input5, #_easyui_textbox_input6,
+	#_easyui_textbox_input7, #_easyui_textbox_input8,
+	#_easyui_textbox_input9, #_easyui_textbox_input10,
+	#_easyui_textbox_input11 {
+		height: 40px;
 	}
-	.btn{
-		height:40px;
+	#btn_join {
+		height: 40px;
+		width: 360px;
+		background-color: #7d1935;
+		border-color: white;
+	}
+	#btn_chekck {
+		height: 40px;
 		width: 120px;
+		background-color: #545454;
+		border-color: white;
+		color: white;
 	}
-	.tb {
-		width: 485px;
-	}
-	.tb_id{
-		width:350px;
-	}
-	.tb_combo {
-		width: 320px;
-	}
-	table td{
-		padding-bottom: 10px;
-		align:'left';
-		
-	}
-	table th{
-		width: 120px;
-	}
-	#cmng_hp1,#cmng_hp2, #cmng_hp3{
-		width: 153px;
-	}
+.tb {
+	width: 485px;
+}
+.tb_id {
+	width: 350px;
+}
+.tb_combo {
+	width: 320px;
+}
+table td {
+	padding-bottom: 10px;
+	align: 'left';
+}
+table th {
+	width: 120px;
+}
+#cmng_hp1, #cmng_hp2, #cmng_hp3 {
+	width: 153px;
+}
 </style>
 <script type="text/javascript">
 	function join(){
@@ -224,115 +268,120 @@
 	    });
 	});
 </script>
-<div class="container-fluid">
-	<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
-		<div class="row page-header">
-			<h1 class="text-center col-12 mb-0" style="padding-bottom: 20px;">JOIN</h1>
-		</div>
+<div class="container-fluid" style="height: 100%">
+	<div class="col-lg-4" id="logo_background" align="center">
+		<img src="${host}/resources/Style/images/logo/logo_cyan.png" id="logo_ch4">
+		<p class="logoinfo">CH4 JOIN</p>
+	</div>
+	<div class="col-lg-8" id="join_background">
 		<div class="row">
-			<div class="well col-lg-offset-2 col-lg-8 col-lg-offset-2">
-				<div class="" align="center">
-				<form id="form_join">
-						<table>
-							<tr>
-								<th> 아이디 </th>
-								<td colspan="2">
-									<input id="cmng_id" name="cmng_id" class="tb_id easyui-textbox"
-											prompt="아이디를 입력하세요.">
-								</td>
-								<td align="center">
-									<input type="hidden" id="id_check" value="unchecked">
-									<button id="btn_chekck" class="btn btn-danger"
-											onClick="checkid()" type="button">
-												중복검사
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td colspan="3">
-									<div id="idcheck"></div>
-								</td>
-							</tr>
-							<tr>
-								<th>비밀번호 </th>
-								<td colspan="3">
-									<input id="cmng_pw" name="cmng_pw" class="tb easyui-passwordbox"
-										   prompt="비밀번호를 입력하세요.">
-								</td>
-							</tr>
-							<tr>
-								<th>비밀번호 확인 </th>
-								<td colspan="3">
-									<input id="re_cmng_pw" class="tb easyui-passwordbox" 
-										   prompt="비밀번호를 다시  입력 해 주세요">
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td colspan="3">
-									<div id="pwcheck"></div>
-								</td>
-							</tr>
-							<tr>
-								<th>성명  </th>
-								<td colspan="3">
-									<input id="cmng_name" name="cmng_name" class="tb easyui-textbox"
-										   prompt="이름을 입력해주세요">
-								</td>
-							</tr>
-							<tr align="left">
-								<th>연락처 </th>
-								<td id="hp1" colspan="3" >
-									<input type="hidden" id="cmng_hp" name="cmng_hp" > 
-									<input id="cmng_hp1" class="easyui-textbox"
-										   prompt="010">
-									<span>-</span>
-									<input id="cmng_hp2" class="easyui-textbox">
-									<span>-</span>
-									<input id="cmng_hp3" class="easyui-textbox">
-								</td>
-							</tr>
-							<tr>
-								<th>회사명</th>
-								<td colspan="3">
-									<select class="tb_combo easyui-combobox" id="combo_company" name="com_no"
-									 data-options="panelHeight:'auto'">
-										<option value="">회사명</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<th>부서명</th>
-								<td colspan="3">
-									<select class="tb_combo easyui-combobox" id="combo_dept" name="dept_no"
-									 data-options="panelHeight:'auto'">
-										<option value="">부서명</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<th>등급 </th>
-								<td colspan="3">
-									 <select class="tb_combo easyui-combobox" name="cmng_grade" id="cmng_grade" 
-									 		 data-options="panelHeight:'auto'">
-							                <option value=""></option>
-							                <option value="승인자">승인자</option>
-							                <option value="안내데스크">안내데스크</option>
-							             </select>
-								</td>
-							</tr>
-						</table>
-					</form>
+			<div class="col-lg-offset-2 col-lg-8 col-lg-offset-2" id="join_area">
+				<div class="row" id="headJoin" align="center">
+					join us!
+				</div>
+				<div class="row" align="center">
+					<form id="form_join">
+							<table>
+								<tr>
+									<th id="label"> 아이디 </th>
+									<td colspan="2">
+										<input id="cmng_id" name="cmng_id" class="tb_id easyui-textbox"
+												prompt="아이디를 입력하세요.">
+									</td>
+									<td align="center">
+										<input type="hidden" id="id_check" value="unchecked">
+										<button id="btn_chekck" class="btn"
+												onClick="checkid()" type="button">
+													중복검사
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colspan="3">
+										<div id="idcheck"></div>
+									</td>
+								</tr>
+								<tr>
+									<th id="label">비밀번호 </th>
+									<td colspan="3">
+										<input id="cmng_pw" name="cmng_pw" class="tb easyui-passwordbox"
+											   prompt="비밀번호를 입력하세요.">
+									</td>
+								</tr>
+								<tr>
+									<th id="label">비밀번호 확인 </th>
+									<td colspan="3">
+										<input id="re_cmng_pw" class="tb easyui-passwordbox" 
+											   prompt="비밀번호를 다시  입력 해 주세요">
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colspan="3">
+										<div id="pwcheck"></div>
+									</td>
+								</tr>
+								<tr>
+									<th id="label">성명  </th>
+									<td colspan="3">
+										<input id="cmng_name" name="cmng_name" class="tb easyui-textbox"
+											   prompt="이름을 입력해주세요">
+									</td>
+								</tr>
+								<tr align="left">
+									<th id="label">연락처 </th>
+									<td id="hp1" colspan="3" >
+										<input type="hidden" id="cmng_hp" name="cmng_hp" > 
+										<input id="cmng_hp1" class="easyui-textbox"
+											   prompt="010">
+										<span>-</span>
+										<input id="cmng_hp2" class="easyui-textbox">
+										<span>-</span>
+										<input id="cmng_hp3" class="easyui-textbox">
+									</td>
+								</tr>
+								<tr>
+									<th id="label">회사명</th>
+									<td colspan="3">
+										<select class="tb_combo easyui-combobox" id="combo_company" name="com_no"
+										 data-options="panelHeight:'auto'">
+											<option value="">회사명</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th id="label">부서명</th>
+									<td colspan="3">
+										<select class="tb_combo easyui-combobox" id="combo_dept" name="dept_no"
+										 data-options="panelHeight:'auto'">
+											<option value="">부서명</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th id="label">등급 </th>
+									<td colspan="3">
+										 <select class="tb_combo easyui-combobox" name="cmng_grade" id="cmng_grade" 
+										 		 data-options="panelHeight:'auto'">
+								                <option value=""></option>
+								                <option value="승인자">승인자</option>
+								                <option value="안내데스크">안내데스크</option>
+								             </select>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				<div class="row" align="center" >
+					<button id="btn_join" class="btn btn-primary" 
+						    onClick="join()">
+						        회원가입&emsp;<i class="fa fa-check spaceLeft"></i>
+					</button>
 				</div>
 			</div>
 		</div>
-		<div class="row" align="center" >
-			<button id="btn_join" class="btn btn-primary" 
-				    onClick="join()">
-				        회원가입&emsp;<i class="fa fa-check spaceLeft"></i>
-			</button>
-		</div>
+		
 	</div>
 </div>
 </body>

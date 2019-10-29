@@ -50,7 +50,6 @@
 	   font-weight: 700;
 	   font-family: sans-serif;
 	}
-
 </style>
 <script type="text/javascript">
 	function login(){

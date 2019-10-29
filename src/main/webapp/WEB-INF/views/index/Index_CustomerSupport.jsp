@@ -16,18 +16,15 @@
 	height: 300px;
 	background-image: url('${host}/resources/Style/images/banner/banner_top.jpg');
 }
-
 .jumbotron_Content a {
 	font-size: 25px;
 }
-
 .Content_title h1 {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	border-width: thick;
 	margin-bottom: -10px;
 }
-
 #main1 {
 	border-bottom: ridge;
 	border-top: ridge;

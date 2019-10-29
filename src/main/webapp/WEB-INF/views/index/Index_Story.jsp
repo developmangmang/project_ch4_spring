@@ -19,7 +19,6 @@
 	height: 200px;
 	background-image: url('${host}/resources/Style/images/banner/speedGate (1).jpg');
 }
-
 .step {
 	-webkit-font-smoothing: antialiased;
 	margin-left: 0px;
@@ -39,18 +38,15 @@
 	align-items: center;
 	align-content: center;
 }
-
 .histoy {
 	margin-left: 20px;
 }
-
 .container {
 	margin-left: 0px;
 	margin-right: 0px;
 	padding-left: 0px;
 	padding-right: 0px;
 }
-
 .developdate {
 	border-bottom-color: gray;
 	border-bottom-style: solid;
@@ -59,7 +55,6 @@
 	margin-bottom: 10;
 	margin-bottom: 10px;
 }
-
 .about {
 	color: #222;
 	font-size: 45px;
@@ -67,7 +62,6 @@
 	font-weight: 700;
 	line-height: 1.2;
 }
-
 .title_p {
 	font-size: 15px;
 	margin-top: 20px;
@@ -76,7 +70,6 @@
 	font-family: Spoqa Han Sans, Sans-serif;
 	font-weight: 500;
 }
-
 .phase {
 	color: #222;
 	font-size: 32px;
@@ -84,7 +77,6 @@
 	font-weight: 400;
 	line-height: 1.6;
 }
-
 .p_explain {
 	margin-left: 10px;
 	color: #707371;
@@ -94,7 +86,6 @@
 	line-height: 1.5;
 	color: #707371;
 }
-
 #content {
 	font-family: Spoqa Han Sans, Sans-serif;
 	font-weight: 500;
@@ -106,9 +97,7 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	word-wrap: normal;
-
 }
-
 #del_date {
 	padding-left:20px;
 	font-size: 16px;

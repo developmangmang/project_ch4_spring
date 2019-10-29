@@ -70,64 +70,52 @@
 body {
 	position: relative;
 }
-
 #section1 {
 	height: 350px;
 	margin-bottom: 10px;
 	font-size: 28px;
 }
-
 #section2 {
 	height: 500px;
 	margin-bottom: 10px;
 	font-size: 28px;
 }
-
 div.panel-heading {
 	font-size: 20px;
 	font-weight: bold;
 }
-
 div.panel-body {
 	height: 100%;
 	border: 0px;
 }
-
 table.table {
 	margin-bottom: 0px;
 }
-
 .row.table {
 	margin-left: 0px;
 	margin-right: 0px;
 	text-align: center;
 	font-size: 14px;
 }
-
 .row.table.basic {
 	border-top: 2px solid #31708f;
 }
-
 .row.table.goods {
 	border-top: 2px solid #3c763d;
 	margin-bottom: 50px;
 }
-
 .table th, .table td {
 	text-align: center;
 	border: 1px solid #EDEDED;
 }
-
 .table th {
 	background-color: #DDDDDD;
 }
-
 #md_cancle_body {
 	padding-left: 0px;
 	padding-right: 0px;
 	text-align: center;
 }
-
 #md_cancle_header {
 	background-color: #DDDDDD;
 }

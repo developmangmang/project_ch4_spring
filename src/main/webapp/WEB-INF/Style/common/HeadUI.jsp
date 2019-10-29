@@ -21,3 +21,5 @@
 <!-- Project Common CSS -->
 <link rel="stylesheet" type="text/css" href="${host}/resources/Style/css/ch4commons.css">
 <!-- ------------------------- -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

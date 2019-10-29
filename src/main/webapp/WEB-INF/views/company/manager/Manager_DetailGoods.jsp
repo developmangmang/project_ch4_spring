@@ -55,65 +55,53 @@
 ul.nav-pills {
 	position: fixed;
 }
-
 /* class 스타일 */
 div.col-lg-7 #section1 {
 	height: 500px;
 	margin-bottom: 10px;
 	font-size: 28px;
 }
-
 div.col-lg-7 #section2, #section3, #section4 {
 	height: 300px;
 	margin-bottom: 10px;
 	font-size: 28px;
 }
-
 div.panel-heading {
 	font-size: 20px;
 	font-weight: bold;
 }
-
 div.panel-body {
 	height: 100%;
 	border: 0px;
 }
-
 table.table {
 	margin-bottom: 0px;
 }
-
 .row.table {
 	margin-left: 0px;
 	margin-right: 0px;
 	text-align: center;
 	font-size: 14px;
 }
-
 .row.table.basic {
 	border-top: 2px solid #31708f;
 }
-
 .row.table.visitor {
 	border-top: 2px solid #3c763d;
 	margin-bottom: 50px;
 }
-
 .row.table.device {
 	border-top: 2px solid #8a6d3b;
 	margin-bottom: 50px;
 }
-
 .row.table.parking {
 	border-top: 2px solid #333333;
 	margin-bottom: 50px;
 }
-
 .table th, .table td {
 	text-align: center;
 	border: 1px solid #EDEDED;
 }
-
 .table th {
 	background-color: #DDDDDD;
 }
