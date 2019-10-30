@@ -20,6 +20,15 @@ public class InfoController {
 	@Autowired
 	InfoLogic iLogic = null;
 	
+	/*
+	 * @RequestMapping(value = "destiDel.ch4",produces="text/plain;charset=UTF-8")
+	 * public String destiDel(@RequestParam Map<String, Object> pMap,Model mod) {
+	 * int result =0; logger.info(pMap); result = iLogic.destiDel(pMap);
+	 * mod.addAttribute("host",hostAddress); if(result==1) { return
+	 * "company/info/Info_ManageCompany"; } return
+	 * "company/info/Info_ManageCompany"; }
+	 */
+	
 	/////////////// SideMenuBar ///////////////////
 	@RequestMapping(value = "info_main.ch4")
 	public String mng_main(Model mod) {
@@ -44,5 +53,7 @@ public class InfoController {
 		mod.addAttribute("host",hostAddress);
 		return "company/info/Info_ManageCompany";
 	}
+	
+
 
 }

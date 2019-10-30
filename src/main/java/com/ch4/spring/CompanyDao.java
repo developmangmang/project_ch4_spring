@@ -57,6 +57,7 @@ public class CompanyDao {
 	}
 
 	public List<Map<String, Object>> applyVisitList(Map<String, Object> pMap) {
+		logger.info(pMap);
 		List<Map<String, Object>> applyVisitList = sqlSessionTemplate.selectList("visitorApplySearch", pMap);
 		return applyVisitList;
 	}

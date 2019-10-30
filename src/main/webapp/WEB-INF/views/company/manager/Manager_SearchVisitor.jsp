@@ -103,10 +103,9 @@
 	                		<td colspan="2">
 	                			 <select class="easyui-combobox" id="SearchType" name='SearchType'
 	                			 		 style="width: 100%;"  data-options="panelHeight:'auto'">
-									<option value="visit_apply_name" selected>신청자명</option>
-									<option value="visitor_name">방문자명</option>
-									<option value="visit_desti">목적지</option>
 									<option value="visit_no">신청번호</option>
+									<option value="visit_apply_name" selected>신청자명</option>
+									<option value="visit_desti">목적지</option>
 								</select>
 	                		</td>
 	                	</tr>
@@ -114,8 +113,6 @@
 	                		<td colspan="2">
 	                			<input class="easyui-searchbox" id="searchText" name="visit_apply_name" 
 	                					data-options="prompt:'Please Input Value',searcher:btn_search">
-				                    <!-- <a class="easyui-linkbutton" type="button" data-options="iconCls:'icon-search'"
-				                      onclick="btn_search()"></a> -->
 	                		</td>
 	                	</tr>
 	                	<tr>
@@ -148,7 +145,7 @@
 	                	</tr>
 	                	<tr>
 	                		<td>
-	                			<input class="easyui-datebox" id=closedate name="visit_apply_date2"
+	                			<input class="easyui-datebox" id="closedate" name="visit_apply_date2"
 	                					label="End Date:" labelPosition="top">
 	                		</td>
 	                	</tr>
@@ -205,7 +202,7 @@
                ,dataType: "json"
                ,data :$("#f_search").serialize()
                ,success: function(data){
-                  $("#tb_sv").bootstrapTable('load',data);
+                  $("#tb_searchVisitor").bootstrapTable('load',data);
                }
             });
          }
@@ -214,28 +211,48 @@
       //신청일 변경 검색 이벤트
       $("#startdate").datebox({
          onSelect: function(date){
-            $(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+        	 var year = date.getFullYear();
+			var month = +date.getMonth()+1;
+			if(month<10){
+				month = '0'+month;
+			}
+			var day = date.getDate();
+			if(day<10){
+				day = '0'+day;
+			}
+			var confm_visit_date = year+'-'+month+'-'+day;
+            $(this).datebox('setValue',confm_visit_date);
             $.ajax({
                type:'post'
                ,url:'/company/applyVisitList.ch4'
                ,dataType: "json"
                ,data :$("#f_search").serialize()
                ,success: function(data){
-                  $("#tb_sv").bootstrapTable('load',data);
+                  $("#tb_searchVisitor").bootstrapTable('load',data);
                }
             });
          }
       });
       $("#closedate").datebox({
          onSelect: function(date){
-            $(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+        	var year = date.getFullYear();
+ 			var month = +date.getMonth()+1;
+ 			if(month<10){
+ 				month = '0'+month;
+ 			}
+ 			var day = date.getDate();
+ 			if(day<10){
+ 				day = '0'+day;
+ 			}
+ 			var confm_visit_date = year+'-'+month+'-'+day;
+            $(this).datebox('setValue',confm_visit_date);
             $.ajax({
                type:'post'
                ,url:'/company/applyVisitList.ch4'
                ,dataType: "json"
                ,data :$("#f_search").serialize()
                ,success: function(data){
-                  $("#tb_sv").bootstrapTable('load',data);
+                  $("#tb_searchVisitor").bootstrapTable('load',data);
                }
             });
          }
@@ -251,7 +268,7 @@
          ,dataType: "json"
          ,data :$("#f_search").serialize()
          ,success: function(data){
-            $("#tb_sv").bootstrapTable('load',data);
+            $("#tb_searchVisitor").bootstrapTable('load',data);
          }
       });   
    }

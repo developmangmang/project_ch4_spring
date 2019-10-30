@@ -118,7 +118,7 @@
 										style="width: 95%"  data-options="panelHeight:'auto'">
 									<option value="confm_no">방문번호</option>
 									<option value="confm_name" selected>방문자명</option>
-									<option value="confm_hp">연락처</option>
+									<option value="confm_desti">목적지</option>
 								</select>
 	                		</td>
 	                	</tr>

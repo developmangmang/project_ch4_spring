@@ -26,7 +26,7 @@
 	<!-- 회원가입  -->
 	<insert id="companyJoin" parameterType="map">
 		insert into company_manage(cmng_no, cmng_id, cmng_pw, cmng_name, cmng_grade, cmng_hp, dept_no)
-		values ('CM'||to_char(systimestamp + (INTERVAL '9' HOUR),'YYMMDDFF3')||dbms_random.string('x',3)
+		values ('CM'||to_char(systimestamp,'YYMMDDFF3')||dbms_random.string('x',3)
 		,#{cmng_id},#{cmng_pw},#{cmng_name},#{cmng_grade},#{cmng_hp},#{dept_no})
 	</insert>
 
