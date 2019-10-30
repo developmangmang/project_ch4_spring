@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -20,6 +22,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 @Service
+@Transactional(propagation=Propagation.REQUIRED, rollbackFor = Exception.class)
 public class CompanyLogic {
 	Logger logger = Logger.getLogger(CompanyLogic.class);
 	
@@ -30,7 +33,7 @@ public class CompanyLogic {
 	
 	@Autowired
 	CompanyDao cDao = null;
-
+	
 	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
 		if (pMap.get("visit_no") != null) {

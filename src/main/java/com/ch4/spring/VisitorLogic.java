@@ -8,10 +8,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ch4.getData.VisitorData;
 
 @Service
+@Transactional(propagation=Propagation.REQUIRED, rollbackFor = Exception.class)
 public class VisitorLogic {
    Logger logger = Logger.getLogger(VisitorLogic.class);
    

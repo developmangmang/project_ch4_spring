@@ -1,17 +1,22 @@
 package com.ch4.spring;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ch4.getData.GoodsData;
 
 @Service
+@Transactional(propagation=Propagation.REQUIRED, rollbackFor = Exception.class)
 public class GoodsLogic {
 	Logger logger = Logger.getLogger(GoodsLogic.class);
 	@Value("${file.path}")
@@ -25,7 +30,7 @@ public class GoodsLogic {
 		Map<String, Object> goodsDetail = gDao.goodsDetail(pMap);
 		return goodsDetail;
 	}
-
+	
 	public int goodsApplyAdd(Map<String, Object> pMap, GoodsData gData) {
 		int result = 0;
 		String aplg_no = null;
