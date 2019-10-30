@@ -115,8 +115,7 @@
 	                		<td>
 	                			<select class="easyui-combobox" id="SearchType" name='SearchType'
                         				style="width: 95%;" data-options="panelHeight:'auto'">
-									<option value="aplg_name">신청자명</option>
-									<option value="aplg_hp">신청자 연락처</option>
+									<option value="confm_no">물품번호</option>
 									<option value="confm_name">물품명</option>
 									<option value="confm_desti">반입장소</option>
 								</select>

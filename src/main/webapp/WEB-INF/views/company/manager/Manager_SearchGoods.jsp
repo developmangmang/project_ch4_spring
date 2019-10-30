@@ -108,8 +108,8 @@
 							</tr>
 							<tr id="line">
 								<td colspan="2">
-									<input class="easyui-searchbox" id="searchText" name="aplg_no"
-											data-options="searcher:btn_search">
+									<input class="easyui-searchbox" id="searchText" name="aplg_name"
+											data-options="searcher:search">
 								</td>
 							</tr>
 							<tr>
@@ -200,7 +200,7 @@
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
-						$("#tb_searchGood").bootstrapTable('load',data);
+						$("#tb_searchGoods").bootstrapTable('load',data);
 					}
 				});
 			}
@@ -208,35 +208,56 @@
 		//날짜 콤보
 		$("#startdate").datebox({
 			onSelect: function(date){
-				$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+				var year = date.getFullYear();
+	 			var month = +date.getMonth()+1;
+	 			if(month<10){
+	 				month = '0'+month;
+	 			}
+	 			var day = date.getDate();
+	 			if(day<10){
+	 				day = '0'+day;
+	 			}
+	 			var confm_visit_date = year+'-'+month+'-'+day;
+				$(this).datebox('setValue',confm_visit_date);
 				$.ajax({
 					type:'post'
 					,url:'/company/applyGoodsList.ch4'
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
-						$("#tb_searchGood").bootstrapTable('load',data);
+						$("#tb_searchGoods").bootstrapTable('load',data);
 					}
 				});
 			}
 		});
 		$("#closedate").datebox({
 			onSelect: function(date){
-				$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+				var year = date.getFullYear();
+	 			var month = +date.getMonth()+1;
+	 			if(month<10){
+	 				month = '0'+month;
+	 			}
+	 			var day = date.getDate();
+	 			if(day<10){
+	 				day = '0'+day;
+	 			}
+	 			var confm_visit_date = year+'-'+month+'-'+day;
+				$(this).datebox('setValue',confm_visit_date);
 				$.ajax({
 					type:'post'
 					,url:'/company/applyGoodsList.ch4'
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
-						$("#tb_searchGood").bootstrapTable('load',data);
+						$("#tb_searchGoods").bootstrapTable('load',data);
 					}
 				});
 			}
 		});
 	});
 	/* 검색버튼 기능 */
-	   function btn_search(){
+	   function search(){
+		//alert("여기");
 	      /* 검색 조건을 통해 재출력 */
 	      $.ajax({
 	         type:'post'
@@ -244,7 +265,7 @@
 	         ,dataType: "json"
 	         ,data :$("#f_search").serialize()
 	         ,success: function(data){
-	            $("#tb_searchGood").bootstrapTable('load',data);
+	            $("#tb_searchGoods").bootstrapTable('load',data);
 	         }
 	      });   
 	   }

@@ -11,8 +11,7 @@
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 </head>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Raleway:400,500,800">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,800">
 <style>
 	html, body {
 		margin: 0;

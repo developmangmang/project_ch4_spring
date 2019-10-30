@@ -1,6 +1,7 @@
 package com.ch4.spring;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -43,5 +44,49 @@ public class InfoDao {
 		logger.info("DAO : "+result);
 		return result;
 	}
-
+	public List<Map<String, Object>> destiList(Map<String, Object> pMap) {
+		List<Map<String,Object>> destiList = sqlSessionTemplate.selectList("destination", pMap);
+		logger.info(destiList);
+		return destiList;
+	}
+	public List<Map<String, Object>> kiosk(Map<String, Object> pMap) {
+		List<Map<String,Object>> kiosk = sqlSessionTemplate.selectList("kiosk", pMap);
+		logger.info(kiosk);
+		return kiosk;
+	}
+	public List<Map<String, Object>> closeday(Map<String, Object> pMap) {
+		List<Map<String,Object>> closeday = sqlSessionTemplate.selectList("closeday", pMap);
+		logger.info(closeday);
+		return closeday;
+	}
+	public int destiAdd(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSessionTemplate.insert("destiAdd",pMap);
+		return result;
+	}
+	public int destiUpd(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSessionTemplate.update("destiUpd",pMap);
+		return result;
+	}
+	public int destiDel(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSessionTemplate.delete("destiDel",pMap);
+		return result;
+	}
+	public int kioskUpd(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSessionTemplate.update("kioskUpd",pMap);
+		return result;
+	}
+	public int closeDayAdd(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSessionTemplate.insert("closeDayAdd",pMap);
+		return result;
+	}
+	public int closeDayDel(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSessionTemplate.delete("closeDayDel",pMap);
+		return result;
+	}
 }

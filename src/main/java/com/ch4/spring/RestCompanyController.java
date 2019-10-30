@@ -28,8 +28,10 @@ public class RestCompanyController {
 	}
 	@RequestMapping(value = "inOutVisitorList.ch4",produces="text/plain;charset=UTF-8")
 	public String inOutVisitorList(@RequestParam Map<String, Object> pMap) {
+		 logger.info(pMap);
 		 List<Map<String, Object>> inOutList = cLogic.inOutVisitorList(pMap);
          jsonStr = g.toJson(inOutList);
+         logger.info(jsonStr);
 		return jsonStr;
 	}
 	@RequestMapping(value = "inOutGoodsList.ch4",produces="text/plain;charset=UTF-8")
