@@ -49,33 +49,27 @@ h2 {
 	font-weight: 700;
 	font-family: sans-serif;
 }
-
 #com_join, #kiosk {
 	width: 80px;
 }
-
 #signtitle {
 	font-size: 50px;
 	margin-bottom: 30px;
 }
-
 #cmng_id {
 	width: 350px;
 	height: 50px;
 	margin-bottom: 10px;
 }
-
 #cmng_pw {
 	width: 350px;
 	height: 50px;
 	margin-bottom: 10px;
 }
-
 #btn_login {
 	width: 350px;
 	height: 50px;
 }
-
 .checkbox {
 	border: 0px;
 	margin-top: 20px;

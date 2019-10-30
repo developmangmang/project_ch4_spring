@@ -300,4 +300,9 @@
          </if>
       </where>
    </select>
+   <!-- 방문 회사 주소,이름 조회 -->
+   <select id="navigation" parameterType="map" resultType="map">
+      select com_addr,com_name,com_hp from company
+       where com_no=#{com_no}
+   </select>
 </mapper>

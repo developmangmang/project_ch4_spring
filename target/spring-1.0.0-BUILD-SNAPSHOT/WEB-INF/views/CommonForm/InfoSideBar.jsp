@@ -21,46 +21,56 @@
 <style>
 	/* 사이드바 설정 */
 	aside {
-	    width: 200px;
+	    width: 15%;
 	    height: 100%;
 	    position: fixed;
-	    background-color: #D9EDF7;
+	    background-color: rgba(49,49,49, 0.9);
 	    overflow: auto;
 	}
 	/* 사이드바 overflow 시 스크롤바 안보이게 하기 */
 	aside::-webkit-scrollbar { 
 	    display: none; 
 	}
+	#imglogo {
+		height: 100px;
+		margin-top: 30px;
+		border-radius: 30px;
+   }
 	#info {
 		text-align: center;
 		margin-top: 20px;
 		margin-bottom: 10px;
 		padding-bottom: 10px;
-		border-bottom: 1px solid #E9D4F9;
+		border-bottom: 1px solid #274f5a;
 	}
+	#head_font {
+		font-weight: 500;
+		font-family: font-family: Spoqa Han Sans, Sans-serif;
+		color: #f6f3ee;
+   }
 	#pg_side .panel-info {
 		border: 0px;
 		background: rgba(0,0,0,0.0);
 	}
 	#pg_side .panel-info .panel-heading {
-		color: #000000;
+		color: #f6f3ee;
 		background: rgba(0,0,0,0.0);
 	}
 	#pg_side .panel-info .panel-body {
 		padding-top: 5px;
 		padding-bottom: 5px;
 		border: 0px;
-		color: #000000;
+		color: #f6f3ee;
 		background: rgba(0,0,0,0.0);
 	}
 	#pg_side .panel-info .panel-body a {
 		margin-left: 20px;
-		color: #000000;
+		color: #f0f0f0;
 	}
 	#btn_logout {
 		width: 90%;
 		height: 40px;
-		background-color: #337AB7;
+		background-color: #4a96ad;
 		color: #ffffff;
 		border: 0px;
 		padding: 0px;
@@ -73,10 +83,13 @@
 	}
 </script>
 <aside>
+	<div align="center">
+		<img src="${host}/resources/Style/images/logo/search2.png" id="imglogo">
+	</div>
 	<div id="info">
-		<h4><b><%=com_name %></b></h4>
-		<h5><b><%=dept_name %></b></h5>
-		<h4><b><%=cmng_name %></b>(님)</h4>
+		<h2 id="head_font"><%=com_name %></h4>
+		<h4 id="head_font"><%=dept_name %></h5>
+		<h3 id="head_font"><%=cmng_name %>(님)</h4>
 		<button id="btn_logout" type="button" onClick="logout()">로그아웃</button>
 	</div>
 	<div id="pg_side" class="panel-group">
@@ -92,7 +105,7 @@
 			<div class="panel-heading">
 				<h4 class="panel-title">
 					<a href="/info/logVisitor.ch4">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a>
+					<i class="fa fa-list-alt" aria-hidden="true"></i>방문현황조회</a>
 				</h4>
 			</div>
 		</div>
@@ -100,7 +113,7 @@
 			<div class="panel-heading">
 				<h4 class="panel-title">
 					<a href="/info/logGoods.ch4">
-					<i class="fa fa-truck" aria-hidden="true"></i>반입현황관리</a>
+					<i class="fa fa-truck" aria-hidden="true"></i>반입현황조회</a>
 				</h4>
 			</div>
 		</div>

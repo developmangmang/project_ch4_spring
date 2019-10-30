@@ -40,4 +40,67 @@
 			#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
 		)}
 	</update>
+	<select id="destination" parameterType="map" resultType="map">
+		select desti_no, desti_name, desti_lcinfo, desti_notes
+  		  from destination de, company cp
+		 where cp.com_no = de.com_no
+		   and de.com_no = #{com_no}
+	</select>
+	<select id="kiosk" parameterType="map" resultType="map">
+		select kiosk_no, kiosk_gate, kiosk_st, kiosk_notes
+		  from kiosk, company
+		 where kiosk.com_no = company.com_no
+		   and kiosk.com_no = #{com_no}
+		   <if test='kiosk_st not in {null,""}'>
+				and kiosk_st = #{kiosk_st}
+		   </if>
+	</select>
+	<select id="closeday" parameterType="map" resultType="map">
+		select comcl_date, comcl_dayweek, comcl_notes 
+ 		  from company_closeday cc, company cp
+		 where cc.com_no = cp.com_no
+		   and cc.com_no = #{com_no}
+	      <!-- 검색 : 신청일자(기간으로) -->
+	      <if test='comcl_date1 not in {null,""}'>
+	         and comcl_date >= #{comcl_date1}
+	      </if>
+	      <if test='comcl_date2 not in {null,""}'>
+	      <![CDATA[and comcl_date <= #{comcl_date2}]]>
+	      </if>		   
+	</select>
+	<insert id="destiAdd" parameterType="map">
+		insert into destination(desti_no, desti_name, desti_lcinfo, desti_notes, com_no)
+		values('DN'||to_char(systimestamp,'YYMMDDFF3')||dbms_random.string('x',3)
+				,#{desti_name},#{desti_lcinfo},#{desti_notes},#{com_no})
+	</insert>
+	<update id="destiUpd" parameterType="map">
+		update destination 
+		   set desti_name = #{desti_name}, desti_lcinfo = #{desti_lcinfo}, desti_notes = #{desti_notes}
+		 where desti_no = #{desti_no}
+		   and com_no = #{com_no}
+	</update>
+	<delete id="destiDel" parameterType="map">
+		delete from destination
+		 where desti_no = #{desti_no}
+	</delete>
+	<update id="kioskUpd" parameterType="map">
+		update kiosk
+		   set kiosk_gate = #{kiosk_gate}, kiosk_st= #{kiosk_st}, kiosk_notes= #{kiosk_notes}
+		 where kiosk_no= #{kiosk_no} 
+		   and com_no =#{com_no}
+	</update>
+	<insert id="closeDayAdd" parameterType="map">
+		insert into company_closeday(com_no, comcl_date, comcl_dayweek,comcl_notes)
+		values (#{com_no},#{comcl_date},#{comcl_dayweek},#{comcl_notes})
+	</insert>
+	<insert id="closeDayDel" parameterType="map">
+		delete from company_closeday
+		 where com_no =#{com_no}
+		   <if test='comcl_dayweek not in {null,""}'>
+		   and comcl_dayweek = #{comcl_dayweek}
+		   </if>
+		   <if test='comcl_notes not in {null,""}'>
+		   and comcl_notes = #{comcl_notes}
+		   </if>
+	</insert>
 </mapper>  

@@ -83,7 +83,6 @@ var grade;
 			 }
 		});////////////////end of bootstrapTable
 	});
-
 </script>
 <script type="text/javascript">
 	//검색하기
