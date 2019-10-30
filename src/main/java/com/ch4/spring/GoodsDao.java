@@ -87,4 +87,9 @@ public class GoodsDao {
 		return qrCodeList;
 	}
 
+	public Map<String, Object> navigation(Map<String, Object> pMap) {
+		Map<String, Object> rMap = sqlSessionTemplate.selectOne("navigation", pMap);
+		return rMap;
+	}
+
 }

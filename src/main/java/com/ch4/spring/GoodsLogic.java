@@ -113,4 +113,9 @@ public class GoodsLogic {
 	      }
 		return qrCodeList;
 	}
+
+	public Map<String, Object> navigation(Map<String, Object> pMap) {
+		Map<String, Object> rMap = gDao.navigation(pMap);
+	      return rMap;
+	}
 }

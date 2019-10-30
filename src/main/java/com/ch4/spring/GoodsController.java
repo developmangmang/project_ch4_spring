@@ -78,4 +78,16 @@ public class GoodsController {
 		mod.addAttribute("host",hostAddress);
 		return "visitor/Visit_SearchGoodsQR";
 	}
+	
+	@RequestMapping(value = "navigation.ch4", produces = "text/plain;charset=UTF-8")
+	public String navigation(@RequestParam Map<String, Object> pMap, Model mod) {
+		mod.addAttribute("host", hostAddress);
+		logger.info("네비게이션  ==>" + pMap);
+		Map<String, Object> rMap = gLogic.navigation(pMap);
+		mod.addAttribute("com_addr", rMap.get("COM_ADDR"));
+		mod.addAttribute("com_name", rMap.get("COM_NAME"));
+		mod.addAttribute("com_hp", rMap.get("COM_HP"));
+		logger.info("맵 : " + rMap.get("COM_ADDR"));
+		return "visitor/Visit_Navigation";
+	}
 }
