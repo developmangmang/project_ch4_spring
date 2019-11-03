@@ -110,6 +110,7 @@
       <if test='visit_month not in {null,""}'>
          and substr(visit_date,6,2) = #{visit_month}
       </if>
+      order by visit_apply_date desc
    </select>
    <!-- 방문자 조회 -->
    <select id="visitorSearch" parameterType="map" resultType="map">

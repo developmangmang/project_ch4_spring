@@ -10,6 +10,7 @@
 		 where ga.aplg_no = gc.aplg_no
 		   and co.com_no = ga.com_no
 		   and gc.aplg_no = #{aplg_no}
+		 order by aplg_trans_date desc
 	</select>
    <!-- 신청자 반입이력 조회 -->
    <update id="preGoodsSearch" parameterType="map" statementType="CALLABLE">

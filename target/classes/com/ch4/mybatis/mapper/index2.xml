@@ -4,12 +4,13 @@
 	<select id="notice" parameterType="map" resultType="map">
 		select n_no, n_title, n_content, n_date
     		,n_writer, n_file, n_grade, n_hit
-    	  from notice
+    	  from notice n_date desc
+    	order by  
 	</select>
 	<!-- 우리 홈페이지 질문 등록 -->
 	<insert id="question" parameterType="map">
 		insert into question(q_no, q_title, q_content, q_email, q_writer)
-			values('QN'||to_char(systimestamp + (INTERVAL '9' HOUR),'YYMMDDFF3')||dbms_random.string('x',3)
+			values('QN'||to_char(systimestamp,'YYMMDDFF3')||dbms_random.string('x',3)
 			, #{q_title}, #{q_content}, #{q_email}, #{q_writer})
 	</insert>
 </mapper>  

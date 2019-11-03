@@ -4,7 +4,7 @@
 	<!-- 우리 홈페이지 답변 등록 -->
 	<insert id="sendAnswer" parameterType="map">
 		insert into answer(a_no, a_content, q_no)
-			values('AN'||to_char(systimestamp + (INTERVAL '9' HOUR),'YYMMDDFF3')||dbms_random.string('x',3)
+			values('AN'||to_char(systimestamp,'YYMMDDFF3')||dbms_random.string('x',3)
 			, #{a_content},#{q_no})
 	</insert>
 	<select id="qnaList" resultType="map">
