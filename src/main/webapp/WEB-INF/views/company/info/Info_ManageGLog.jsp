@@ -89,7 +89,7 @@
 <%@ include file="../../CommonForm/InfoSideBar.jsp"%>
 	<div style="padding-left: 17%; height: 100%">
 		<div class="row" id="header_area"> 
-			<img src="${host}/resources/Style/images/logo/info_logGoods.png" id="titleimg">
+			<img src="${host}/resources/Style/images/logo/log_goods.png" id="titleimg">
 		</div>
 		<div class="row" id="dashboard_area">
 			<div class=" well col-lg-2" id="search_area" align="center">

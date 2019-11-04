@@ -51,16 +51,21 @@
 	#pg_side .panel-info {
 		border: 0px;
 		background: rgba(0,0,0,0.0);
+		padding: 5px;
 	}
 	#pg_side .panel-info .panel-heading {
 		color: #f6f3ee;
 		background: rgba(0,0,0,0.0);
+	}
+	#pg_side .panel-info .panel-heading a {
+		font-size: x-large;
 	}
 	#pg_side .panel-info .panel-body {
 		padding-top: 5px;
 		padding-bottom: 5px;
 		border: 0px;
 		color: #f6f3ee;
+		font-size:large;
 		background: rgba(0,0,0,0.0);
 	}
 	#pg_side .panel-info .panel-body a {

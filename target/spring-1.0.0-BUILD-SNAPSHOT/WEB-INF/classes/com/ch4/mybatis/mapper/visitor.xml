@@ -37,6 +37,8 @@
          and co.com_no = va.com_no 
          and confm_name = #{confm_name}
          and confm_hp = #{confm_hp}
+       order by confm_visit_date desc
+         
    </select>
    <!-- 신청 내용 작성  (기본정보)-->
    <update id="visitorApplyAdd" parameterType="map" statementType="CALLABLE">
